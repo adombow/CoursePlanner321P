@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta charset="utf-8">
+
+	<title>Main Panel</title>
+	<link rel="stylesheet" type="text/css" href="css/sidebar.css">
+	<link rel="stylesheet" type="text/css" href="css/mainPanel.css">
+  <link rel="stylesheet" type="text/css" href="css/schedule.css">
+	
+  
+</head>
+	<body>
+	<?php 
+    	include("inc/sidebar.html");
+	?>
+		<h1 style="text-align: center;">
+			Welcome to Course Planner!
+		</h1>
+    
+     <table width="80%" align="center" >
+    <div id="head_nav">
+    <tr>
+        <th>Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thrusday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+    </tr>
+</div>  
+
+    <tr>
+        <th>10:00 - 11:00</th>
+        
+            <td>Physics-1</td>
+            <td>English</td>
+            <td title="No Class" class="Holiday"></td>
+            <td>Chemestry-1</td>
+            <td>Alzebra</td>
+            <td>Physical</td>
+        </div>
+    </tr>
+
+    <tr>
+        <th>11:00 - 12:00</td>
+        
+            <td>Math-2</td>
+            <td>Chemestry-2</td>
+            <td>Physics-1</td>
+            <td>Hindi</td>
+            <td>English</td>
+            <td>Soft Skill</td>
+        </div>
+    </tr>
+
+    <tr>
+        <th>12:00 - 01:00</td>
+        
+            <td>Hindi</td>
+            <td>English</td>
+            <td>Math-1</td>
+            <td>Chemistry</td>
+            <td>Physics</td>
+            <td>Chem.Lab</td>
+
+        </div>
+    </tr>
+
+    <tr>
+        <th>01:00 - 02:00</td>
+        
+            <td>Cumm. Skill</td>
+            <td>Sports</td>
+            <td>English</td>
+            <td>Computer Lab</td>
+            <td>Header</td>
+            <td>Header</td>
+
+        </div>
+    </tr>
+
+    <tr>
+        <th>02:00 - 03:00</td>
+        
+            <td>Header</td>
+            <td>Header</td>
+            <td>Header</td>
+            <td>Header</td>
+            <td>Header</td>
+            <td>Header</td>
+        </div>
+    </tr>
+</table>
+
+</div>
+
+	<script src="js/sidebar.js"></script>
+</body>
+</html>
