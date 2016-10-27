@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 25, 2016 at 03:13 AM
+-- Generation Time: Oct 27, 2016 at 07:15 AM
 -- Server version: 5.5.52
 -- PHP Version: 5.6.26
 
@@ -23,14 +23,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Courses`
+-- Table structure for table `Course Feature`
 --
--- Creation: Oct 25, 2016 at 02:59 AM
+
+CREATE TABLE IF NOT EXISTS `Course Feature` (
+  `Feature Name` char(255) DEFAULT NULL,
+  `Rating` int(5) unsigned DEFAULT NULL COMMENT 'Difficulty Rating',
+  `Type` varchar(255) DEFAULT NULL COMMENT 'Category of feature',
+  `Due Date` date DEFAULT NULL,
+  `Course` char(7) DEFAULT NULL,
+  `ID` int(255) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID`),
+  KEY `Rating` (`Rating`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Courses`
 --
 
 CREATE TABLE IF NOT EXISTS `Courses` (
   `Course Code` char(8) DEFAULT NULL COMMENT 'Course codes assigned by instituiton offering the course.',
-  `Day(s) of Week` varchar(11) DEFAULT NULL COMMENT 'Day(s) of the week the course meets',
+  `Day(s) of Week` bit(7) DEFAULT NULL COMMENT 'Day(s) of the week the course meets',
   `Description` text,
   `Instructor` varchar(60) DEFAULT NULL,
   `Textbook` tinytext,
@@ -46,7 +61,20 @@ CREATE TABLE IF NOT EXISTS `Courses` (
 --
 
 INSERT INTO `Courses` (`Course Code`, `Day(s) of Week`, `Description`, `Instructor`, `Textbook`, `Time`, `ID`) VALUES
-('CPEN 321', 'Tue/Thu', 'Software Engineering\r\n\r\nEngineering practices for the development of non-trivial software-intensive systems including requirements specification, software architecture, implementation, verification, and maintenance. Iterative development. Recognized standards, guidelines, and models. ', 'AGHAREBPARAST, FARSHID; GOPALAKRISHNAN, SATHISH', NULL, '12:30:00', 1);
+('CPEN 321', b'0000000', 'Software Engineering\r\n\r\nEngineering practices for the development of non-trivial software-intensive systems including requirements specification, software architecture, implementation, verification, and maintenance. Iterative development. Recognized standards, guidelines, and models. ', 'AGHAREBPARAST, FARSHID; GOPALAKRISHNAN, SATHISH', NULL, '12:30:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `User Profile`
+--
+
+CREATE TABLE IF NOT EXISTS `User Profile` (
+  `Name` varchar(40) DEFAULT NULL,
+  `Registration Date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `ID` tinyint(255) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
