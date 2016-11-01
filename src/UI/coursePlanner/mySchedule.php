@@ -25,8 +25,11 @@
         <tr><td>There are no items...</td></tr>
     </table>
 
-
-    <button type="button" id="updateScheduler">Update</button>
+    <div style="text-align: center; margin: 60;">
+        <button type="button" id="update-scheduler">Update</button>
+        <button type="button" id="add-row">Add Row</button>
+        <button type="button" id="remove-last-row">Remove Last Row</button>
+    </div>
     
     <div id="view-edit-tile"><div>
 </div>
