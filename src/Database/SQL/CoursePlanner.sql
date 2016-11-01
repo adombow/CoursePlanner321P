@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS `Courses` (
   `Description` text,
   `Instructor` varchar(60) DEFAULT NULL,
   `Textbook` tinytext,
-  `Time` time DEFAULT NULL COMMENT 'Time of the day the course meets',
+  `Start Time` time DEFAULT NULL COMMENT 'Time of the day the course starts',
+  `End Time` time DEFAULT NULL COMMENT 'Time of the day the course ends',
   `ID` smallint(255) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique ID for each course',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `Course Code` (`Course Code`),
@@ -60,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `Courses` (
 -- Dumping data for table `Courses`
 --
 
-INSERT INTO `Courses` (`Course Code`, `Day(s) of Week`, `Description`, `Instructor`, `Textbook`, `Time`, `ID`) VALUES
-('CPEN 321', b'0000000', 'Software Engineering\r\n\r\nEngineering practices for the development of non-trivial software-intensive systems including requirements specification, software architecture, implementation, verification, and maintenance. Iterative development. Recognized standards, guidelines, and models. ', 'AGHAREBPARAST, FARSHID; GOPALAKRISHNAN, SATHISH', NULL, '12:30:00', 1);
+INSERT INTO `Courses` (`Course Code`, `Day(s) of Week`, `Description`, `Instructor`, `Textbook`, `Start Time`,`End Time`, `ID`) VALUES
+('CPEN 321', b'0000000', 'Software Engineering\r\n\r\nEngineering practices for the development of non-trivial software-intensive systems including requirements specification, software architecture, implementation, verification, and maintenance. Iterative development. Recognized standards, guidelines, and models. ', 'AGHAREBPARAST, FARSHID; GOPALAKRISHNAN, SATHISH', NULL, '12:30:00','14:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -73,9 +74,16 @@ CREATE TABLE IF NOT EXISTS `User Profile` (
   `Name` varchar(40) DEFAULT NULL,
   `Registration Date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `ID` tinyint(255) unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`)
+   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+
+CREATE TABLE IF NOT EXISTS `USER COURSES`(
+	
+    `User id` tinyint(255) unsigned,
+	`Course id` smallint(255) unsigned
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
