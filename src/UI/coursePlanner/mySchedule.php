@@ -17,7 +17,7 @@
         include("inc/sidebar.html");
     ?>
         <h1 style="text-align: center;">
-            Welcome to Course Planner!
+            Schedule your schedule
         </h1>
 
     
@@ -26,12 +26,14 @@
     </table>
 
     <div style="text-align: center; margin: 60;">
-        <button type="button" id="update-scheduler">Update</button>
         <button type="button" id="add-row">Add Row</button>
         <button type="button" id="remove-last-row">Remove Last Row</button>
     </div>
     
-    <div id="view-edit-tile"><div>
+    <div id="confirm_remove"></div>
+    <div id="view-edit-tile"></div>
+    <div id="edit-tile"></div>
+    
 </div>
 
     <script src="js/scheduler.js"></script>
