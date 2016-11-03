@@ -79,6 +79,14 @@ CREATE TABLE IF NOT EXISTS `User Courses` (
   KEY `User ID` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE IF NOT EXISTS `USER FEATURES`(
+	
+    `User id` tinyint(255) unsigned,
+	`feature id` int(255) unsigned
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+
 -- --------------------------------------------------------
 
 --
@@ -111,12 +119,6 @@ ALTER TABLE `User Courses`
 <<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE IF NOT EXISTS `USER FEATURES`(
-	
-    `User id` tinyint(255) unsigned,
-	`feature id` int(255) unsigned
-
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
 
 =======
 >>>>>>> c6af89016c56314e4324abe557b730eecb0be2c3
