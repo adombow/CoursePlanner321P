@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>
-<?php echo "fetch ubc ssc courses schedule";?>
+<?php echo "crawl and fetch ubc ssc courses schedule and put into db";?>
 </title>
 </head>
 <body>
@@ -121,7 +121,45 @@ foreach($links_level_2_new as &$item){
 }
 
 
+//-------------------------------------------
+// Level 3 crawler
+//-------------------------------------------
+// array to store scraped links
+$links_level_3 = array();
+foreach($links_level_2_new as &$item){
+	// set target url to crawl
+	$url = $item; 
+	// open the web page
+	$html = new simple_html_dom();
+	$html->load_file($url);
+	// crawl the webpage for links
+	foreach($html->find("a") as $link){
+		array_push($links_level_3, $link->href);
+	}
+	// remove duplicates from the links array
+	$links_level_3 = array_unique($links_level_3);
+}
+// set output headers to download file
+header("Content-Type: text/csv; charset=utf-8");
+header("Content-Disposition: attachment; filename=links_level_3.csv");
+// set file handler to output stream
+$output = fopen("php://output", "w");
+// output the scraped links
+fputcsv($output, $links_level_3, "\n");	
+
 */
+
+
+//-------------------------------------------
+// Level 3 crawler clean up
+//-------------------------------------------
+//open the new csv file, store into array
+//the array need implode to string
+//and miss https://courses.students.ubc.ca
+$links_level_3_new = array_map("str_getcsv",file("links_level_3_new.csv"));
+foreach($links_level_3_new as &$item){
+	$item = 'https://courses.students.ubc.ca'.implode($item);
+}
 
 /*
 // Downloading home page to variable $scraped_page
