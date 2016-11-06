@@ -161,17 +161,307 @@ foreach($links_level_3_new as &$item){
 	$item = 'https://courses.students.ubc.ca'.implode($item);
 }
 
-/*
-// Downloading home page to variable $scraped_page
-$scraped_page = getHTTPS('https://courses.students.ubc.ca/'.implode($links_level_2[0]));
+// Downloading home page to variable $scraped_page *$links_level_3_new[]
+$scraped_page = getHTTPS($links_level_3_new[666]);
 // Scraping downloaded dara in $scraped_page for content between tags
 $scraped_data = scrape_between($scraped_page, "<body>", "</body>");
 // split the string to array string list
-$scraped_data = preg_replace("/[^A-Za-z0-9]/"," ",$scraped_data);
-$data2string = preg_split("/[\s,]+/", $scraped_data);
-$key = array_search("AANB",$data2string);
-echo $data2string[$key];
-*/
+$scraped_data = preg_replace("/[^A-Za-z0-9,.-]/"," ",$scraped_data);
+$data2string = preg_split("/[\s]+/", $scraped_data);
+
+
+//echo $key = array_search("Seminar",$data2string);
+//set the part of the page from 'worklist' to 'contact'
+//comparing with the real website
+$x = 0;
+array_splice($data2string, 0, array_search("Worklist",$data2string));
+array_splice($data2string, 0, array_search("h4",$data2string)+1);
+
+
+//dept
+$dept = $data2string[0];
+//courseID
+$courseID = $data2string[1];
+//sectionID
+$sectionID = $data2string[2];
+//course type
+$coursetype = '';
+for($x=3; $x<array_search("h4",$data2string); $x++){
+	$coursetype .= $data2string[$x]." ";
+}
+//echo $coursetype;
+
+//course title
+array_splice($data2string, 0, array_search("h5",$data2string)+1);
+$coursetitle = '';
+for($x=0; $x<array_search("h5",$data2string); $x++){
+	$coursetitle .= $data2string[$x]." ";
+}
+//echo $coursetitle;
+//course info
+array_splice($data2string, 0, $x+2);
+$courseinfo = '';
+for($x=0; $x<array_search("p",$data2string); $x++){
+	$courseinfo .= $data2string[$x]." ";
+}
+//echo $courseinfo;
+
+//course credit
+array_splice($data2string, 0, $x);
+array_splice($data2string, 0, array_search("Credits",$data2string));
+if($data2string[1]=='n' and $data2string[2]=='a') $coursecredits = 'N/A';
+else $coursecredits = $data2string[1];
+//echo $coursecredits;
+//course location
+array_splice($data2string, 0, array_search("Location",$data2string));
+$courselocation = $data2string[1];
+//echo $courselocation;
+//course term
+array_splice($data2string, 0, array_search("Term",$data2string));
+$courseterm = '';
+for($x=0; $x<=array_search("br",$data2string); $x++){
+	if($data2string[$x]=='b'){
+		$x++;
+		$courseterm .= '(';
+	}
+	if($data2string[$x]=='br'){
+	$courseterm .= ')';
+	break;
+	}
+	$courseterm .= $data2string[$x]." ";
+}
+//echo $courseterm;
+//course day table row 1
+array_splice($data2string, 0, array_search("Room",$data2string));
+array_splice($data2string, 0, array_search("thead",$data2string));
+
+array_splice($data2string, 0, array_search("td",$data2string));
+$courseday_row1_term = '';
+if($data2string[1]!='td'){ 
+	$courseday_row1_term  = $data2string[1];
+	array_splice($data2string, 0, 4);
+}
+else array_splice($data2string, 0, 3);
+//echo $courseday_row1_term;
+
+
+$courseday_row1_day = '';
+if($data2string[0]!='td'){ 
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		if($data2string[$x]!='td') 
+			$courseday_row1_day .= $data2string[$x]." ";
+	}
+	array_splice($data2string, 0, $x+2);
+}
+else array_splice($data2string, 0, 2);
+//echo $courseday_row1_day;
+
+$courseday_row1_start = '';
+if($data2string[0]!='td'){ 
+	$courseday_row1_start = $data2string[0].':'.$data2string[1];
+	array_splice($data2string, 0, 4);
+}
+else array_splice($data2string, 0, 2);
+//echo $courseday_row1_start;
+
+$courseday_row1_end = '';
+if($data2string[0]!='td'){ 
+	$courseday_row1_end = $data2string[0].':'.$data2string[1];
+	array_splice($data2string, 0, 4);
+}
+else array_splice($data2string, 0, 2);
+//echo $courseday_row1_end;
+
+
+$courseday_row1_building = '';
+if($data2string[0]!='td'){ 
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		if($data2string[$x]!='td') 
+			$courseday_row1_building .= $data2string[$x]." ";
+	}
+	array_splice($data2string, 0, $x+2);
+}
+else array_splice($data2string, 0, 3);
+//echo $courseday_row1_building;
+
+$courseday_row1_room = '';
+if(in_array('roomID',$data2string)){
+	array_splice($data2string, 0, array_search("roomID",$data2string)+1);
+	$courseday_row1_room = $data2string[0];
+}
+//echo $courseday_row1_room;
+array_splice($data2string, 0, array_search("td",$data2string)+1);
+
+
+//course day table row 2
+if($data2string[0]=='tr'){
+	array_splice($data2string, 0, array_search("td",$data2string));
+	$courseday_row2_term = '';
+	if($data2string[1]!='td'){ 
+		$courseday_row2_term  = $data2string[1];
+		array_splice($data2string, 0, 4);
+	}
+	else array_splice($data2string, 0, 3);
+	//echo $courseday_row2_term;
+
+	$courseday_row2_day = '';
+	if($data2string[0]!='td'){ 
+		for($x=0; $x<array_search("td",$data2string); $x++){
+			if($data2string[$x]!='td') 
+				$courseday_row2_day .= $data2string[$x]." ";
+		}
+		array_splice($data2string, 0, $x+2);
+	}
+	else array_splice($data2string, 0, 2);
+	//echo $courseday_row2_day;
+
+	$courseday_row2_start = '';
+	if($data2string[0]!='td'){ 
+		$courseday_row2_start = $data2string[0].':'.$data2string[1];
+		array_splice($data2string, 0, 4);
+	}
+	else array_splice($data2string, 0, 2);
+	//echo $courseday_row2_start;
+
+	$courseday_row2_end = '';
+	if($data2string[0]!='td'){ 
+		$courseday_row2_end = $data2string[0].':'.$data2string[1];
+		array_splice($data2string, 0, 4);
+	}
+	else array_splice($data2string, 0, 2);
+	//echo $courseday_row2_end;
+
+	$courseday_row2_building = '';
+	if($data2string[0]!='td'){ 
+		for($x=0; $x<array_search("td",$data2string); $x++){
+			if($data2string[$x]!='td') 
+				$courseday_row2_building .= $data2string[$x]." ";
+		}
+		array_splice($data2string, 0, $x+2);
+	}
+	else array_splice($data2string, 0, 3);
+	//echo $courseday_row2_building;
+
+	$courseday_row2_room = '';
+	if(in_array('roomID',$data2string)){
+		array_splice($data2string, 0, array_search("roomID",$data2string)+1);
+		$courseday_row2_room = $data2string[0];
+	}
+	//echo $courseday_row2_room;
+	array_splice($data2string, 0, array_search("td",$data2string)+1);
+}
+
+// Instructor
+$Instructor = '';
+if(in_array("Instructor",$data2string) and array_search("Instructor",$data2string)<array_search("book",$data2string)){
+	array_splice($data2string, 0, array_search("Instructor",$data2string));
+	if($data2string[3]!='a') $Instructor = $data2string[3];
+	else if($data2string[3]=='a'){
+		array_splice($data2string, 0, array_search("a",$data2string)+1);
+		while($data2string[2]!='table'){
+			array_splice($data2string, 0, array_search("section",$data2string)+2);
+			for($x=0; $x<array_search("a",$data2string); $x++){
+				$Instructor .= $data2string[$x];
+			}
+			if($data2string[$x+3]!='table') $Instructor .= '; ';
+			if($data2string[$x+3]=='table') break;
+			array_splice($data2string, 0, array_search("a",$data2string)+1);
+		}
+		array_splice($data2string, 0, array_search("table",$data2string)+1);
+	}
+}
+//echo $Instructor;
+
+//3 books
+$book1 = '';
+$book2 = '';
+$book3 = '';
+array_splice($data2string, 0, array_search("table-striped",$data2string)+1);
+
+if($data2string[0]!='section-summary'){
+	array_splice($data2string, 0, array_search("td",$data2string)+1);
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		$book1 .= $data2string[$x].' ';
+	}		
+}
+else{
+	//book 1
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	
+	$book1 .= 'Book Title: ';
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		$book1 .= $data2string[$x].' ';
+	}
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book1 .= '('.$data2string[0].')'.' Author: ';
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		$book1 .= $data2string[$x].' ';
+	}
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book1 .= 'ISB: '.$data2string[0];
+	if($data2string[3]=='table') goto endbook;
+	//book 2
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book2 .= 'Book Title: ';
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		$book2 .= $data2string[$x].' ';
+	}
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book2 .= '('.$data2string[0].')'.' Author: ';
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		$book2 .= $data2string[$x].' ';
+	}
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book2 .= 'ISB: '.$data2string[0];
+	if($data2string[3]=='table') goto endbook;
+	//book 3
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book3 .= 'Book Title: ';
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		$book3 .= $data2string[$x].' ';
+	}
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book3 .= '('.$data2string[0].')'.' Author: ';
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	for($x=0; $x<array_search("td",$data2string); $x++){
+		$book3 .= $data2string[$x].' ';
+	}
+	array_splice($data2string, 0, array_search("class",$data2string)+2);
+	$book3 .= 'ISB: '.$data2string[0];
+	if($data2string[3]=='table') goto endbook;
+}
+
+endbook:{
+	//echo $book1;
+	//echo $book2;
+	//echo $book3;
+};
+
+//------------------------------
+//Below is to put the data into mysql
+//------------------------------
+if( $_POST ){
+	$servername = "planner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com:3306";
+	$username = "planner";
+	$password = "cpen3210";
+	$dbname = "courseplanner";
+
+	// Create connection
+	$conn = mysql_connect($servername, $username, $password);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	} 
+	// database name
+	mysql_select_db($dbname, $con);
+
+	//put command here
+	$query = "";
+	mysql_query($query);
+	mysql_close($con);
+}
 
 ?>
 </body>
