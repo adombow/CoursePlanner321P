@@ -14,18 +14,12 @@ var row1 = [ first_col[0], mon[0], tue[0], wed[0], thu[0], fri[0], sat[0], sun[0
 var table = [row0, row1];
 
 
-var inputTitle = "";
-var inputTime = "";
-var inputLocation = "";
-var inputInfor = "";
-
-
 
 
 //show infor
-var dialogInfor = function(i,j) {
+var viewTile = function(i,j) {
     if (j==0) return;
-    console.log("i = " + i + " ;  j = " + j);
+    //console.log("i = " + i + " ;  j = " + j);
     //store information to the dialogbox
     $( "#view-edit-tile" ).data("dialog_title", table[i][j]);
 
@@ -47,7 +41,8 @@ var dialogInfor = function(i,j) {
                 //$( this ).dialog( "close" );
             },
             "Remove": function() {
-                remove($("#view-edit-tile").data('dialog_title'));
+                confirm_tile_remove($("#view-edit-tile").data('dialog_title'));
+
                 $( this ).dialog( "close" );
             },
             Ok: function() {
@@ -65,7 +60,7 @@ var dialogInfor = function(i,j) {
 //
 //****************************************************
 var edit = function(target) {
-    console.log("Editing ...");
+    //console.log("Editing ...");
 
     //write content
     document.getElementById("edit-tile").innerHTML = 'Title: <input type="text" style="z-index:10000" name="title"><br>Time: <input type="text" style="z-index:10000" name="time"><br>Location: <input type="text" style="z-index:10000" name="location"><br>Infor: <input type="text" style="z-index:10000" name="infor"><br>';
@@ -97,13 +92,41 @@ var edit = function(target) {
     
 }
 
-var remove = function(target) {
+var removeTile = function(target) {
     target["title"] = "";
     target["time"] = "";
     target["location"] = "";
     target["infor"] = "";
+
+
+    loadTable("data-table", table);
+
 }
 
+var confirm_tile_remove = function(target) {
+
+    document.getElementById("confirm-tile-remove").innerHTML = "Are you sure to remove the information of this tile?";
+    
+    $( "#confirm-tile-remove" ).dialog({
+        title: "Confirm removement",
+        modal: true,
+        buttons: {
+            'Yes': function () {
+                
+                removeTile(target);
+                
+                $( "#confirm-tile-remove" ).dialog('close');
+            },
+            'Cancel': function () {
+                $(this).dialog('close');
+
+            }
+        }
+    });
+}
+
+
+// ************************** row operation **************************
 var addRow = function() {
     var position_of_new_row = table.length - 1;
 
@@ -150,11 +173,11 @@ var removeLastRow = function() {
 
 }
 
-var confirm_remove = function() {
+var confirm_row_remove = function() {
 
-    document.getElementById("confirm_remove").innerHTML = "Are you sure to remove the last row from the table?";
+    document.getElementById("confirm-row-remove").innerHTML = "Are you sure to remove the last row from the table?";
     
-    $( "#confirm_remove" ).dialog({
+    $( "#confirm-row-remove" ).dialog({
         title: "Confirm removement",
         modal: true,
         buttons: {
@@ -162,7 +185,7 @@ var confirm_remove = function() {
                 
                 removeLastRow();
                 
-                $( "#confirm_remove" ).dialog('close');
+                $( "#confirm-row-remove" ).dialog('close');
             },
             'Cancel': function () {
                 $(this).dialog('close');
@@ -174,7 +197,7 @@ var confirm_remove = function() {
 
 var removeRow = document.getElementById("remove-last-row");
 removeRow.onclick = function(){
-    confirm_remove();
+    confirm_row_remove();
 }
 
 //****************************************************
@@ -200,8 +223,8 @@ var loadTable = function(tableId, data) {
         for (var j=0; j<data[i].length; j++) {
             var temp = data[i][j];
 
-            if (j==0) row += '<td class="uneditable" onclick="dialogInfor(' + i + ',' + j + ')">' + temp["title"] + '</td>';
-            else row += '<td class="editable" onclick="dialogInfor(' + i + ',' + j + ')">' + temp["title"] + '</td>';
+            if (j==0) row += '<td class="uneditable" onclick="viewTile(' + i + ',' + j + ')">' + temp["title"] + '</td>';
+            else row += '<td class="editable" onclick="viewTile(' + i + ',' + j + ')">' + temp["title"] + '</td>';
         }
         rows += row + '<tr>';
     }
