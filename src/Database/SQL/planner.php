@@ -457,6 +457,8 @@ if( $_POST ){
 	// database name
 	mysql_select_db($dbname, $con);
 
+	//INSERT INTO `courseplanner`.`course` (`dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3`) VALUES ($dept, $courseID, $sectionID, $coursetype, $coursetitle, $courseinfo, $coursecredits, $courselocation, $courseterm, $courseday_row1_term, $courseday_row1_day, $courseday_row1_start, $courseday_row1_end, $courseday_row1_building, $courseday_row1_room, $courseday_row2_term, $courseday_row2_day, $courseday_row2_start, $courseday_row2_end, $courseday_row2_building, $courseday_row2_room, $Instructor, $book1, $book2, $book3);
+
 	//put command here
 	$query = "";
 	mysql_query($query);
