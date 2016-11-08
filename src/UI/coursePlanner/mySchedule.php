@@ -15,6 +15,7 @@
     <body>
     <?php 
         include("inc/sidebar.html");
+        include("schedule_db.php");
     ?>
         <h1 style="text-align: center;">
             Schedule your schedule

@@ -59,13 +59,6 @@ CREATE TABLE IF NOT EXISTS `Courses` (
   KEY `Day(s) of Week` (`Day(s) of Week`,`Instructor`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `Courses`
---
-
-INSERT INTO `Courses` (`Course Code`, `Day(s) of Week`, `Description`, `Instructor`, `Textbook`, `Start Time`, `End Time`, `Course_ID`) VALUES
-('CPEN 321', b'0000000', 'Software Engineering\r\n\r\nEngineering practices for the development of non-trivial software-intensive systems including requirements specification, software architecture, implementation, verification, and maintenance. Iterative development. Recognized standards, guidelines, and models. ', 'AGHAREBPARAST, FARSHID; GOPALAKRISHNAN, SATHISH', NULL, '12:30:00', '14:00:00', 1);
-
 -- --------------------------------------------------------
 
 --
