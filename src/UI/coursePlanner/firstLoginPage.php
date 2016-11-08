@@ -23,8 +23,10 @@
             $("#tab").append("<tr id="+_len+" align='center'>"
                                 +"<td>"+_len+"</td>"
                                 +"<td>Course"+_len+"</td>"
-                                +"<td><input type='text' name='desc"+_len+"' id='desc"+_len+"' /></td>"
-                                +"<td><a href=\'#\' onclick=\'deltr("+_len+")\'>DELETE</a></td>"
+                                +"<td><input type='text' name='CourseName"+_len+"' id='CourseName"+_len+"' /></td>"
+ +"<td><input type='text' name='CourseNumber"+_len+"' id='CourseNumber"+_len+"' /></td>" 
+ +"<td><input type='text' name='CourseSection"+_len+"' id='CourseSection"+_len+"' /></td>" 
+                               +"<td><a href=\'#\' onclick=\'deltr("+_len+")\'>DELETE</a></td>"
                             +"</tr>");            
         })    
     })
@@ -113,6 +115,8 @@
             <td width="20%">Number</td>
             <td>List</td>
             <td>Course Name</td>
+            <td>Course Number</td>
+            <td>Course Section</td>
             <td>Delete Course</td>
        </tr>
     </table>
