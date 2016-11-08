@@ -1,5 +1,7 @@
 <!doctype html>
 
+
+
 <html>
 <head>
 <title>Facebook Login </title>
@@ -20,10 +22,9 @@ var auth_response_change_callback = function(response) {
 var auth_status_change_callback = function(response) {
     statusChangeCallback(response);
 console.log("auth_status_change_callback: " + response.status);
-if(response.status==='connected'){
-window.location = "firstLoginPage.php";
 
-}
+
+
 }
 
   // This is called with the results from from FB.getLoginStatus().

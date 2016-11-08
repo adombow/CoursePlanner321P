@@ -5,15 +5,15 @@
 	<title>Main Panel</title>
 	<link rel="stylesheet" type="text/css" href="css/sidebar.css">
 	<link rel="stylesheet" type="text/css" href="css/mainPanel.css">
-	
+
   
 </head>
 	<body>
-	<?php 
-	require("database.php");
-	require("session.php");
-	   include("inc/sidebar.html");
-	   require("index.php");
+	  <?php
+	 
+    	     include("inc/sidebar.html");
+	     include("infoFillIn.php");
+	
 	   
 	?>
 		<h1 style="text-align: center;">
@@ -56,53 +56,7 @@
 
 	</div>
 
-	<?php
-	$databaseName = 'courseplanner';
-    	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-    	$userName = 'courseplanner';
-    	$password = 'cpen3210';
-        //Create a new database object and connect to it
-        //$conn = new Mysql();
-	$conn = new mysqli($servername, $username, $password, $databasename);
-    	?>
+<script src="js/sidebar.js"></script>
 
-        <!--DB connection error handling for debugging
-            Should change to something more user friendly for final -->
-        <?php //if( $conn -> getConnection() -> connection_error ): 
-	      if( $conn -> connection_error ): ?>
-            <h1 style="text-align: center;">
-                Not connected to database.
-            </h1>
-        <?php else: ?>
-            <h1 style="text-align: center;">
-                Connected to database.
-            </h1>
-        <?php endif; ?>
-
-        <?php
-	//Create new session
-	$session = Session::getInstance();
-
-	//FB login token (should be unique for every user ----------- Add this once fb functionality finished
-	$fbtoken = rand(0,18097);
-	$session->loginToken = $fbtoken;	
-	$UID = $session->loginToken; 
-
-	//$session->db = $conn;
-        ?>
-	<h1 style="text-align: center;">
-		<?php echo $UID; ?>
-	</h1>
-
-	<?php
-	//$session->db->dbDisconnect();  	
-	//$session->destroy(); 
-        ?>
-
-	<script src="js/sidebar.js"></script>
-
-	<?php
-	$conn->close();
-	?>
 </body>
 </html>
