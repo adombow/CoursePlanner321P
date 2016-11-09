@@ -24,6 +24,7 @@
 <title>Facebook Login </title>
 <meta charset="UTF-8">
 <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body onload = "FB.Event.subscribe('auth.authResponseChange', auth_response_change_callback);
 FB.Event.subscribe('auth.statusChange', auth_status_change_callback);">
