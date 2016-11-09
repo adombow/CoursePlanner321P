@@ -2,20 +2,6 @@
 
 <?php
 	require("session.php");
-
-	/*$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "myDB";
-
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-
-	// Check connection
-	if ($conn->connect_error) {
-	    die("Connection failed: " . $conn->connect_error);
-	} 
-	echo "Connected successfully<br>"*/
 ?>
 
 
@@ -58,6 +44,15 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+	  var facebookid = response.authResponse.userID;
+	  $.ajax ({
+	    type: "POST",
+	    url:"index.php",
+	    data: {facebookid:facebookid},
+	    success: function(){
+		  console.log("userID sent!");
+	    }
+	  });
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
@@ -101,17 +96,6 @@ function statusChangeCallback(response) {
   // These three cases are handled in the callback function.
 
   FB.getLoginStatus(function(response) {
-    if(response.status === 'connected'){
-	var facebookid = response.authResponse.userID;
-	$.ajax ({
-	    type: "POST",
-	    url:"index.php",
-	    data: {facebookid:facebookid},
-	    success: function(){
-		console.log("userID sent!");
-	    }
-	});
-    }
   //alert("hello check login status");
     statusChangeCallback(response);
   });
