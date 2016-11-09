@@ -50,12 +50,17 @@
 
 /*
     var name = "Andrew";
-    courses = [];
-    courses[0] = "courseID1";
-    courses[1] = "courseID2"; etc.
+    courseDept = [];
+    courseCode = [];
+    courseSec = [];
+    //Grab each entry from the user, parse into 3 strings as above
+    courseDept[0] = "MATH";
+    courseCode[0] = "100";
+    courseSec[0] = "001";
+    etc.
     $.ajax ({
       	method: "POST",
-       	data: { name: name, courses: courses },
+       	data: { name: name, courseDept: courseDept, courseCode: courseCode, courseSec: courseSec },
         success: function(){
            console.log("userID sent!");
         }
@@ -178,6 +183,7 @@
 	        echo "Error: ". $conn->error;
 	    }
 	    //Course info to be gotten from database using info from POST request in js above
+	    //While there are courses to insert, insert them into user courses and create a new calendar entry
 	    $dept;
 	    $courseID;
 	    $sectionID;
@@ -190,7 +196,6 @@
 	    while($row = $result->fetch_assoc()){
 		$cid = $row['ID'];
 	    }
-	    //While there are courses to insert, insert them into user courses and create a new calendar entry
 	    $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
 	    $conn->query($sql);
 	    $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
