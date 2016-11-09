@@ -8,9 +8,7 @@
    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
    <script type="text/javascript" src="jquery-1.3.1.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 
 <script>
      $(document).ready(function(){
@@ -49,6 +47,20 @@
         }    
         
     }
+
+/*
+    var name = "Andrew";
+    courses = [];
+    courses[0] = "courseID1";
+    courses[1] = "courseID2"; etc.
+    $.ajax ({
+      	method: "POST",
+       	data: { name: name, courses: courses },
+        success: function(){
+           console.log("userID sent!");
+        }
+      });
+*/
 </script>
 </head>
     <body>
@@ -138,5 +150,56 @@
     <input type="submit" name="b1" value="submit" onClick="javascript:location.href='mainPanelWithoutRefer.php'">
    
 </div>
+<?php
+	require("session.php");
+        //Access the database connection created on login
+        //$conn = $session->db;
+        $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
+        $userName = 'courseplanner';
+        $password = 'cpen3210';
+        $databaseName = 'courseplanner';
+        //Create a new database object and connect to it
+        $conn = new mysqli($serverName, $userName, $password, $databaseName);
+
+        if($conn->connect_error){
+            die("Error: ". $conn->connect_error);
+        }
+
+        //Get current session
+        $session = Session::getInstance();
+	$uid = $session->userID;
+
+	if( isset($_POST['name']) ){
+	    $name = $_POST['name'];
+	    $sql = "UPDATE `User Profile` SET `Name` = '$name' WHERE `ID`=$uid";
+	    if( $conn->query($sql) === TRUE ){
+	        echo "Record updated successfully";
+	    } else{
+	        echo "Error: ". $conn->error;
+	    }
+	    //Course info to be gotten from database using info from POST request in js above
+	    $dept;
+	    $courseID;
+	    $sectionID;
+	    $courseCode = $dept. " ". $courseID;
+	    $location;
+	    $time;
+	    $info;
+	    $sql = "SELECT `ID` FROM `course` WHERE `dept`='$dept', `courseID`='$courseID', `sectionID`='$sectionID'";
+	    $result = $conn->query($sql);
+	    while($row = $result->fetch_assoc()){
+		$cid = $row['ID'];
+	    }
+	    //While there are courses to insert, insert them into user courses and create a new calendar entry
+	    $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
+	    $conn->query($sql);
+	    $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
+	    $conn->query($sql);
+	}
+?>
+
+<?php
+	$conn->close();
+?>
 </body>
 </html>
