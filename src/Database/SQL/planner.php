@@ -274,7 +274,8 @@ foreach($links_level_3_new as &$item){
 		array_splice($data2string, 0, array_search("roomID",$data2string)+1);
 		$courseday_row1_room = $data2string[0];
 	}
-	 $courseday_row1_room;
+	$courseday_row1_room;
+	if($data2string[8]=='colspan' or $data2string[9]=='colspan') array_splice($data2string, 0, 20);
 	array_splice($data2string, 0, array_search("td",$data2string)+1);
 	//course day table row 2
 	$courseday_row2_term = '';
@@ -291,7 +292,7 @@ foreach($links_level_3_new as &$item){
 			array_splice($data2string, 0, 4);
 		}
 		else array_splice($data2string, 0, 3);
-		 $courseday_row2_term;
+		$courseday_row2_term;
 		
 		if($data2string[0]!='td'){ 
 			for($x=0; $x<array_search("td",$data2string); $x++){
@@ -301,21 +302,21 @@ foreach($links_level_3_new as &$item){
 			array_splice($data2string, 0, $x+2);
 		}
 		else array_splice($data2string, 0, 2);
-		 $courseday_row2_day;
+		$courseday_row2_day;
 		
 		if($data2string[0]!='td'){ 
 			$courseday_row2_start = $data2string[0].':'.$data2string[1];
 			array_splice($data2string, 0, 4);
 		}
 		else array_splice($data2string, 0, 2);
-		 $courseday_row2_start;
+		$courseday_row2_start;
 		
 		if($data2string[0]!='td'){ 
 			$courseday_row2_end = $data2string[0].':'.$data2string[1];
 			array_splice($data2string, 0, 4);
 		}
 		else array_splice($data2string, 0, 2);
-		 $courseday_row2_end;
+		$courseday_row2_end;
 		
 		if($data2string[0]!='td'){ 
 			for($x=0; $x<array_search("td",$data2string); $x++){
@@ -325,15 +326,17 @@ foreach($links_level_3_new as &$item){
 			array_splice($data2string, 0, $x+2);
 		}
 		else array_splice($data2string, 0, 3);
-		 $courseday_row2_building;
+		$courseday_row2_building;
 		
 		if(in_array('roomID',$data2string)){
 			array_splice($data2string, 0, array_search("roomID",$data2string)+1);
 			$courseday_row2_room = $data2string[0];
 		}
-		 $courseday_row2_room;
+		$courseday_row2_room;
 		array_splice($data2string, 0, array_search("td",$data2string)+1);
 	}
+	
+
 	
 	// Instructor
 	$Instructor = '';
@@ -355,6 +358,7 @@ foreach($links_level_3_new as &$item){
 			array_splice($data2string, 0, array_search("table",$data2string)+1);
 		}
 	}
+
 	//3 books
 	$book1 = '';
 	$book2 = '';
@@ -419,50 +423,42 @@ foreach($links_level_3_new as &$item){
 		 $book2;
 		 $book3;
 		
-		$sql = "INSERT INTO `courseplanner`.`course` (`dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3`, `ID`) VALUES ('$dept', '$courseID', '$sectionID', '$coursetype', '$coursetitle', '$courseinfo', '$coursecredits', '$courselocation', '$courseterm', '$courseday_row1_term', '$courseday_row1_day', '$courseday_row1_start', '$courseday_row1_end', '$courseday_row1_building', '$courseday_row1_room', '$courseday_row2_term', '$courseday_row2_day', '$courseday_row2_start', '$courseday_row2_end', '$courseday_row2_building', '$courseday_row2_room,', '$Instructor', '$book1', '$book2', '$book3', NULL);";
+	if($courseday_row1_term=='Last'){
+		$courseday_row1_term = '';
+		$courseday_row1_day = '';
+		$courseday_row1_start = '';
+		$courseday_row1_end = '';
+		$courseday_row1_building = '';
+		$courseday_row1_room = '';
+		$courseday_row2_term = '';
+		$courseday_row2_day = '';
+		$courseday_row2_start = '';
+		$courseday_row2_end = '';
+		$courseday_row2_building = '';
+		$courseday_row2_room = '';
+	}
+	
+	if(strpos($book1,'end of Main Content')){
+		$book1='Information for the books required for this section is not available. ';
+		$book2='';
+		$book3='';
+	}
+	
+	//echo $courseday_row1_term,$courseday_row1_day,$courseday_row1_start,$courseday_row1_end,$courseday_row1_building,$courseday_row1_room,$courseday_row2_term,$courseday_row2_day,$courseday_row2_start,$courseday_row2_end,$courseday_row2_building,$courseday_row2_room,$Instructor,$book1,$book2,$book3;
+	
+	
+	
+	
+	//insert data
+//		$sql = "INSERT INTO `courseplanner`.`course` (`dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3`, `ID`) VALUES ('$dept', '$courseID', '$sectionID', '$coursetype', '$coursetitle', '$courseinfo', '$coursecredits', '$courselocation', '$courseterm', '$courseday_row1_term', '$courseday_row1_day', '$courseday_row1_start', '$courseday_row1_end', '$courseday_row1_building', '$courseday_row1_room', '$courseday_row2_term', '$courseday_row2_day', '$courseday_row2_start', '$courseday_row2_end', '$courseday_row2_building', '$courseday_row2_room', '$Instructor', '$book1', '$book2', '$book3', NULL);";
+
+	//update data
+	$sql = "UPDATE `course` SET `dept`='$dept',`courseID`='$courseID',`sectionID`='$sectionID',`course_type`='$coursetype',`course_title`='$coursetitle',`course_info`='$courseinfo',`course_credit`='$coursecredits',`course_location`='$courselocation',`course_term`='$courseterm',`course_schedule_term_row1`='$courseday_row1_term',`course_schedule_day_row1`='$courseday_row1_day',`course_schedule_day_start_row1`='$courseday_row1_start',`course_schedule_day_end_row1`='$courseday_row1_end',`course_schedule_building_row1`='$courseday_row1_building',`course_schedule_room_row1`='$courseday_row1_room',`course_schedule_term_row2`='$courseday_row2_term',`course_schedule_day_row2`='$courseday_row2_day',`course_schedule_day_start_row2`='$courseday_row2_start',`course_schedule_day_end_row2`='$courseday_row2_end',`course_schedule_building_row2`='$courseday_row2_building',`course_schedule_room_row2`='$courseday_row2_room',`course_instructors`='$Instructor',`course_book1`='$book1',`course_book2`='$book2',`course_book3`='$book3' WHERE `dept`='$dept' and `courseID`='$courseID' and `sectionID`='$sectionID' and `course_type`='$coursetype';";
 	
 	if ($conn->query($sql) != TRUE) {
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
-<<<<<<< HEAD
 		
-=======
-	array_splice($data2string, 0, array_search("class",$data2string)+2);
-	$book3 .= 'ISB: '.$data2string[0];
-	if($data2string[3]=='table') goto endbook;
-}
-
-endbook:{
-	//echo $book1;
-	//echo $book2;
-	//echo $book3;
-};
-
-//------------------------------
-//Below is to put the data into mysql
-//------------------------------
-if( $_POST ){
-	$servername = "planner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com:3306";
-	$username = "planner";
-	$password = "cpen3210";
-	$dbname = "courseplanner";
-
-	// Create connection
-	$conn = mysql_connect($servername, $username, $password);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	} 
-	// database name
-	mysql_select_db($dbname, $con);
-
-	//INSERT INTO `courseplanner`.`course` (`dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3`) VALUES ($dept, $courseID, $sectionID, $coursetype, $coursetitle, $courseinfo, $coursecredits, $courselocation, $courseterm, $courseday_row1_term, $courseday_row1_day, $courseday_row1_start, $courseday_row1_end, $courseday_row1_building, $courseday_row1_room, $courseday_row2_term, $courseday_row2_day, $courseday_row2_start, $courseday_row2_end, $courseday_row2_building, $courseday_row2_room, $Instructor, $book1, $book2, $book3);
-
-	//put command here
-	$query = "";
-	mysql_query($query);
-	mysql_close($con);
->>>>>>> origin/master
 }
 echo 'done';
 $conn->close();
