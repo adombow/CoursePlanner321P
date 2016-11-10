@@ -13,9 +13,8 @@
 FB.Event.subscribe('auth.statusChange', auth_status_change_callback);">
 
 <script>
-    
 var auth_response_change_callback = function(response) {
-    statusChangeCallback(response);
+  statusChangeCallback(response);
   console.log("auth_response_change_callback");
   console.log(response);
 }
@@ -24,7 +23,7 @@ var auth_status_change_callback = function(response) {
     statusChangeCallback(response);
     console.log("auth_status_change_callback: " + response.status);
     if(response.status === 'connected'){
-    	window.location = "firstLoginPage.php";
+        window.location = "firstLoginPage.php";
     }
 }
 

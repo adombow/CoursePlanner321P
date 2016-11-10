@@ -79,9 +79,9 @@
             $fbID = $_POST['facebookid'];
             //If user already exists, don't add a new db entry, otherwise create one
             if( $conn->query("INSERT INTO `User Profile` (`fbID`) VALUES ('$fbID')") === TRUE ){
-                echo "New record created succesfully";
+                echo "New record created!";
             } else{
-                echo "Error: ". $conn->error;
+                echo $conn->error;
             }
             //Get the unique row ID for the new user, or retrieve their old one
             $result = $conn->query("SELECT ID FROM `User Profile` WHERE `fbID`='". $fbID. "'");
