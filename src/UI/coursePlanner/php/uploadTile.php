@@ -86,7 +86,7 @@
 
 	
 	if ($exist == 1) {
-		$sql = "UPDATE `$table` SET `Title`='$title', `Time`='$time', `Location`='$location', `Info='$infor' WHERE `x`=$x AND `y`=$y AND `userID`=$uid ";
+		$sql = "UPDATE `$table` SET `Title`='$title', `Time`='$time', `Location`='$location', `Info`='$infor' WHERE `x`=$x AND `y`=$y AND `userID`=$uid ";
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record updated successfully \n";
 		} else {

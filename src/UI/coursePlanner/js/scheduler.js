@@ -287,8 +287,6 @@ var downloadTile = function(i,j) {
         success: function(data){
             console.log("find data with index: (" + i + "," + j +")");
             storeTileLocal(data, i, j);
-
-            //alert(data);
         }
     });
 }
@@ -299,13 +297,10 @@ var storeTileLocal = function(data, i, j) {
     //get temp json object
     var empt = new jQuery.parseJSON('{"title": "", "time": "" , "location": "", "infor": ""}');
     var temp = new jQuery.parseJSON('{"title": "", "time": "" , "location": "", "infor": ""}');
-    temp["title"] = data["title"];
-    temp["time"] = data["time"];
-    temp["location"] = data["location"];
-    temp["infor"] = data["infor"];
-
-
-    
+    temp["title"] = data["Title"];
+    temp["time"] = data["Time"];
+    temp["location"] = data["Location"];
+    temp["infor"] = data["Info"];    
 
     switch(j) {
         case 1: 
