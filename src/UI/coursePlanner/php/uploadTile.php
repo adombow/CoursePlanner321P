@@ -18,7 +18,7 @@
 	    echo "<h1>Didn't work</h1>";
 	}
 	// get user ID
-	require(session.php);
+	require('../session.php');
 	$session = Session::getInstance();
 	$uid = $session->userID;
 

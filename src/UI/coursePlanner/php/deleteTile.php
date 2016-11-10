@@ -11,7 +11,7 @@
 	$y = $_POST['y'];
 
 	// get user ID
-	require(session.php);
+	require('../session.php');
 	$session = Session::getInstance();
 	$uid = $session->userID;
 
