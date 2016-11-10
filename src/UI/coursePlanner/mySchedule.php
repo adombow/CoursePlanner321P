@@ -15,8 +15,8 @@
     <body>
     <?php 
         include("inc/sidebar.html");
-	require("session.php");
-	require("database.php");
+	    require("session.php");
+	    require("database.php");
     ?>
         <h1 style="text-align: center;">
             Plan your schedule
@@ -29,10 +29,13 @@
 
     <div style="text-align: center; margin: 60;">
         <button type="button" id="add-row">Add Row</button>
+        <button type="button" id="add-rows">Add Rows</button>
         <button type="button" id="remove-last-row">Remove Last Row</button>
     </div>
     
-    <div id="confirm_remove"></div>
+    <div id="num-of-rows-to-add"></div>
+    <div id="confirm-tile-remove"></div>
+    <div id="confirm-row-remove"></div>
     <div id="view-edit-tile"></div>
     <div id="edit-tile"></div>
 
