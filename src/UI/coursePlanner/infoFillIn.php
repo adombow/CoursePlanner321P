@@ -17,14 +17,14 @@ var auth_response_change_callback = function(response) {
   statusChangeCallback(response);
   console.log("auth_response_change_callback");
   console.log(response);
+  if(response.status === 'connected'){
+       // window.location = "firstLoginPage.php";
+    }
 }
 
 var auth_status_change_callback = function(response) {
     statusChangeCallback(response);
     console.log("auth_status_change_callback: " + response.status);
-    if(response.status === 'connected'){
-        window.location = "firstLoginPage.php";
-    }
 }
 
   // This is called with the results from from FB.getLoginStatus().
@@ -134,56 +134,6 @@ var auth_status_change_callback = function(response) {
 
 <div class="fb-login-button" data-max-rows="1" data-size="large"
      data-show-faces="true" data-auto-logout-link="true"></div>
-   
-
-<!--<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>-->
-
-<?php
-  /*      require("session.php");
-        include("inc/sidebar.html");
-        include("infoFillIn.php");
-        //Access the database connection created on login
-        //$conn = $session->db;
-        $serverName = "courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com:3306";
-        $userName = "courseplanner";
-        $password = "cpen3210";
-        $databaseName = "courseplanner";
-        //Create a new database object and connect to it
-        $conn = new mysqli($serverName, $userName, $password, $databaseName);
-
-        if($conn->connect_error){
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        //Create new session
-        $session = Session::getInstance();
-        if( isset($_POST['facebookid']) ){
-            //FB userID from Javascript above (should be unique for every user)
-            $fbID = $_POST['facebookid'];
-            //If user already exists, don't add a new db entry, otherwise create one
-            if( $conn->query("INSERT INTO `User Profile` (`fbID`) VALUES ('$fbID')") === TRUE ){
-                echo "New record created succesfully";
-            } else{
-                echo "Error: ". $conn->error;
-            }
-            //Get the unique row ID for the new user, or retrieve their old one
-            $result = $conn->query("SELECT ID FROM `User Profile` WHERE `fbID`='". $fbID. "'");
-            if( $result->num_rows > 0 ){
-                while($row = $result->fetch_assoc()){
-                    $uid = $row["ID"];
-                }
-            }
-            //Store the user's ID in the session for use later
-            $session->userID = $uid;
-            //$session->db = $conn;
-        }
-        $conn->close();
-*/?>
 </body>
 </html>
 
