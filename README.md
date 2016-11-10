@@ -54,7 +54,9 @@ Create or login to user profile
 LAMP
 	The web server is written in LAMP which is is an archetypal model of web service solution stacks, named as an acronym of the names of its original four open-source components: the Linux operating system, the Apache HTTP Server, the MySQL relational database management system, and the PHP programming language. LAMP is a suitable solution stack for building dynamic web sites and web applications. The model view is as follow image.
 
-
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%2010.07.51%20AM.png/>
+<br>
 
 Linux operating system
 	Linux is a Unix-like and mostly POSIX-compliant computer operating system (OS) assembled under the model of free and open-source software development and distribution. The defining component of Linux is the Linux kernel, an operating system kernel first released on September 17, 1991 by Linus Torvalds. The Free Software Foundation uses the name GNU/Linux to describe the operating system, which has led to some controversy. Source: https://en.wikipedia.org/wiki/Linux
@@ -77,34 +79,11 @@ PHP programing language
 	PHP is a server-side scripting language designed primarily for web development but is also used as a general-purpose programming language. Originally created by Rasmus Lerdorf in 1994, the PHP reference implementation is now produced by The PHP Development Team. PHP originally stood for Personal Home Page, but it now stands for the recursive acronym PHP: Hypertext Preprocessor. Source: https://en.wikipedia.org/wiki/PHP
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 3.Data
 	Our Web Server Entity-Relationship (ER) Diagram is as follows:
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%2010.08.19%20AM.png/>
+<br>
 
 
 
@@ -114,43 +93,20 @@ PHP programing language
 4.User Interface Design 
 	The user interface mainly includes login view, schedule panel, reminder panel, workload ranking panel, and contact and help panel. The login view is used to allow users to login with their facebook account, which requires a facebook login module to support the function. After the user logs into their account, they will be able to navigate through all the following four panels on a sidebar. Users could open or hide the sidebar by clicking opening button or close button. The panels will display user’s private information related to their account, and users could modify their schedule, set reminder requirements, rank workload of certain class work and get contact and help from our design team on corresponding panels. All the panels are able to access certain parts of our server end database to retrieve or update information. Also, there should be a reminder module to support its functionality.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 a)Dashboard View:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.48.50%20AM.png />
+<br>
 
 
 
 b)Facebook Login View:
 
+
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.50.42%20AM.png/>
+<br>
 
 
 
@@ -158,9 +114,9 @@ b)Facebook Login View:
 c)First login Info Enter Page View:
 
 
-
-
-
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.51.04%20AM.png/>
+<br>
 
 
 
@@ -168,25 +124,17 @@ c)First login Info Enter Page View:
 d)Sidebar Select View:
 
 
-
-
-
-
-
-
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.54.38%20AM.png/>
+<br>
 
 
 
 e)Course Information Edit Page View:
 
-
-
-
-
-
-
-
-
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.51.29%20AM.png/>
+<br>
 
 
 
