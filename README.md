@@ -16,7 +16,7 @@ www.courseplanner.de
 DATABASE
 1.Andrew Dombowsky
 2.Qianzhen Gao
-3.Pietr Crandell
+3.Pietr Crandall
 
 UI
 1.Diya Ren 
