@@ -1,13 +1,13 @@
 <?php
 	// parameters set up
 	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-    $userName = 'courseplanner';
-    $password = 'cpen3210';
-    $databaseName = 'courseplanner';
+    	$userName = 'courseplanner';
+    	$password = 'cpen3210';
+    	$databaseName = 'courseplanner';
 	$table = "Unique Calendar Entry";
 
-	$x = $_POST["x"];
-	$y = $_POST["y"];
+	$x = $_POST['x'];
+	$y = $_POST['y'];
 	
 	// get user ID
 	require(session.php);
@@ -37,15 +37,15 @@
 	//		Getting data from database
 	//
 	// **************************************************
-	$sql = "SELECT `userID`, `Title`, `Time`, `Location`, `info`, `x`, `y` FROM `$table`";
+	$sql = "SELECT `userID`, `Title`, `Time`, `Location`, `Info`, `x`, `y` FROM `$table`";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 	        //only return the expected one
-			if ($row["x"] == $x && $row["y"] == $y && $row["ID"] == $uid){
-				unset($row["ID"]);
+			if ($row["x"] == $x && $row["y"] == $y && $row["userID"] == $uid){
+				unset($row["userID"]);
 				echo json_encode($row);
 				break;
 			}

@@ -283,7 +283,7 @@ var downloadTile = function(i,j) {
         type: "POST",
         url: 'php/downloadTile.php',
         data: {x: i, y: j},
-        dataType: "json",
+        //dataType: "json",
         success: function(data){
             console.log("find data with index: (" + i + "," + j +")");
             storeTileLocal(data, i, j);

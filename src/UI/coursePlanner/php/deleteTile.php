@@ -1,14 +1,14 @@
 <?php
 	// parameters set up
 	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-    $userName = 'courseplanner';
-    $password = 'cpen3210';
-    $databaseName = 'courseplanner';
+    	$userName = 'courseplanner';
+    	$password = 'cpen3210';
+    	$databaseName = 'courseplanner';
 	$table = "Unique Calendar Entry";
 
 	//Get parameters from url
-	$x = $_POST["x"];
-	$y = $_POST["y"];
+	$x = $_POST['x'];
+	$y = $_POST['y'];
 
 	// get user ID
 	require(session.php);
@@ -48,7 +48,7 @@
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 	        //echo "title: " . $row["title"]. " - Time: " . $row["time"]. " " . $row["location"]. "<br>";
-			if ($row["x"] == $x && $row["y"] == $y && $row["ID"] == $uid){
+			if ($row["x"] == $x && $row["y"] == $y && $row["userID"] == $uid){
 				$exist = 1;
 				echo "This tile exists in DB \n";
 			}

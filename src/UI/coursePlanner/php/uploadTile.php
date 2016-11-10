@@ -1,19 +1,22 @@
 <?php
 	// parameters set up
 	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-    $userName = 'courseplanner';
-    $password = 'cpen3210';
-    $databaseName = 'courseplanner';
+    	$userName = 'courseplanner';
+    	$password = 'cpen3210';
+    	$databaseName = 'courseplanner';
 	$table = "Unique Calendar Entry";
 
 	//Get parameters from url
-	$title = $_POST["title"];
-	$x = $_POST["x"];
-	$y = $_POST["y"];
-	$time = $_POST["time"];
-	$location = $_POST["location"];
-	$infor = $_POST["infor"];
-
+	if( isset($_POST['title']) ){
+	    $title = $_POST['title'];
+	    $x = $_POST['x'];
+	    $y = $_POST['y'];
+	    $time = $_POST['time'];
+	    $location = $_POST['location'];
+	    $infor = $_POST['infor'];
+	} else{
+	    echo "<h1>Didn't work</h1>";
+	}
 	// get user ID
 	require(session.php);
 	$session = Session::getInstance();
@@ -70,7 +73,7 @@
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 	        
-			if ($row["x"] == $x && $row["y"] == $y && $row["ID"] == $uid){
+			if ($row["x"] == $x && $row["y"] == $y && $row["userID"] == $uid){
 				$exist = 1;
 				echo "This tile exists in DB \n";
 			}
