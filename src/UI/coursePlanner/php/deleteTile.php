@@ -48,7 +48,7 @@
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 	        //echo "title: " . $row["title"]. " - Time: " . $row["time"]. " " . $row["location"]. "<br>";
-			if ($row["x"] == $x && $row["y"] == $y && $row["ID"] == $uid){
+			if ($row["x"] == $x && $row["y"] == $y && $row["userID"] == $uid){
 				$exist = 1;
 				echo "This tile exists in DB \n";
 			}

@@ -44,8 +44,8 @@
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 	        //only return the expected one
-			if ($row["x"] == $x && $row["y"] == $y && $row["ID"] == $uid){
-				unset($row["ID"]);
+			if ($row["x"] == $x && $row["y"] == $y && $row["userID"] == $uid){
+				unset($row["userID"]);
 				echo json_encode($row);
 				break;
 			}
