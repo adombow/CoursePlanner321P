@@ -79,7 +79,7 @@ PHP programing language <br />
 	PHP is a server-side scripting language designed primarily for web development but is also used as a general-purpose programming language. Originally created by Rasmus Lerdorf in 1994, the PHP reference implementation is now produced by The PHP Development Team. PHP originally stood for Personal Home Page, but it now stands for the recursive acronym PHP: Hypertext Preprocessor. Source: https://en.wikipedia.org/wiki/PHP
 
 
-3.DataP<br />
+3.Data<br />
 	Our Web Server Entity-Relationship (ER) Diagram is as follows:
 <br>
 <img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%2010.08.19%20AM.png/>
