@@ -6,8 +6,8 @@
     $databaseName = 'courseplanner';
 	$table = "Unique Calendar Entry";
 
-	$x = $_REQUEST["x"];
-	$y = $_REQUEST["y"];
+	$x = $_POST["x"];
+	$y = $_POST["y"];
 	
 	// get user ID
 	require(session.php);
@@ -21,7 +21,7 @@
 	//
 	// **************************************************
 	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn = new mysqli($serverName, $userName, $password, $databaseName);
 
 	// Check connection
 	if ($conn->connect_error) {
@@ -37,7 +37,7 @@
 	//		Getting data from database
 	//
 	// **************************************************
-	$sql = "SELECT ID, title, time, location, infor, x, y FROM $table";
+	$sql = "SELECT `userID`, `Title`, `Time`, `Location`, `info`, `x`, `y` FROM `$table`";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {

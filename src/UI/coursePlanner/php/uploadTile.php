@@ -7,12 +7,12 @@
 	$table = "Unique Calendar Entry";
 
 	//Get parameters from url
-	$title = $_REQUEST["title"];
-	$x = $_REQUEST["x"];
-	$y = $_REQUEST["y"];
-	$time = $_REQUEST["time"];
-	$location = $_REQUEST["location"];
-	$infor = $_REQUEST["infor"];
+	$title = $_POST["title"];
+	$x = $_POST["x"];
+	$y = $_POST["y"];
+	$time = $_POST["time"];
+	$location = $_POST["location"];
+	$infor = $_POST["infor"];
 
 	// get user ID
 	require(session.php);
@@ -26,7 +26,7 @@
 	//
 	// **************************************************
 	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn = new mysqli($serverName, $userName, $password, $databaseName);
 
 	// Check connection
 	if ($conn->connect_error) {
@@ -39,12 +39,12 @@
 
 	//id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	// sql to create table
-	$sql = "CREATE TABLE $table (
-		ID INT(6) UNSIGNED, 
-		title VARCHAR(30),
-		time VARCHAR(50),
-		location VARCHAR(50),
-		infor VARCHAR(50),
+	$sql = "CREATE TABLE `$table` (
+		userID INT(6) UNSIGNED, 
+		Title VARCHAR(30),
+		Time VARCHAR(50),
+		Location VARCHAR(50),
+		Info VARCHAR(50),
 		x INT(6) UNSIGNED,
 		y INT(6) UNSIGNED
 	)";
@@ -63,7 +63,7 @@
 	// **************************************************
 	// check
 	$exist = 0;
-	$sql = "SELECT ID, x, y FROM $table ";
+	$sql = "SELECT `userID`, `x`, `y` FROM `$table` ";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -74,9 +74,6 @@
 				$exist = 1;
 				echo "This tile exists in DB \n";
 			}
-
-
-			
 	    }
 	} else {
 	    echo "No tile existed in DB \n";
@@ -94,7 +91,7 @@
 
 	
 	if ($exist == 1) {
-		$sql = "UPDATE $table SET title='$title', time='$time', location='$location', infor='$infor' WHERE x='$x' AND y='$y' AND ID='$uid' ";
+		$sql = "UPDATE `$table` SET `Title`='$title', `Time`='$time', `Location`='$location', `Info='$infor' WHERE `x`=$x AND `y`=$y AND `userID`=$uid ";
 
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record updated successfully \n";
@@ -104,7 +101,7 @@
 	}
 	else {
 		
-		$sql = "INSERT INTO $table (ID, title, x, y, time, location, infor) VALUES ('$uid', '$title', '$x', '$y', '$time', '$location', '$infor')";
+		$sql = "INSERT INTO `$table` (`userID`, `Title`, `x`, `y`, `Time`, `Location`, `Info`) VALUES ($uid, '$title', $x, $y, '$time', '$location', '$infor')";
 
 		if ($conn->query($sql) === TRUE) {
 		    echo "New record created successfully \n";

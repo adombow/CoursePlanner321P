@@ -78,7 +78,7 @@ var edit = function(target, i, j) {
                 loadTable("data-table", table);
 
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: 'php/uploadTile.php',
                     data: {title: target["title"], time: target["time"], location: target["location"], infor: target["infor"], x: i, y: j},
                     success: function(data){
@@ -108,7 +108,7 @@ var removeTile = function(target, i, j) {
     target["infor"] = "";
 
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: 'php/deleteTile.php',
         data: {x: i, y: j},
         success: function(data){
@@ -280,7 +280,7 @@ var downloadTiles = function(i) {
 
 var downloadTile = function(i,j) {
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: 'php/downloadTile.php',
         data: {x: i, y: j},
         dataType: "json",

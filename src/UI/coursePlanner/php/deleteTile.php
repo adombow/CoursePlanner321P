@@ -7,8 +7,8 @@
 	$table = "Unique Calendar Entry";
 
 	//Get parameters from url
-	$x = $_REQUEST["x"];
-	$y = $_REQUEST["y"];
+	$x = $_POST["x"];
+	$y = $_POST["y"];
 
 	// get user ID
 	require(session.php);
@@ -24,7 +24,7 @@
 	// **************************************************
 
 	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn = new mysqli($serverName, $userName, $password, $databaseName);
 
 	// Check connection
 	if ($conn->connect_error) {
@@ -41,7 +41,7 @@
 	// **************************************************
 	// check
 	$exist = 0;
-	$sql = "SELECT ID, title, time, location, infor, x, y FROM $table";
+	$sql = "SELECT `userID`, `Title`, `Time`, `Location`, `Info`, `x`, `y` FROM `$table`";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -69,7 +69,7 @@
 	//
 	// **************************************************
 	if ($exist == 1) {
-		$sql = "DELETE FROM $table WHERE x='$x' AND y='$y' AND ID='$uid' ";
+		$sql = "DELETE FROM `$table` WHERE `x`=$x AND `y`=$y AND `userID`=$uid ";
 
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record deleted successfully \n";
