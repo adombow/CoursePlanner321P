@@ -6,13 +6,13 @@
     	$databaseName = 'courseplanner';
 	$table = "Unique Calendar Entry";
 
-	$x = $_POST['x'];
-	$y = $_POST['y'];
+	$x = $_REQUEST['x'];
+	$y = $_REQUEST['y'];
 	
 	// get user ID
-	//require(session.php);
-	//$session = Session::getInstance();
-	$uid = 12;//$session->userID;
+	require(session.php);
+	$session = Session::getInstance();
+	$uid = $session->userID;
 
 
 	// **************************************************
@@ -28,37 +28,27 @@
 	    die("Connection failed: " . $conn->connect_error);
 	} 
 
-
-	
-
-	
 	// **************************************************
 	//
 	//		Getting data from database
 	//
 	// **************************************************
-	$sql = "SELECT `userID`, `Title`, `Time`, `Location`, `Info`, `x`, `y` FROM `$table`";
+	$sql = "SELECT * FROM `$table` WHERE `userID`=$uid";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 	        //only return the expected one
-			if ($row["x"] == $x && $row["y"] == $y && $row["userID"] == $uid){
-				unset($row["userID"]);
+			if ($row["x"] == $x && $row["y"] == $y){
 				echo json_encode($row);
+				unset($row["userID"]);
 				break;
 			}
-			
 	    }
 	} else {
 	    echo "[Pulling Failed]: No such a tile in database ...\n";
 	}
-
-
-
-
-	
 	$conn->close();
 ?>
 
