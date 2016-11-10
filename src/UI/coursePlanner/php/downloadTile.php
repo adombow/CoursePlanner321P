@@ -37,7 +37,7 @@
 	//		Getting data from database
 	//
 	// **************************************************
-	$sql = "SELECT `userID`, `Title`, `Time`, `Location`, `info`, `x`, `y` FROM `$table`";
+	$sql = "SELECT `userID`, `Title`, `Time`, `Location`, `Info`, `x`, `y` FROM `$table`";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
