@@ -286,6 +286,15 @@ var downloadTile = function(i,j) {
         dataType: "json",
         success: function(data){
             console.log("find data with index: (" + i + "," + j +")");
+
+            console.log("data: " + data);
+            console.log("data[0]: " + data[0]);
+            console.log("data['title']: " + data["title"]);
+            console.log("data['Title']: " + data["Title"]);
+            console.log("data['time']: " + data["time"]);
+            console.log("data['location']: " + data["location"]);
+            console.log("data['infor']: " + data["infor"]);
+
             storeTileLocal(data, i, j);
 
             //alert(data);
@@ -299,10 +308,10 @@ var storeTileLocal = function(data, i, j) {
     //get temp json object
     var empt = new jQuery.parseJSON('{"title": "", "time": "" , "location": "", "infor": ""}');
     var temp = new jQuery.parseJSON('{"title": "", "time": "" , "location": "", "infor": ""}');
-    temp["title"] = data["title"];
-    temp["time"] = data["time"];
-    temp["location"] = data["location"];
-    temp["infor"] = data["infor"];
+    temp["title"] = data["Title"];
+    temp["time"] = data["Time"];
+    temp["location"] = data["Location"];
+    temp["infor"] = data["Info"];
 
 
     
