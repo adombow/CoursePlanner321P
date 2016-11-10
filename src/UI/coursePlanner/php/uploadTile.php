@@ -1,22 +1,22 @@
 <?php
 	// parameters set up
 	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-    	$userName = 'courseplanner';
-    	$password = 'cpen3210';
-    	$databaseName = 'courseplanner';
+	$userName = 'courseplanner';
+	$password = 'cpen3210';
+	$databaseName = 'courseplanner';
 	$table = "Unique Calendar Entry";
 
 	//Get parameters from url
-	//if( isset($_POST['title']) ){
+	if( isset($_POST['title']) ){
 	    $title = $_POST['title'];
 	    $x = $_POST['x'];
 	    $y = $_POST['y'];
 	    $time = $_POST['time'];
 	    $location = $_POST['location'];
 	    $infor = $_POST['infor'];
-	//} else{
-	  //  echo "<h1>Didn't work</h1>";
-	//}
+	} else{
+	    echo "<h1>Didn't work</h1>";
+	}
 	// get user ID
 	require(session.php);
 	$session = Session::getInstance();
@@ -37,9 +37,12 @@
 	} 
 	echo "Connected successfully \n";
 
+
+	
+
 	//id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	// sql to create table
-	/*$sql = "CREATE TABLE `$table` (
+	$sql = "CREATE TABLE `$table` (
 		userID INT(6) UNSIGNED, 
 		Title VARCHAR(30),
 		Time VARCHAR(50),
@@ -54,7 +57,7 @@
 	} else {
 	    echo "Fail to create table: " . $conn->error + "\n";
 	}
-*/
+
 
 	// **************************************************
 	//
@@ -63,13 +66,14 @@
 	// **************************************************
 	// check
 	$exist = 0;
-	$sql = "SELECT `x`,`y` FROM `$table` WHERE `userID`=$uid";
+	$sql = "SELECT `userID`, `x`, `y` FROM `$table` ";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
-			if ($row["x"] == $x && $row["y"] == $y){
+	        
+			if ($row["x"] == $x && $row["y"] == $y && $row["userID"] == $uid){
 				$exist = 1;
 				echo "This tile exists in DB \n";
 			}
@@ -90,7 +94,8 @@
 
 	
 	if ($exist == 1) {
-		$sql = "UPDATE `$table` SET `Title`='$title', `Time`='$time', `Location`='$location', `Info`='$infor' WHERE `x`=$x AND `y`=$y AND `userID`=$uid";
+		$sql = "UPDATE `$table` SET `Title`='$title', `Time`='$time', `Location`='$location', `Info='$infor' WHERE `x`=$x AND `y`=$y AND `userID`=$uid ";
+
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record updated successfully \n";
 		} else {
@@ -98,13 +103,18 @@
 		}
 	}
 	else {
-		$sql = "INSERT INTO `$table` (`userID`, `Title`, `Time`, `Location`, `Info`, `x`, `y`) VALUES ($uid, '$title', '$time', '$location', '$infor', $x, $y)";
+		
+		$sql = "INSERT INTO `$table` (`userID`, `Title`, `x`, `y`, `Time`, `Location`, `Info`) VALUES ($uid, '$title', $x, $y, '$time', '$location', '$infor')";
+
 		if ($conn->query($sql) === TRUE) {
 		    echo "New record created successfully \n";
 		} else {
 		    echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 	}
+
+	
+
 	$conn->close();
 ?>
 

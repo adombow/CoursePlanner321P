@@ -1,9 +1,9 @@
 <?php
 	// parameters set up
 	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-    	$userName = 'courseplanner';
-    	$password = 'cpen3210';
-    	$databaseName = 'courseplanner';
+	$userName = 'courseplanner';
+	$password = 'cpen3210';
+	$databaseName = 'courseplanner';
 	$table = "Unique Calendar Entry";
 
 	//Get parameters from url
