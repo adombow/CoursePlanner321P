@@ -287,18 +287,11 @@ var downloadTile = function(i,j) {
         success: function(data){
             console.log("find data with index: (" + i + "," + j +")");
 
-            console.log("data: " + data);
-            console.log("data[0]: " + data[0]);
-            console.log("data['title']: " + data["title"]);
-            console.log("data['Title']: " + data["Title"]);
-            console.log("data['time']: " + data["time"]);
-            console.log("data['location']: " + data["location"]);
-            console.log("data['infor']: " + data["infor"]);
-            
+
 
             storeTileLocal(data, i, j);
  
-            //alert(data);
+
         }
     });
 }
