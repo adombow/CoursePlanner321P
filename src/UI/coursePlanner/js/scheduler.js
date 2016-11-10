@@ -280,10 +280,10 @@ var downloadTiles = function(i) {
 
 var downloadTile = function(i,j) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: 'php/downloadTile.php',
         data: {x: i, y: j},
-        //dataType: "json",
+        dataType: "json",
         success: function(data){
             console.log("find data with index: (" + i + "," + j +")");
             storeTileLocal(data, i, j);
