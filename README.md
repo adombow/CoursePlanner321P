@@ -13,42 +13,42 @@ www.courseplanner.de
 
 ## TEAM MEMBERS
 
-DATABASE
-1.Andrew Dombowsky
-2.Qianzhen Gao
-3.Pietr Crandall
+DATABASE<br />
+1.Andrew Dombowsky<br />
+2.Qianzhen Gao<br />
+3.Pietr Crandall<br />
 
-UI
-1.Diya Ren 
-2.Mengxi Zhang
+UI<br />
+1.Diya Ren <br />
+2.Mengxi Zhang<br />
 
 
 ##Know More About Our Design 
-Core features: 
-Edit Courses Schedule
-            1)Add course
-            2)Delete course
-3)Edit course 
+###1.Core features: <br />
+a)Edit Courses Schedule:<br />
+            1)Add course 
+            2)Delete course 
+            3)Edit course 
 
 
-Reminder System
+b)Reminder System:<br />
          1) Set a manual reminder
-	2) Set a rank-based reminder
+	 2) Set a rank-based reminder
 
 
-Ranking and Modifying Course Features
-1) Rank course feature
-2) Add new course feature
-3) Add information to existing feature
+c)Ranking and Modifying Course Features<br />
+         1) Rank course feature
+         2) Add new course feature
+         3) Add information to existing feature
 
 
-Additional features:
-Create or login to user profile   
-1) Use facebook to login to Course Planner profile
-      	2) Create a new course planner profile after first login in with Facebook
+###Additional features:<br />
+a)Create or login to user profile <br /> 
+         1) Use facebook to login to Course Planner profile
+      	 2) Create a new course planner profile after first login in with Facebook
 
 
-2.Architectural & Component-Level Design
+###2.Architectural & Component-Level Design
 
 
 LAMP
