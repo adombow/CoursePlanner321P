@@ -216,13 +216,6 @@ removeRow.onclick = function(){
     confirm_row_remove();
 }
 
-
-
-
-
-
-
-
 //****************************************************
 //
 //      load data from local and from server to UI
@@ -275,8 +268,6 @@ var downloadTiles = function(i) {
         }
     }
 }
-
-
 
 var downloadTile = function(i,j) {
     $.ajax({
