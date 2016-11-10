@@ -10,9 +10,9 @@
 	$y = $_POST['y'];
 	
 	// get user ID
-	require(session.php);
-	$session = Session::getInstance();
-	$uid = $session->userID;
+	//require(session.php);
+	//$session = Session::getInstance();
+	$uid = 12;//$session->userID;
 
 
 	// **************************************************

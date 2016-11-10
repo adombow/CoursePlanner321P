@@ -7,20 +7,18 @@
 	$table = "Unique Calendar Entry";
 
 	//Get parameters from url
-	if( isset($_POST['title']) ){
+	
 	    $title = $_POST['title'];
 	    $x = $_POST['x'];
 	    $y = $_POST['y'];
 	    $time = $_POST['time'];
 	    $location = $_POST['location'];
 	    $infor = $_POST['infor'];
-	} else{
-	    echo "<h1>Didn't work</h1>";
-	}
+	
 	// get user ID
-	require(session.php);
-	$session = Session::getInstance();
-	$uid = $session->userID;
+	//require(session.php);
+	//$session = Session::getInstance();
+	$uid = 12;//$session->userID;
 
 
 	// **************************************************
