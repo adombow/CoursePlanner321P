@@ -50,7 +50,7 @@
     }
     $conn->close();
     if( isset($_POST['redirect']) ){
-            header("Location: index.php");
+            header("Location: mainPanel.php");
     }
 ?>
 
@@ -115,7 +115,7 @@
 ?>
     <form id="form1" method="post">
     
-    <input type="hidden" name="redirect" value="index.php">
+    <input type="hidden" name="redirect" value="mainPanel.php">
     <div style="text-align: center; margin: 100;">
     <h1 style="text-align:center;">WE WOULD LIKE TO KNOW MORE ABOUT YOU</h1>
    
