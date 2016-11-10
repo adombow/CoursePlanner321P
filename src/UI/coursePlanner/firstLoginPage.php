@@ -1,3 +1,60 @@
+<?php
+    require("session.php");
+    //Access the database connection created on login
+    //$conn = $session->db;
+    $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
+    $userName = 'courseplanner';
+    $password = 'cpen3210';
+    $databaseName = 'courseplanner';
+    //Create a new database object and connect to it
+    $conn = new mysqli($serverName, $userName, $password, $databaseName);
+
+    if($conn->connect_error){
+        die("Error: ". $conn->connect_error);
+    }
+
+    //Get current session
+    $session = Session::getInstance();
+    $uid = $session->userID;
+
+    if( isset($_POST['name']) ){
+        $name = htmlspecialchars($_POST['name']);
+        if($name !== ''){
+            $sql = "UPDATE `User Profile` SET `Name` = '$name' WHERE `ID`=$uid";
+            if( $conn->query($sql) === TRUE ){
+                   //echo "Record updated successfully";
+            } else{
+                    echo "Error: ". $conn->error;
+            }
+        }
+    }
+    if( isset($_POST['courses']) ){
+        //Course info to be gotten from database using info from POST request in js above
+        //While there are courses to insert, insert them into user courses and create a new calendar entry
+        $dept;
+        $courseID;
+        $sectionID;
+        $courseCode = $dept. " ". $courseID;
+        $location;
+        $time;
+        $info;
+        $sql = "SELECT `ID` FROM `course` WHERE `dept`='$dept', `courseID`='$courseID', `sectionID`='$sectionID'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()){
+            $cid = $row['ID'];
+        }
+        $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
+        $conn->query($sql);
+        $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
+        $conn->query($sql);
+    }
+    $conn->close();
+    if( isset($_POST['redirect']) ){
+            header("Location: index.php");
+    }
+?>
+
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8>
@@ -48,86 +105,64 @@
         
     }
 
-/*
-    var name = "Andrew";
-    courseDept = [];
-    courseCode = [];
-    courseSec = [];
-    //Grab each entry from the user, parse into 3 strings as above
-    courseDept[0] = "MATH";
-    courseCode[0] = "100";
-    courseSec[0] = "001";
-    etc.
-    $.ajax ({
-      	method: "POST",
-       	data: { name: name, courseDept: courseDept, courseCode: courseCode, courseSec: courseSec },
-        success: function(){
-           console.log("userID sent!");
-        }
-      });
-*/
 </script>
+
 </head>
     <body>
-    <?php
-    include("inc/sideBar.html");
-    include("backToMainPanel.php");
+<?php
+    //include("inc/sideBar.html");
+    include("infoFillIn.php");
+?>
+    <form id="form1" method="post">
     
-    ?>
+    <input type="hidden" name="redirect" value="index.php">
     <div style="text-align: center; margin: 100;">
-    <h1 style="text-align:center;">WE WOULD LIKE TO KNOW MORE ABOUT
-      YOU</h1>
+    <h1 style="text-align:center;">WE WOULD LIKE TO KNOW MORE ABOUT YOU</h1>
    
     <style>
     body{background-color:pink}
     </style>
-    <p>1.what's your name     <input type="text" name=""></p>
+    <p>1. What's your name     
+    <input type="text" name="name"></p>
     <input id="man" type="radio" checked="checked" name="1"/>Male
     <input id="woman" type="radio"  name="1"/>Female 
-    <p>2.what year are you in?</p>
+    <p>2. What year are you in?</p>
     <input id="Year1" type="radio" checked="checked" name ="2"/>Year1
     <input id="Year2" type="radio"  name ="2"/>Year2
     <input id="Year3" type="radio"  name ="2"/>Year3
     <input id="Year4" type="radio"  name ="2"/>Year4
     <input id="Year5+" type="radio" name ="2"/>Year5+
-    <p>3.what's your faculty</p>
-<select id = "falculty-select">
-  <option value ="Applied Science">Applied Science</option>
-  <option value ="Architecture and Landscape Architecture, School of">Architecture and Landscape Architecture</option>
-  
-  <option value="Arts">Arts</option>
-  <option value="Audiology and Speech Science">Audiology and Speech Sciences</option>
-  <option value ="Business">Business</option>
-  <option value ="Community and Regional Planning">Community and Regional Planning</option>
-  <option value="Continuing Studies">Continuing Studies</option>
-  <option value="Dentistry">Dentistry</option>
-   <option value ="Education">Education</option>
-  <option value ="Forestry">Forestry</option>
-  
-  <option value="Graduate and Postdoctoral Studies">Graduate and Postdoctoral Studies</option>
-  <option value="Journalism">Journalism</option>
-  <option value ="Kinesiology">Kinesiology</option>
-  <option value ="Land and Food Systems">Land and Food Systems</option>
-  <option value="Law, Peter A.">Law, Peter A.</option>
-  <option value="Library, Archival and Information Studies">Library,
-  Archival and Information Studies</option>
-   <option value ="Medicine">Medicine</option>
-  <option value ="Music">Music</option>
-  
-  <option value="Nursing">Nursing</option>
-  <option value="Pharmaceutical Sciences">Pharmaceutical Sciences</option>
-  <option value ="Population and Public Health">Population and Public Health</option>
-  <option value ="Science">Science</option>
-  <option value="Social Work">Social Work</option>
-  <option value="UBC Vantage College">UBC Vantage College</option>
-   <option value ="Vancouver School of Economics">Vancouver School of Economics</option>
-  
+    <p>3. What's your faculty</p>
+    <select id = "falculty-select">
+    <option value ="Applied Science">Applied Science</option>
+    <option value ="Architecture and Landscape Architecture, School of">Architecture and Landscape Architecture</option>
+    <option value="Arts">Arts</option>
+    <option value="Audiology and Speech Science">Audiology and Speech Sciences</option>
+    <option value ="Business">Business</option>
+    <option value ="Community and Regional Planning">Community and Regional Planning</option>
+    <option value="Continuing Studies">Continuing Studies</option>
+    <option value="Dentistry">Dentistry</option>
+    <option value ="Education">Education</option>
+    <option value ="Forestry">Forestry</option>
+    <option value="Graduate and Postdoctoral Studies">Graduate and Postdoctoral Studies</option>
+    <option value="Journalism">Journalism</option>
+    <option value ="Kinesiology">Kinesiology</option>
+    <option value ="Land and Food Systems">Land and Food Systems</option>
+    <option value="Law, Peter A.">Law, Peter A.</option>
+    <option value="Library, Archival and Information Studies">Library, Archival and Information Studies</option>
+    <option value ="Medicine">Medicine</option>
+    <option value ="Music">Music</option>
+    <option value="Nursing">Nursing</option>
+    <option value="Pharmaceutical Sciences">Pharmaceutical Sciences</option>
+    <option value ="Population and Public Health">Population and Public Health</option>
+    <option value ="Science">Science</option>
+    <option value="Social Work">Social Work</option>
+    <option value="UBC Vantage College">UBC Vantage College</option>
+    <option value ="Vancouver School of Economics">Vancouver School of Economics</option>
 </select>
 
-
-   <p>4.what courses are you taking?</p>
-
- <table id="tab" border="1" width="60%" align="center" style="margin-top:20px">
+   <p>4. What courses are you taking?</p>
+   <table id="tab" border="1" width="60%" align="center" style="margin-top:20px">
         <tr>
             <td width="20%">Number</td>
             <td>List</td>
@@ -137,74 +172,22 @@
             <td>Delete Course</td>
        </tr>
     </table>
-  
+
     <div style="border:2px; 
                 border-color:red; 
                 margin-left:20%;
                 margin-top:30px;
 		text-align
               ">
-        <input type="button" id="but" value="Add Course">
+    <input type="button" id="but" value="Add Course">
     </div>
- 
 
     <script src="js/courseSelectBar.js"></script>
     <script src="js/sideBar.js"></script>
  
 <div style="text-align: center; margin: 100;">   
-    <input type="submit" name="b1" value="submit" onClick="javascript:location.href='mainPanelWithoutRefer.php'">
-   
+    <input type="submit" name="b1" value="submit">
 </div>
-<?php
-	require("session.php");
-        //Access the database connection created on login
-        //$conn = $session->db;
-        $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-        $userName = 'courseplanner';
-        $password = 'cpen3210';
-        $databaseName = 'courseplanner';
-        //Create a new database object and connect to it
-        $conn = new mysqli($serverName, $userName, $password, $databaseName);
-
-        if($conn->connect_error){
-            die("Error: ". $conn->connect_error);
-        }
-
-        //Get current session
-        $session = Session::getInstance();
-	$uid = $session->userID;
-
-	if( isset($_POST['name']) ){
-	    $name = $_POST['name'];
-	    $sql = "UPDATE `User Profile` SET `Name` = '$name' WHERE `ID`=$uid";
-	    if( $conn->query($sql) === TRUE ){
-	        echo "Record updated successfully";
-	    } else{
-	        echo "Error: ". $conn->error;
-	    }
-	    //Course info to be gotten from database using info from POST request in js above
-	    //While there are courses to insert, insert them into user courses and create a new calendar entry
-	    $dept;
-	    $courseID;
-	    $sectionID;
-	    $courseCode = $dept. " ". $courseID;
-	    $location;
-	    $time;
-	    $info;
-	    $sql = "SELECT `ID` FROM `course` WHERE `dept`='$dept', `courseID`='$courseID', `sectionID`='$sectionID'";
-	    $result = $conn->query($sql);
-	    while($row = $result->fetch_assoc()){
-		$cid = $row['ID'];
-	    }
-	    $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
-	    $conn->query($sql);
-	    $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
-	    $conn->query($sql);
-	}
-?>
-
-<?php
-	$conn->close();
-?>
+</form>
 </body>
 </html>
