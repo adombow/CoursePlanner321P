@@ -294,9 +294,10 @@ var downloadTile = function(i,j) {
             console.log("data['time']: " + data["time"]);
             console.log("data['location']: " + data["location"]);
             console.log("data['infor']: " + data["infor"]);
+            
 
             storeTileLocal(data, i, j);
-
+ 
             //alert(data);
         }
     });
