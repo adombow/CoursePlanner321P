@@ -15,7 +15,7 @@
     <body>
     <?php 
         include("inc/sidebar.html");
-	    require("session.php");
+	require("session.php");
     ?>
         <h1 style="text-align: center;">
             Plan your schedule
@@ -44,16 +44,16 @@
         $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
         $userName = 'courseplanner';
         $password = 'cpen3210';
-		$databaseName = 'courseplanner';
+	$databaseName = 'courseplanner';
         //Create a new database object and connect to it
-        $conn = new mysqli($serverName, $userName, $password, $databaseName);
+        //$conn = new mysqli($serverName, $userName, $password, $databaseName);
     ?>
 
         <!--DB connection error handling for debugging
             Should change to something more user friendly for final -->
         <?php 
-	      if( $conn -> connect_error )
-			echo $conn->connect_error;
+	//if( $conn -> connect_error )
+		//echo $conn->connect_error;
         ?>
 
 	<?php
@@ -70,7 +70,7 @@
     <script src="js/sidebar.js"></script>
 
     <?php
-    $conn->close();
+    //$conn->close();
     ?>
 </body>
 </html>

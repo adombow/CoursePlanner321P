@@ -17,6 +17,7 @@ FB.Event.subscribe('auth.statusChange', auth_status_change_callback);">
 
 
 <script>
+var firstLogin;
 var auth_response_change_callback = function(response) {
   statusChangeCallback(response);
   console.log("auth_response_change_callback");
@@ -27,7 +28,12 @@ var auth_status_change_callback = function(response) {
     statusChangeCallback(response);
     console.log("auth_status_change_callback: " + response.status);
     if(response.status === 'connected'){
-        window.location = "firstLoginPage.php";
+        if( firstLogin == 'FALSE' ){
+	    window.location = "mainPanel.php";
+    	}
+	else{
+	    window.location = "firstLoginPage.php";
+	}
     }
 }
 
@@ -44,11 +50,13 @@ var auth_status_change_callback = function(response) {
       // Logged into your app and Facebook.
       testAPI();
       $.ajax ({
-        method: "POST",
+        method: "GET",
 	url: "index.php",
-        data: { facebookid : response.authResponse.userID },
-        success: function(){
+        data: { facebookid: response.authResponse.userID, firstLogin: 'TRUE' },
+        dataType: "json",
+	success: function(data){
            console.log("userID sent!");
+	   firstLogin = data["firstLogin"];
         }
       });
       //window.location = "firstLoginPage.php";
@@ -202,14 +210,17 @@ var auth_status_change_callback = function(response) {
 
         //Create new session
         $session = Session::getInstance();
-        if( isset($_POST['facebookid']) ){
+        if( isset($_REQUEST['facebookid']) ){
             //FB userID from Javascript above (should be unique for every user)
-            $fbID = $_POST['facebookid'];
-            //If user already exists, don't add a new db entry, otherwise create one
+            $fbID = $_REQUEST['facebookid'];
+	    $firstLogin = $_REQUEST['firstLogin'];
+	    //If user already exists, don't add a new db entry, otherwise create one
             if( $conn->query("INSERT INTO `User Profile` (`fbID`) VALUES ('$fbID')") === TRUE ){
-                echo "New record created!";
+		$arr = array('firstLogin' => 'TRUE');
+		echo json_encode($arr);
             } else{
-                echo $conn->error;
+		$arr = array('firstLogin' => 'FALSE');
+	        echo json_encode($arr);
             }
             //Get the unique row ID for the new user, or retrieve their old one
             $result = $conn->query("SELECT ID FROM `User Profile` WHERE `fbID`='". $fbID. "'");
