@@ -72,25 +72,24 @@
         //<tr/>middle
         $("#tab tr").attr("align","center");
         
-        //增加<tr/>
+        //increase<tr/>
         $("#but").click(function(){
             var _len = $("#tab tr").length;        
             $("#tab").append("<tr id="+_len+" align='center'>"
                                 +"<td>"+_len+"</td>"
                                 +"<td>Course"+_len+"</td>"
                                 +"<td><input type='text' name='CourseName"+_len+"' id='CourseName"+_len+"' /></td>"
- +"<td><input type='text' name='CourseNumber"+_len+"' id='CourseNumber"+_len+"' /></td>" 
  +"<td><input type='text' name='CourseSection"+_len+"' id='CourseSection"+_len+"' /></td>" 
                                +"<td><a href=\'#\' onclick=\'deltr("+_len+")\'>DELETE</a></td>"
                             +"</tr>");            
         })    
     })
     
-    //删除<tr/>
+    //delete<tr/>
     var deltr =function(index)
     {
         var _len = $("#tab tr").length;
-        $("tr[id='"+index+"']").remove();//删除当前行
+        $("tr[id='"+index+"']").remove();//delete current row 
         for(var i=index+1,j=_len;i<j;i++)
         {
             var nextTxtVal = $("#desc"+i).val();
@@ -122,16 +121,20 @@
     <style>
     body{background-color:pink}
     </style>
-    <p>1. What's your name     
+    <p>1. What's your name    
+<!--create a gender chosen button--> 
     <input type="text" name="name"></p>
     <input id="man" type="radio" checked="checked" name="1"/>Male
     <input id="woman" type="radio"  name="1"/>Female 
+
+<!--choose your the year you are in-->
     <p>2. What year are you in?</p>
     <input id="Year1" type="radio" checked="checked" name ="2"/>Year1
     <input id="Year2" type="radio"  name ="2"/>Year2
     <input id="Year3" type="radio"  name ="2"/>Year3
     <input id="Year4" type="radio"  name ="2"/>Year4
     <input id="Year5+" type="radio" name ="2"/>Year5+
+<!--initialize a select bar for falculty-->
     <p>3. What's your faculty</p>
     <select id = "falculty-select">
     <option value ="Applied Science">Applied Science</option>
@@ -161,13 +164,13 @@
     <option value ="Vancouver School of Economics">Vancouver School of Economics</option>
 </select>
 
+<!--creat a table for entering course information-->
    <p>4. What courses are you taking?</p>
    <table id="tab" border="1" width="60%" align="center" style="margin-top:20px">
         <tr>
             <td width="20%">Number</td>
             <td>List</td>
             <td>Course Name</td>
-            <td>Course Number</td>
             <td>Course Section</td>
             <td>Delete Course</td>
        </tr>
