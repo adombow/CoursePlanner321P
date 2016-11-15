@@ -27,14 +27,14 @@ var auth_response_change_callback = function(response) {
 var auth_status_change_callback = function(response) {
     statusChangeCallback(response);
     console.log("auth_status_change_callback: " + response.status);
-    if(response.status === 'connected'){
+    /*if(response.status === 'connected'){
         if( firstLogin == 'FALSE' ){
-	    window.location = "mainPanel.php";
+			window.location = "mainPanel.php";
     	}
-	else{
-	    window.location = "firstLoginPage.php";
-	}
-    }
+		else{
+			window.location = "firstLoginPage.php";
+		}
+    }*/
 }
 
   // This is called with the results from from FB.getLoginStatus().
@@ -51,19 +51,23 @@ var auth_status_change_callback = function(response) {
       testAPI();
       $.ajax ({
         method: "POST",
-	url: "index.php",
+		url: "index.php",
         data: { facebookid: response.authResponse.userID, firstLogin: 'TRUE' },
         dataType: "json",
-	error: function(){
-	   firstLogin = 'TRUE';
-	   console.log("Error retrieving login info.");
-	},
-	success: function(data){
-           console.log("userID sent!");
-	   firstLogin = data["firstLogin"];
+		error: function(){
+			firstLogin = 'TRUE';
+			console.log("Error retrieving login info.");
+		},
+		success: function(data){
+			console.log("userID sent!");
+			firstLogin = data["firstLogin"];
         }
-      });
-      //window.location = "firstLoginPage.php";
+	  });
+      if( firstLogin == 'FALSE' ){
+		window.location = "mainPanel.php";
+      } else{
+		window.location = "firstLoginPage.php";
+	  }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
