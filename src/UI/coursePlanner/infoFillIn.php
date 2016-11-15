@@ -39,24 +39,26 @@ var auth_status_change_callback = function(response) {
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
-      $.ajax ({
+      /*$.ajax ({
         method: "POST",
 	url: "index.php",
         data: { facebookid : response.authResponse.userID },
         success: function(){
            console.log("userID sent!");
         }
-      });
+      });*/
       //window.location = "firstLoginPage.php";
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
+      window.location = "index.php";
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
+      window.location = "index.php";
     }
   }
 
@@ -125,7 +127,6 @@ var auth_status_change_callback = function(response) {
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
-
 
 <div id="status"> </div>
 

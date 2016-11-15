@@ -5,8 +5,8 @@
 
 <meta charset="UTF-8">
 
-<title>Main Panel</title>
-<link rel="stylesheet" type="text/css" href="css/sidebar.css">
+<title>Please Log In</title>
+<!-- <link rel="stylesheet" type="text/css" href="css/sidebar.css"> -->
 <link rel="stylesheet" type="text/css" href="css/mainPanel.css">
 <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -50,10 +50,14 @@ var auth_status_change_callback = function(response) {
       // Logged into your app and Facebook.
       testAPI();
       $.ajax ({
-        method: "GET",
+        method: "POST",
 	url: "index.php",
         data: { facebookid: response.authResponse.userID, firstLogin: 'TRUE' },
         dataType: "json",
+	error: function(){
+	   firstLogin = 'TRUE';
+	   console.log("Error retrieving login info.");
+	},
 	success: function(data){
            console.log("userID sent!");
 	   firstLogin = data["firstLogin"];
@@ -148,7 +152,7 @@ var auth_status_change_callback = function(response) {
      data-show-faces="true" data-auto-logout-link="true"></div>
 
 <?php	 
-    include("inc/sidebar.html");
+    //include("inc/sidebar.html");
     //include("infoFillIn.php");
 ?>
 <h1 style="text-align: center;">
