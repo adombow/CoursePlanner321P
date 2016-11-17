@@ -28,31 +28,68 @@
             }
         }
     }
-    if( isset($_POST['courses']) ){
+   // if( isset($_POST['courses']) ){
+        
         //Course info to be gotten from database using info from POST request in js above
         //While there are courses to insert, insert them into user courses and create a new calendar entry
-        $dept;
-        $courseID;
-        $sectionID;
-        $courseCode = $dept. " ". $courseID;
-        $location;
-        $time;
-        $info;
-        $sql = "SELECT `ID` FROM `course` WHERE `dept`='$dept', `courseID`='$courseID', `sectionID`='$sectionID'";
-        $result = $conn->query($sql);
-        while($row = $result->fetch_assoc()){
+     //   $dept;
+       // $courseID;
+       // $sectionID;
+       // $courseCode = $dept. " ". $courseID;
+       // $location;
+       // $time;
+       // $info;
+       // $sql = "SELECT `ID` FROM `course` WHERE `dept`='$dept', `courseID`='$courseID', `sectionID`='$sectionID'";
+       // $result = $conn->query($sql);
+       // while($row = $result->fetch_assoc()){
+         //   $cid = $row['ID'];
+       // }
+       // $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
+       // $conn->query($sql);
+       // $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
+       // $conn->query($sql);
+   // }
+
+
+//for passing course info to database and do the comparsion
+  $arg =$_POST;
+foreach($_POST['courseName'] as $value){
+$values = mysql_real_escape_string($value);
+
+}
+foreach($_POST['courseNumber'] as $value){
+$values = mysql_real_escape_string($value);
+
+}
+foreach($_POST['courseSection'] as $value){
+$values = mysql_real_escape_string($value);
+}
+
+$mi = new MultipleIterator();
+$mi->attachIterator(new ArrayIterator($array1));
+$mi->attachIterator(new ArrayIterator($array2));
+$mi->attachIterator(new ArrayIterator($array3));
+
+foreach ( $mi as $value ) {
+    list($courseName, $courseNumber, $courseSection) = $value;
+    $query = "SELECT ID FROM courses WHERE dept='{$_POST['courseName']}' AND courseID='{$_POST['courseNumber']}'AND sectionID='{$_POST['courseSection]}'";
+    $result = $conn->query($sql);
+    while($row = $result->fetch_assoc()){
             $cid = $row['ID'];
         }
-        $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
-        $conn->query($sql);
-        $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
-        $conn->query($sql);
-    }
+    $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
+    $conn->query($sql);
+    $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
+    $conn->query($sql);
+
+//closing connection
     $conn->close();
     if( isset($_POST['redirect']) ){
             header("Location: mainPanel.php");
     }
 ?>
+
+
 
 <!DOCTYPE HTML>
 <html>
@@ -78,8 +115,9 @@
             $("#tab").append("<tr id="+_len+" align='center'>"
                                 +"<td>"+_len+"</td>"
                                 +"<td>Course"+_len+"</td>"
-                                +"<td><input type='text' name='CourseName"+_len+"' id='CourseName"+_len+"' /></td>"
- +"<td><input type='text' name='CourseSection"+_len+"' id='CourseSection"+_len+"' /></td>" 
+                                +"<td><input type='text' name='CourseName[_len+]' id='CourseName"+_len+"' /></td>"
+ +"<td><input type='text' name='CourseNumber[_len]' id='CourseSection"+_len+"' /></td>" 
++"<td><input type='text' name='CourseSection[_len]' id='CourseSection"+_len+"' /></td>" 
                                +"<td><a href=\'#\' onclick=\'deltr("+_len+")\'>DELETE</a></td>"
                             +"</tr>");            
         })    
@@ -172,6 +210,7 @@
             <td>List</td>
             <td>Course Name</td>
             <td>Course Section</td>
+             <td>Course Number</td>
             <td>Delete Course</td>
        </tr>
     </table>
