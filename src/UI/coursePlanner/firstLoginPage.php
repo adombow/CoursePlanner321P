@@ -58,13 +58,13 @@ foreach ( $mi as $value ) {
     $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
     $conn->query($sql);
 }
-
+*/
 //closing connection
     $conn->close();
     if( isset($_POST['redirect']) ){
             header("Location: mainPanel.php");
     }
-*/
+
 ?>
 
 <!DOCTYPE HTML>
