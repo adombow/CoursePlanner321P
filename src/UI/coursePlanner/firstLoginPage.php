@@ -22,47 +22,23 @@
         if($name !== ''){
             $sql = "UPDATE `User Profile` SET `Name` = '$name' WHERE `ID`=$uid";
             if( $conn->query($sql) === TRUE ){
-                   //echo "Record updated successfully";
+                   echo "Record updated successfully";
             } else{
-                    echo "Error: ". $conn->error;
+                   echo "Error: ". $conn->error;
             }
         }
     }
-   // if( isset($_POST['courses']) ){
-        
-        //Course info to be gotten from database using info from POST request in js above
-        //While there are courses to insert, insert them into user courses and create a new calendar entry
-     //   $dept;
-       // $courseID;
-       // $sectionID;
-       // $courseCode = $dept. " ". $courseID;
-       // $location;
-       // $time;
-       // $info;
-       // $sql = "SELECT `ID` FROM `course` WHERE `dept`='$dept', `courseID`='$courseID', `sectionID`='$sectionID'";
-       // $result = $conn->query($sql);
-       // while($row = $result->fetch_assoc()){
-         //   $cid = $row['ID'];
-       // }
-       // $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
-       // $conn->query($sql);
-       // $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
-       // $conn->query($sql);
-   // }
-
 
 //for passing course info to database and do the comparsion
-  $arg =$_POST;
+/*$arg =$_POST;
 foreach($_POST['courseName'] as $value){
-$values = mysql_real_escape_string($value);
-
+	$values = mysql_real_escape_string($value);
 }
 foreach($_POST['courseNumber'] as $value){
-$values = mysql_real_escape_string($value);
-
+	$values = mysql_real_escape_string($value);
 }
 foreach($_POST['courseSection'] as $value){
-$values = mysql_real_escape_string($value);
+	$values = mysql_real_escape_string($value);
 }
 
 $mi = new MultipleIterator();
@@ -72,24 +48,24 @@ $mi->attachIterator(new ArrayIterator($array3));
 
 foreach ( $mi as $value ) {
     list($courseName, $courseNumber, $courseSection) = $value;
-    $query = "SELECT ID FROM courses WHERE dept='{$_POST['courseName']}' AND courseID='{$_POST['courseNumber']}'AND sectionID='{$_POST['courseSection]}'";
+    $query = "SELECT ID FROM courses WHERE dept='{$_POST['courseName']}' AND courseID='{$_POST['courseNumber']}'AND sectionID='{$_POST['courseSection']}'";
     $result = $conn->query($sql);
     while($row = $result->fetch_assoc()){
             $cid = $row['ID'];
-        }
+    }
     $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
     $conn->query($sql);
     $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
     $conn->query($sql);
+}
 
 //closing connection
     $conn->close();
     if( isset($_POST['redirect']) ){
             header("Location: mainPanel.php");
     }
+*/
 ?>
-
-
 
 <!DOCTYPE HTML>
 <html>

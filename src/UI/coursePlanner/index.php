@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 
 <title>Please Log In</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/sidebar.css"> -->
 <link rel="stylesheet" type="text/css" href="css/mainPanel.css">
 <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,7 +16,8 @@ FB.Event.subscribe('auth.statusChange', auth_status_change_callback);">
 
 
 <script>
-var firstLogin;
+var countCheck = 0;
+
 var auth_response_change_callback = function(response) {
   statusChangeCallback(response);
   console.log("auth_response_change_callback");
@@ -27,14 +27,6 @@ var auth_response_change_callback = function(response) {
 var auth_status_change_callback = function(response) {
     statusChangeCallback(response);
     console.log("auth_status_change_callback: " + response.status);
-    /*if(response.status === 'connected'){
-        if( firstLogin == 'FALSE' ){
-			window.location = "mainPanel.php";
-    	}
-		else{
-			window.location = "firstLoginPage.php";
-		}
-    }*/
 }
 
   // This is called with the results from from FB.getLoginStatus().
@@ -49,25 +41,28 @@ var auth_status_change_callback = function(response) {
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
-      $.ajax ({
-        method: "POST",
-		url: "index.php",
-        data: { facebookid: response.authResponse.userID, firstLogin: 'TRUE' },
-        dataType: "json",
-		error: function(){
+      if( countCheck == 0 ){
+      	$.ajax ({
+        	method: "POST",
+		url: "logCheck.php",
+        	data: { facebookid: response.authResponse.userID },
+        	dataType: "JSON",
+		error: function(textStatus, errorThrown){
 			firstLogin = 'TRUE';
-			console.log("Error retrieving login info.");
+			console.log(textStatus, errorThrown);
 		},
-		success: function(data){
+		success: function( response ){
 			console.log("userID sent!");
-			firstLogin = data["firstLogin"];
-        }
-	  });
-      if( firstLogin == 'FALSE' ){
-		window.location = "mainPanel.php";
-      } else{
-		window.location = "firstLoginPage.php";
-	  }
+			console.log(response);
+      			if( response.firstLogin == 'FALSE' ){
+				window.location = "mainPanel.php";
+      			} else{
+				window.location = "firstLoginPage.php";
+      			}
+		}
+    	});
+	countCheck++;
+      }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -155,10 +150,6 @@ var auth_status_change_callback = function(response) {
 <div class="fb-login-button" data-max-rows="1" data-size="large"
      data-show-faces="true" data-auto-logout-link="true"></div>
 
-<?php	 
-    //include("inc/sidebar.html");
-    //include("infoFillIn.php");
-?>
 <h1 style="text-align: center;">
 	Welcome to Course Planner!
 </h1>
@@ -199,49 +190,5 @@ var auth_status_change_callback = function(response) {
 
 	</div>
 
-<script src="js/sidebar.js"></script>
-
-<?php
-        require("session.php");
-        //Access the database connection created on login
-        //$conn = $session->db;
-        $serverName = "courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com:3306";
-        $userName = "courseplanner";
-        $password = "cpen3210";
-        $databaseName = "courseplanner";
-        //Create a new database object and connect to it
-        $conn = new mysqli($serverName, $userName, $password, $databaseName);
-
-        if($conn->connect_error){
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        //Create new session
-        $session = Session::getInstance();
-        if( isset($_REQUEST['facebookid']) ){
-            //FB userID from Javascript above (should be unique for every user)
-            $fbID = $_REQUEST['facebookid'];
-	    $firstLogin = $_REQUEST['firstLogin'];
-	    //If user already exists, don't add a new db entry, otherwise create one
-            if( $conn->query("INSERT INTO `User Profile` (`fbID`) VALUES ('$fbID')") === TRUE ){
-		$arr = array('firstLogin' => 'TRUE');
-		echo json_encode($arr);
-            } else{
-		$arr = array('firstLogin' => 'FALSE');
-	        echo json_encode($arr);
-            }
-            //Get the unique row ID for the new user, or retrieve their old one
-            $result = $conn->query("SELECT ID FROM `User Profile` WHERE `fbID`='". $fbID. "'");
-            if( $result->num_rows > 0 ){
-                while($row = $result->fetch_assoc()){
-                    $uid = $row["ID"];
-                }
-            }
-            //Store the user's ID in the session for use later
-            $session->userID = $uid;
-            //$session->db = $conn;
-        }
-        $conn->close();
-?>
 </body>
 </html>
