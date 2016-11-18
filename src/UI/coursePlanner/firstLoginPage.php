@@ -30,15 +30,19 @@
     }
 
 //for passing course info to database and do the comparsion
-/*$arg =$_POST;
+//$arg =$_POST;
+$courseName  = htmlspecialchars($_POST['courseName']);
+$courseNumber  = htmlspecialchars($_POST['courseNumber']);
+$courseSection  = htmlspecialchars($_POST['courseSection']);
+if((!empty($courseName))&&(!empty($courseNumber))&&(!empty($courseSection))){
 foreach($_POST['courseName'] as $value){
-	$values = mysql_real_escape_string($value);
+	$values = $value;
 }
 foreach($_POST['courseNumber'] as $value){
-	$values = mysql_real_escape_string($value);
+	$values = $value;
 }
 foreach($_POST['courseSection'] as $value){
-	$values = mysql_real_escape_string($value);
+	$values = $value;
 }
 
 $mi = new MultipleIterator();
@@ -58,7 +62,8 @@ foreach ( $mi as $value ) {
     $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
     $conn->query($sql);
 }
-*/
+}
+
 //closing connection
     $conn->close();
     if( isset($_POST['redirect']) ){
