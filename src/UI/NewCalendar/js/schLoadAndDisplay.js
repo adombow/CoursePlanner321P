@@ -54,7 +54,7 @@ var mapToDisplay = function() {
             textColor : display_color[1]
         };
 
-        events.push(temp);
+        display_events.push(temp);
 
     }
 
@@ -101,6 +101,7 @@ var updateEvents = function(){
         type: "POST",
         url: 'php/countEntries.php',
         dataType: "json",
+        async: false,
         success: function(data){
             console.log("get num of entries of the user from dtabase ... ");
             numEntries = parseInt(data);
@@ -110,7 +111,7 @@ var updateEvents = function(){
 
         },
         error : function() {        
-            alert("Exception from countEntries.php");    
+            //alert("Exception from countEntries.php");    
         }    
     });
 
@@ -122,6 +123,7 @@ var updateEvents = function(){
 // ---------------->> Initialize the page when refresh <<----------------
 $.ajax({
     url:updateEvents(),
+    async: false,
     success:function(){
        mapToDisplay();
     }

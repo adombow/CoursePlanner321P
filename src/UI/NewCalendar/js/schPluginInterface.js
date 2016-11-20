@@ -1,5 +1,5 @@
 // array thats going to be displayed on calendar
-var events  = [
+var display_events  = [
 	/*{
 
 		id : 'E02',
@@ -14,15 +14,15 @@ var events  = [
 
 // interface function to pass the array enevts
 function getEvents(){
-	console.log(events);
-	return events;
+	console.log(display_events);
+	return display_events;
 }
 
 
 // interface to update the display
 function rerender() {
 	$('.mycal').remove();
-    //document.getElementById("ppp").innerHTML = "<div class="mycal" style="width:100%;"></div>";
+    
     $( '#mycal-container' ).append( '<div class="mycal" style="width:100%;"></div>');
 
     $('.mycal').easycal({
@@ -40,6 +40,7 @@ function rerender() {
         },
         eventClick : function(eventId){
             console.log('Event was clicked with id: ' + eventId);
+            showInfoDialog(eventId);
         },
 
         events : getEvents(),
