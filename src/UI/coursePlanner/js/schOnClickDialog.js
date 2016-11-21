@@ -20,7 +20,7 @@ var showInfoDialog = function(id) {
 	$( "#onclick-dialog" ).dialog({
         title: dbEntries[dialog_index][db_key_title],
         modal: true,
-        width: 400,
+        width: 600,
         buttons: {
             'Delete' : function () {
             	confirm_delete(id);
@@ -33,7 +33,7 @@ var showInfoDialog = function(id) {
         
     });
 	// write in the info
-    document.getElementById("onclick-dialog").innerHTML = 'Time: ' + dbEntries[i][db_key_start] + '-' + dbEntries[i][db_key_end] + '<br>Location: ' + dbEntries[i][db_key_location] + '<br>--*--<br>' + dbEntries[i][db_key_info];
+    document.getElementById("onclick-dialog").innerHTML = 'Time: ' + dbEntries[i][db_key_start] + '-' + dbEntries[i][db_key_end] + '<br>Location: ' + dbEntries[i][db_key_location] + '<br><br>' + dbEntries[i][db_key_info];
 
 }
 
