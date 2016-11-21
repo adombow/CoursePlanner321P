@@ -3,14 +3,15 @@ var dbEntries = Array();
 
 // ---------------->> To display calendar based on dbEntries array <<----------------
 function db2cal_time(db_date, db_start, db_end){
-    var date_time;
-    if(db_date.toLowerCase() == "mon") date_time = "01-08-2016 ";
-    else if(db_date.toLowerCase() == "tue") date_time = "02-08-2016 ";
-    else if(db_date.toLowerCase() == "wed") date_time = "03-08-2016 ";
-    else if(db_date.toLowerCase() == "thu") date_time = "04-08-2016 ";
-    else if(db_date.toLowerCase() == "fri") date_time = "05-08-2016 ";
-    else if(db_date.toLowerCase() == "sat") date_time = "06-08-2016 ";
-    else if(db_date.toLowerCase() == "sun") date_time = "07-08-2016 ";
+    var date_time = "01-08-2016 ";
+    if(db_date == "mon") date_time = "01-08-2016 ";
+    else if(db_date == "tue") date_time = "02-08-2016 ";
+    else if(db_date == "wed") date_time = "03-08-2016 ";
+    else if(db_date == "thu") date_time = "04-08-2016 ";
+    else if(db_date == "fri") date_time = "05-08-2016 ";
+    else if(db_date == "sat") date_time = "06-08-2016 ";
+    else if(db_date == "sun") date_time = "07-08-2016 ";
+    else date_time = "01-08-2016 ";
     var ret = [
         date_time.concat(db_start),
         date_time.concat(db_end)

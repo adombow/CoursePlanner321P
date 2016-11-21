@@ -52,9 +52,7 @@
 	<script type="text/javascript" src="js/schLoadAndDisplay.js"></script>
 	<script type="text/javascript" src="js/schOnClickDialog.js"></script>
 	<script type="text/javascript" src="js/sidebar.js"></script>
-	<script>
-		rerender();
-	</script>
+
 
 	
 	

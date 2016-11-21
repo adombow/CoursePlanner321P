@@ -1,8 +1,8 @@
 <?php
 	// parameters set up
-	$serverName = 'localhost';//'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-	$userName = 'root';//'courseplanner';
-	$password = '';//'cpen3210';
+	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com'; //'localhost';//
+	$userName = 'courseplanner'; //'root';//
+	$password = 'cpen3210'; //'';//
 	$databaseName = 'courseplanner';
 	$table = 'Unique Calendar Entry';
 
@@ -90,7 +90,7 @@
 
 	
 	if ($exist == 1) {
-		$sql = "UPDATE `{$table}` SET `Title`='{$title}', `Location`='{$location}', `Infor`='{$info}', `BColour`='{$bg_color}', `TColour`='{$text_color}' WHERE `Date`='{$date}' AND `Start`='{$start}' AND `End`='{$end}' AND `userID`={$uid} ";
+		$sql = "UPDATE `{$table}` SET `Title`='{$title}', `Location`='{$location}', `Info`='{$info}', `BColour`='{$bg_color}', `TColour`='{$text_color}' WHERE `Date`='{$date}' AND `Start`='{$start}' AND `End`='{$end}' AND `userID`={$uid} ";
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record updated successfully \n";
 		} else {
@@ -99,7 +99,7 @@
 	}
 	else {
 		
-		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Location`, `Infor`, `BColour`, `TColour`) VALUES ('{$uid}', '{$title}', '{$date}', '{$start}', '{$end}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}')";
+		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Location`, `Info`, `BColour`, `TColour`) VALUES ('{$uid}', '{$title}', '{$date}', '{$start}', '{$end}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}')";
 		if ($conn->query($sql) === TRUE) {
 		    echo "New record created successfully \n";
 		} else {

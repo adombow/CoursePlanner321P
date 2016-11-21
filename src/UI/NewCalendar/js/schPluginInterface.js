@@ -1,19 +1,21 @@
 // array thats going to be displayed on calendar
 var display_events  = [
-	/*{
-
-		id : 'E02',
+	{
+        /*
+		id : '5',
 		title: 'msa,',
 		start: '04-08-2016 16:45:00',
 		end : '04-08-2016 17:30:00',
 		backgroundColor: '#12CA6B',
 		textColor : '#FFF'
-	}*/
+        */
+	}
 		
 ];
 
 // interface function to pass the array enevts
 function getEvents(){
+    console.log("----->> get Events: ");
 	console.log(display_events);
 	return display_events;
 }
@@ -49,6 +51,7 @@ function rerender() {
         overlapTextColor : '#000',
         overlapTitle : 'Multiple'
     });
+    
 }
 
 
