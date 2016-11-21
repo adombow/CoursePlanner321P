@@ -1,7 +1,6 @@
 <?php
     require("session.php");
-    //Access the database connection created on login
-    //$conn = $session->db;
+
     $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
     $userName = 'courseplanner';
     $password = 'cpen3210';
@@ -28,86 +27,125 @@
             }
         }
     }
+    if( isset($_POST['courseName']) ){
+	//for passing course info to database and do the comparsion
+	$nvals = count($_POST['courseName']);
+	if( $nvals == count($_POST['courseNumber']) && $nvals == count($_POST['courseSection']) ){
+		//for each course entered by the user
+		for( $i = 0; $i < $nvals; $i++ ){
+			$courseName = htmlspecialchars($_POST['courseName'][$i]);
+			$courseNumber = htmlspecialchars($_POST['courseNumber'][$i]);
+            		$courseSection = htmlspecialchars($_POST['courseSection'][$i]);
+            		$sql = "SELECT `ID` FROM `course` WHERE dept='$courseName' AND courseID='$courseNumber' AND sectionID='$courseSection'";
+			$result = $conn->query($sql);
+            		while( $row = $result->fetch_assoc() ){
+				$cid = $row['ID'];
+            		}
+           
+            		$sql = "SELECT `dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3` FROM `course` WHERE `ID`=$cid";
+			$result = $conn->query($sql);
+			while ( $row = $result->fetch_assoc() ) {
+				$title = $row["dept"]." ".$row["courseID"]." ".$row["sectionID"];
+				$info = 'Course: '.$title."\r\n".$row["course_title"].'. '.$row["course_info"]."\r\n".'Type: '.
+						$row["course_type"]."\r\n".'Credit: '.$row["course_credit"]."\r\n".'Location: '.$row["course_location"].
+						"\r\n".'Course term: '.$row["course_term"]."\r\n".'Instructors: '.$row["course_instructors"]."\r\n".
+						'Books info: '."\r\n".$row["course_book1"]."\r\n".$row["course_book2"]."\r\n".$row["course_book3"]."\r\n";
+				$location1 = $row["course_schedule_building_row1"].' Room: '.$row["course_schedule_room_row1"];
+				$location2 = $row["course_schedule_building_row2"].' Room: '.$row["course_schedule_room_row2"];
+				
+				$course_schedule_term_row1= $row["course_schedule_term_row1"];
+				$course_schedule_day_row1= $row["course_schedule_day_row1"];
+				$course_schedule_day_start_row1= $row["course_schedule_day_start_row1"];
+				$course_schedule_day_end_row1= $row["course_schedule_day_end_row1"];
+				$course_schedule_term_row2= $row["course_schedule_term_row2"];
+				$course_schedule_day_row2= $row["course_schedule_day_row2"];
+				$course_schedule_day_start_row2= $row["course_schedule_day_start_row2"];
+				$course_schedule_day_end_row2= $row["course_schedule_day_end_row2"];
+			}
 
-//for passing course info to database and do the comparsion
-//$arg =$_POST;
-$courseName  = htmlspecialchars($_POST['courseName']);
-$courseNumber  = htmlspecialchars($_POST['courseNumber']);
-$courseSection  = htmlspecialchars($_POST['courseSection']);
-if((!empty($courseName))&&(!empty($courseNumber))&&(!empty($courseSection))){
-foreach($_POST['courseName'] as $value){
-	$values = $value;
-}
-foreach($_POST['courseNumber'] as $value){
-	$values = $value;
-}
-foreach($_POST['courseSection'] as $value){
-	$values = $value;
-}
-
-$mi = new MultipleIterator();
-$mi->attachIterator(new ArrayIterator($array1));
-$mi->attachIterator(new ArrayIterator($array2));
-$mi->attachIterator(new ArrayIterator($array3));
-
-foreach ( $mi as $value ) {
-    list($courseName, $courseNumber, $courseSection) = $value;
-    $query = "SELECT ID FROM courses WHERE dept='{$_POST['courseName']}' AND courseID='{$_POST['courseNumber']}'AND sectionID='{$_POST['courseSection']}'";
-    $result = $conn->query($sql);
-    while($row = $result->fetch_assoc()){
-            $cid = $row['ID'];
+			if( $course_schedule_day_row1 != NULL ){
+				$date1 = explode(" ", $course_schedule_day_row1);
+		
+				foreach($date1 as $item){ 							//ampersand??
+					//check exist
+					$check = $conn->query("SELECT `ID` FROM `Unique Calendar Entry` WHERE `userID`=$uid and `Title`='$title' and `date`='$item' and `Location`='$location1'");
+					if($check->num_rows == 0){//no exist
+						$sql = "INSERT INTO `Unique Calendar Entry`(`Title`, `Location`, `Info`, `date`, `start`, `end`, `userID`, `courseID`) VALUES ('$title','$location1','$info','$item','$course_schedule_day_start_row1','$course_schedule_day_end_row1',$uid,$cid)";
+					}
+					else{//exist
+						$sql="UPDATE `Unique Calendar Entry` SET `Title`='$title',`Location`='$location1',`Info`='$info',`date`='$item',`start`='$course_schedule_day_start_row1',`end`='$course_schedule_day_end_row1' WHERE `userID`=$uid and `Title`='$title' and `date`='$item' and `Location`='$location1'";
+					}
+					if ($conn->query($sql) != TRUE) {
+						echo "Error: " . $sql . "<br>" . $conn->error;
+					}
+				}
+			}
+	
+			if($course_schedule_day_row2!=NULL){
+				$date2 = explode(" ", $course_schedule_day_row2);
+		
+				foreach($date2 as $item){
+					//check exist
+					$check = $conn->query("SELECT `ID` FROM `Unique Calendar Entry` WHERE `userID`=$uid and `Title`='$title' and `date`='$item' and `Location`='$location2'");
+					if($check->num_rows == 0){//no exist
+						$sql = "INSERT INTO `Unique Calendar Entry`(`Title`, `Location`, `Info`, `date`, `start`, `end`,`userID`) VALUES ('$title','$location2','$info','$item','$course_schedule_day_start_row2','$course_schedule_day_end_row2',$uid)";
+					}
+					else{//exist
+						$sql="UPDATE `Unique Calendar Entry` SET `Title`='$title',`Location`='$location2',`Info`='$info',`date`='$item',`start`='$course_schedule_day_start_row2',`end`='$course_schedule_day_end_row2' WHERE `userID`=$userID and `Title`='$title' and `date`='$item' and `Location`='$location2'";
+					}
+					if ($conn->query($sql) != TRUE) {
+						echo "Error: " . $sql . "<br>" . $conn->error;
+					}
+				}
+			}
+        	}
+	}
     }
-    $sql = "INSERT INTO `User Courses` (`Course ID`, `User ID`) VALUES ($cid, $uid)";
-    $conn->query($sql);
-    $sql = "INSERT INTO `Course Calendar Entry` (`Course ID`,`Title`,`Time`,`Location`,`Info`) VALUES ($cid,'$coursecode','$time','$location','$info')";
-    $conn->query($sql);
-}
-}
-
-//closing connection
+    //closing connection
     $conn->close();
     if( isset($_POST['redirect']) ){
             header("Location: mainPanel.php");
     }
-
 ?>
 
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8>
+<meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <title>First Login Page</title>
-   <link rel="stylesheet"
-	 href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <!--<link rel="stylesheet" type="text/css" href="css/sidebar.css">-->
    <script type="text/javascript" src="jquery-1.3.1.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 
 <script>
+     var _len = 0;
      $(document).ready(function(){
         //<tr/>middle
         $("#tab tr").attr("align","center");
         
         //increase<tr/>
         $("#but").click(function(){
-            var _len = $("#tab tr").length;        
-            $("#tab").append("<tr id="+_len+" align='center'>"
+            //var _len = $("#tab tr").length;        
+	    $("#tab").append("<tr id="+_len+" align='center'>"
                                 +"<td>"+_len+"</td>"
                                 +"<td>Course"+_len+"</td>"
-                                +"<td><input type='text' name='CourseName[_len+]' id='CourseName"+_len+"' /></td>"
- +"<td><input type='text' name='CourseNumber[_len]' id='CourseSection"+_len+"' /></td>" 
-+"<td><input type='text' name='CourseSection[_len]' id='CourseSection"+_len+"' /></td>" 
+                                +"<td><input type='text' name='courseName["+_len+"]' id='courseName"+_len+"' /></td>"
+ +"<td><input type='text' name='courseNumber["+_len+"]' id='courseNumber"+_len+"' /></td>" 
++"<td><input type='text' name='courseSection["+_len+"]' id='courseSection"+_len+"' /></td>" 
                                +"<td><a href=\'#\' onclick=\'deltr("+_len+")\'>DELETE</a></td>"
                             +"</tr>");            
-        })    
+            _len++;
+	    console.log(_len);
+	})    
     })
     
     //delete<tr/>
     var deltr =function(index)
     {
-        var _len = $("#tab tr").length;
+        //var _len = $("#tab tr").length;
         $("tr[id='"+index+"']").remove();//delete current row 
         for(var i=index+1,j=_len;i<j;i++)
         {
@@ -120,7 +158,8 @@ foreach ( $mi as $value ) {
                                 +"<td><a href=\'#\' onclick=\'deltr("+(i-1)+")\'>DELETE</a></td>"
                             +"</tr>");
         }    
-        
+        _len--;
+	console.log(_len);
     }
 
 </script>
@@ -128,8 +167,7 @@ foreach ( $mi as $value ) {
 </head>
     <body>
 <?php
-    //include("inc/sideBar.html");
-    include("infoFillIn.php");
+	include("infoFillIn.php");
 ?>
     <form id="form1" method="post">
     
@@ -189,9 +227,9 @@ foreach ( $mi as $value ) {
         <tr>
             <td width="20%">Number</td>
             <td>List</td>
-            <td>Course Name</td>
+            <td>Department</td>
+            <td>Course Number</td>
             <td>Course Section</td>
-             <td>Course Number</td>
             <td>Delete Course</td>
        </tr>
     </table>
@@ -205,9 +243,11 @@ foreach ( $mi as $value ) {
     <input type="button" id="but" value="Add Course">
     </div>
 
+<!--
     <script src="js/courseSelectBar.js"></script>
     <script src="js/sideBar.js"></script>
- 
+-->
+
 <div style="text-align: center; margin: 100;">   
     <input type="submit" name="b1" value="submit">
 </div>
