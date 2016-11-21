@@ -1,50 +1,54 @@
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-
     <title>My Schedule</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
-    <link rel="stylesheet" type="text/css" href="css/mainPanel.css">
-    <link rel="stylesheet" type="text/css" href="css/schedule.css">
     
-  
+    <link rel="stylesheet" type="text/css" href="css/scheduleTable.css">
+
+    <style>
+        #mycal-container{ width: 820px; margin: 0 auto; font-size: 16px; font-family: Arial; box-sizing: border-box;}
+
+    </style>
 </head>
-    <body>
+<body>
     <?php 
         include("inc/sidebar.html");
-	require("session.php");
     ?>
         <h1 style="text-align: center;">
-            Plan your schedule
+            Schedule your schedule
         </h1>
-
     
-    <table id="data-table" align="center">
-        <tr><td>There are no items...</td></tr>
-    </table>
+        <div>
+            <div id="onclick-dialog"></div>
+            <div id="confirm-delete"></div>
+            <div id="new-task"></div>
+        </div>
+        
+        <div style="text-align: center; margin: 30px;">
+            <button type="button" id="add-task" style="font-size: 24px">Edit Calendar</button>
+            
+        </div>
+        
+        <div id="mycal-container"><div class="mycal" style="text-align: center;">Loading ...</div></div>
 
-    <div style="text-align: center; margin: 60;">
-        <button type="button" id="add-row">Add Row</button>
-        <button type="button" id="add-rows">Add Rows</button>
-        <button type="button" id="remove-last-row">Remove Last Row</button>
+        
+
     </div>
-    
-    <div id="num-of-rows-to-add"></div>
-    <div id="confirm-tile-remove"></div>
-    <div id="confirm-row-remove"></div>
-    <div id="view-edit-tile"></div>
-    <div id="edit-tile"></div>
 
-    <?php
+
+
+    
+
+
+<?php
         //Access the database connection created on login
-	//$conn = $session->db;
+    //$conn = $session->db;
         $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
         $userName = 'courseplanner';
         $password = 'cpen3210';
-	$databaseName = 'courseplanner';
+    $databaseName = 'courseplanner';
         //Create a new database object and connect to it
         //$conn = new mysqli($serverName, $userName, $password, $databaseName);
     ?>
@@ -52,11 +56,11 @@
         <!--DB connection error handling for debugging
             Should change to something more user friendly for final -->
         <?php 
-	//if( $conn -> connect_error )
-		//echo $conn->connect_error;
+    //if( $conn -> connect_error )
+        //echo $conn->connect_error;
         ?>
 
-	<?php
+    <?php
         //Get the current session, if none exists already, make one
         $session = Session::getInstance();
 
@@ -66,8 +70,19 @@
 
 </div>
 
-    <script src="js/scheduler.js"></script>
-    <script src="js/sidebar.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/schPlugin.js"></script>
+    <script type="text/javascript" src="js/schDelete.js"></script>
+    <script type="text/javascript" src="js/schAdd.js"></script>
+    <script type="text/javascript" src="js/schParameters.js"></script>
+    <script type="text/javascript" src="js/schPluginInterface.js"></script>
+    <script type="text/javascript" src="js/schLoadAndDisplay.js"></script>
+    <script type="text/javascript" src="js/schOnClickDialog.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
 
     <?php
     //$conn->close();

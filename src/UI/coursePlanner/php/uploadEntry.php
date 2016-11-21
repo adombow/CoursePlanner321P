@@ -1,17 +1,20 @@
 <?php
 	// parameters set up
-	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-	$userName = 'courseplanner';
-	$password = 'cpen3210';
+	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com'; //'localhost';//
+	$userName = 'courseplanner'; //'root';//
+	$password = 'cpen3210'; //'';//
 	$databaseName = 'courseplanner';
-	$table = "Unique Calendar Entry";
+	$table = 'Unique Calendar Entry';
 
-	    $title = $_POST['title'];
-	    $x = $_POST['x'];
-	    $y = $_POST['y'];
-	    $time = $_POST['time'];
-	    $location = $_POST['location'];
-	    $infor = $_POST['infor'];
+
+	    $title = $_REQUEST["title"];
+	    $date = $_REQUEST["date"];
+	    $start = $_REQUEST["start"];
+	    $end = $_REQUEST["end"];
+	    $location = $_REQUEST["location"];
+	    $info = $_REQUEST["info"];
+	    $bg_color = $_REQUEST["bg_color"];
+	    $text_color = $_REQUEST["text_color"];
 	// get user ID
 	require('../session.php');
 	$session = Session::getInstance();
@@ -58,24 +61,25 @@
 	// **************************************************
 	// check
 	$exist = 0;
-	$sql = "SELECT `x`, `y` FROM `$table` WHERE `userID`=$uid";
+	
+	$sql = "SELECT * FROM `{$table}` WHERE `userID`={$uid} AND `Date`='{$date}' AND `Start`='{$start}' ";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 	        
-			if ($row["x"] == $x && $row["y"] == $y){
+			if ($row["End"] == $end){
 				$exist = 1;
-				echo "This tile exists in DB \n";
+				echo "Overwritting a time interval ... \n";
 			}
 	    }
 	} else {
-	    echo "No tile existed in DB \n";
+	    //echo "No tile existed in DB \n";
 	}
 	
 	if ($exist === 0) {
-		echo "No same tile existed in DB \n";
+		//echo "No same tile existed in DB \n";
 	}
 
 	// **************************************************
@@ -86,7 +90,7 @@
 
 	
 	if ($exist == 1) {
-		$sql = "UPDATE `$table` SET `Title`='$title', `Time`='$time', `Location`='$location', `Info`='$infor' WHERE `x`=$x AND `y`=$y AND `userID`=$uid ";
+		$sql = "UPDATE `{$table}` SET `Title`='{$title}', `Location`='{$location}', `Info`='{$info}', `BColour`='{$bg_color}', `TColour`='{$text_color}' WHERE `Date`='{$date}' AND `Start`='{$start}' AND `End`='{$end}' AND `userID`={$uid} ";
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record updated successfully \n";
 		} else {
@@ -95,7 +99,7 @@
 	}
 	else {
 		
-		$sql = "INSERT INTO `$table` (`userID`, `Title`, `Time`, `Location`, `Info`, `x`, `y`) VALUES ($uid, '$title', '$time', '$location', '$infor', $x, $y)";
+		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Location`, `Info`, `BColour`, `TColour`) VALUES ('{$uid}', '{$title}', '{$date}', '{$start}', '{$end}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}')";
 		if ($conn->query($sql) === TRUE) {
 		    echo "New record created successfully \n";
 		} else {

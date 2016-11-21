@@ -39,7 +39,38 @@
 
 
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
+
+
+<?php
+        //Access the database connection created on login
+	//$conn = $session->db;
+        $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
+        $userName = 'courseplanner';
+        $password = 'cpen3210';
+	$databaseName = 'courseplanner';
+        //Create a new database object and connect to it
+        //$conn = new mysqli($serverName, $userName, $password, $databaseName);
+    ?>
+
+        <!--DB connection error handling for debugging
+            Should change to something more user friendly for final -->
+        <?php 
+	//if( $conn -> connect_error )
+		//echo $conn->connect_error;
+        ?>
+
+	<?php
+        //Get the current session, if none exists already, make one
+        $session = Session::getInstance();
+
+        //Do some query to get uid from logintoken
+        $UID = $session->userID;
+     ?>
+
+</div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -53,8 +84,8 @@
 	<script type="text/javascript" src="js/schOnClickDialog.js"></script>
 	<script type="text/javascript" src="js/sidebar.js"></script>
 
-
-	
-	
+    <?php
+    //$conn->close();
+    ?>
 </body>
 </html>

@@ -1,18 +1,18 @@
 <?php
 	// parameters set up
-	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-	$userName = 'courseplanner';
-	$password = 'cpen3210';
+	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com'; //'localhost';//
+	$userName = 'courseplanner'; //'root';//
+	$password = 'cpen3210'; //'';//
 	$databaseName = 'courseplanner';
-	$table = "Unique Calendar Entry";
+	$table = 'Unique Calendar Entry';
 
-	$x = $_REQUEST['x'];
-	$y = $_REQUEST['y'];
+	$idArray = $_REQUEST['array'];//array(0,1);//
 	
 	// get user ID
 	require('../session.php');
 	$session = Session::getInstance();
 	$uid = $session->userID;
+	//$uid = 57;
 
 
 	// **************************************************
@@ -35,17 +35,25 @@
 	// **************************************************
 	$sql = "SELECT * FROM `$table` WHERE `userID`=$uid";
 	$result = $conn->query($sql);
+	//echo $idArray;
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
-	        //only return the expected one
-			if ($row["x"] == $x && $row["y"] == $y){
-				unset($row["userID"]);
+
+	    	//echo $idArray;
+	    	
+	    	if (!in_array($row["ID"],$idArray)){
+	    		unset($row["userID"]);
 				echo json_encode($row);
+				
 				break;
-			}
+	    	}
+			
+
+			
 	    }
+	    
 	} else {
 	    echo "[Pulling Failed]: No such a tile in database ...\n";
 	}
