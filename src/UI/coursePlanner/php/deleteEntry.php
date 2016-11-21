@@ -10,7 +10,7 @@
 	$entryID = $_POST['id'];
 
 	// get user ID
-	require('../session.php');
+	require('/var/www/html/session.php');
 	$session = Session::getInstance();
 	$uid = $session->userID;
 

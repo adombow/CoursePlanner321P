@@ -16,7 +16,7 @@
 	    $bg_color = $_REQUEST["bg_color"];
 	    $text_color = $_REQUEST["text_color"];
 	// get user ID
-	require('../session.php');
+	require('/var/www/html/session.php');
 	$session = Session::getInstance();
 	$uid = $session->userID;
 
