@@ -39,10 +39,10 @@
             		$sql = "SELECT `ID` FROM `course` WHERE dept='$courseName' AND courseID='$courseNumber' AND sectionID='$courseSection'";
 			$result = $conn->query($sql);
             		while( $row = $result->fetch_assoc() ){
-				$cid = $row['ID'];
+						$cid = $row['ID'];
             		}
            
-            		$sql = "SELECT `dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3` FROM `course` WHERE `ID`=$cid";
+            $sql = "SELECT `dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3` FROM `course` WHERE `ID`=$cid";
 			$result = $conn->query($sql);
 			while ( $row = $result->fetch_assoc() ) {
 				$title = $row["dept"]." ".$row["courseID"]." ".$row["sectionID"];
@@ -104,8 +104,8 @@
     //closing connection
     $conn->close();
     if( isset($_POST['redirect']) ){
-			header('Location: '.$_SERVER['REQUEST_URI']); 
-            //header('Location: '.$_SERVER['PHP_SELF']);
+			//header('Location: '.$_SERVER['REQUEST_URI']); 
+            header('Location: '.$_SERVER['PHP_SELF']);
             //header("Location: courseRegister.php");
     }
 ?>

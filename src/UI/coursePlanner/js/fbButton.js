@@ -1,18 +1,3 @@
-<!DOCTYPE HTML>
-
-<html>
-<head>
-
-<title>Facebook Login </title>
-<meta charset="UTF-8">
-<script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-</head>
-<body onload = "FB.Event.subscribe('auth.authResponseChange', auth_response_change_callback);
-FB.Event.subscribe('auth.statusChange', auth_status_change_callback);">
-
-<script>
 var auth_response_change_callback = function(response) {
   statusChangeCallback(response);
   console.log("auth_response_change_callback");
@@ -120,21 +105,3 @@ var auth_status_change_callback = function(response) {
         'Thanks for logging in, ' + response.name + '!';
     });
   }
-</script>
-
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-<div id="status"> </div>
-
-
-<div id="fb-root"></div>
-
-<div class="fb-login-button" data-max-rows="1" data-size="large"
-     data-show-faces="true" data-auto-logout-link="true"></div>
-</body>
-</html>
-
