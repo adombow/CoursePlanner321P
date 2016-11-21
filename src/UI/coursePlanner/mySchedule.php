@@ -62,10 +62,10 @@
 
     <?php
         //Get the current session, if none exists already, make one
-        $session = Session::getInstance();
+        //$session = Session::getInstance();
 
         //Do some query to get uid from logintoken
-        $UID = $session->userID;
+        //$UID = $session->userID;
      ?>
 
 </div>

@@ -21,7 +21,7 @@
         if($name !== ''){
             $sql = "UPDATE `User Profile` SET `Name` = '$name' WHERE `ID`=$uid";
             if( $conn->query($sql) === TRUE ){
-                   echo "Record updated successfully";
+                   //echo "Record updated successfully";
             } else{
                    echo "Error: ". $conn->error;
             }
@@ -46,10 +46,10 @@
 			$result = $conn->query($sql);
 			while ( $row = $result->fetch_assoc() ) {
 				$title = $row["dept"]." ".$row["courseID"]." ".$row["sectionID"];
-				$info = 'Course: '.$title."\r\n".$row["course_title"].'. '.$row["course_info"]."\r\n".'Type: '.
-						$row["course_type"]."\r\n".'Credit: '.$row["course_credit"]."\r\n".'Location: '.$row["course_location"].
-						"\r\n".'Course term: '.$row["course_term"]."\r\n".'Instructors: '.$row["course_instructors"]."\r\n".
-						'Books info: '."\r\n".$row["course_book1"]."\r\n".$row["course_book2"]."\r\n".$row["course_book3"]."\r\n";
+				$info = 'Course: '.$title."<br>".$row["course_title"].'. '.$row["course_info"]."<br>".'Type: '.
+						$row["course_type"]."<br>".'Credit: '.$row["course_credit"]."<br>".'Location: '.$row["course_location"].
+						"<br>".'Course term: '.$row["course_term"]."<br>".'Instructors: '.$row["course_instructors"]."<br>".
+						'Books info: '."<br>".$row["course_book1"]."<br>".$row["course_book2"]."<br>".$row["course_book3"]."<br>";
 				$location1 = $row["course_schedule_building_row1"].' Room: '.$row["course_schedule_room_row1"];
 				$location2 = $row["course_schedule_building_row2"].' Room: '.$row["course_schedule_room_row2"];
 				
