@@ -39,10 +39,10 @@
             		$sql = "SELECT `ID` FROM `course` WHERE dept='$courseName' AND courseID='$courseNumber' AND sectionID='$courseSection'";
 			$result = $conn->query($sql);
             		while( $row = $result->fetch_assoc() ){
-				$cid = $row['ID'];
+						$cid = $row['ID'];
             		}
            
-            		$sql = "SELECT `dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3` FROM `course` WHERE `ID`=$cid";
+            $sql = "SELECT `dept`, `courseID`, `sectionID`, `course_type`, `course_title`, `course_info`, `course_credit`, `course_location`, `course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`, `course_schedule_day_start_row1`, `course_schedule_day_end_row1`, `course_schedule_building_row1`, `course_schedule_room_row1`, `course_schedule_term_row2`, `course_schedule_day_row2`, `course_schedule_day_start_row2`, `course_schedule_day_end_row2`, `course_schedule_building_row2`, `course_schedule_room_row2`, `course_instructors`, `course_book1`, `course_book2`, `course_book3` FROM `course` WHERE `ID`=$cid";
 			$result = $conn->query($sql);
 			while ( $row = $result->fetch_assoc() ) {
 				$title = $row["dept"]." ".$row["courseID"]." ".$row["sectionID"];
@@ -104,7 +104,9 @@
     //closing connection
     $conn->close();
     if( isset($_POST['redirect']) ){
-            header("Location: mainPanel.php");
+			//header('Location: '.$_SERVER['REQUEST_URI']); 
+            header('Location: '.$_SERVER['PHP_SELF']);
+            //header("Location: courseRegister.php");
     }
 ?>
 
@@ -113,7 +115,8 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <title>First Login Page</title>
+   <title>Change Account Info</title>
+   <link rel="stylesheet" type="text/css" href="css/sidebar.css">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
    <!--<link rel="stylesheet" type="text/css" href="css/sidebar.css">-->
    <script type="text/javascript" src="jquery-1.3.1.js"></script>
@@ -165,18 +168,20 @@
 </script>
 
 </head>
-    <body>
+<body>
 <?php
 	include("infoFillIn.php");
+	include("inc/sidebar.html");
 ?>
+<script src="js/sidebar.js"></script>
     <form id="form1" method="post">
     
     <input type="hidden" name="redirect" value="mainPanel.php">
     <div style="text-align: center; margin: 100;">
-    <h1 style="text-align:center;">WE WOULD LIKE TO KNOW MORE ABOUT YOU</h1>
+    <h1 style="text-align:center;">MODIFY YOUR ACCOUNT AND COURSE INFORMATION</h1>
    
     <style>
-    body{background-color:pink}
+    body{background-color:Azure}
     </style>
     <p>1. What's your name    
 <!--create a gender chosen button--> 
@@ -242,11 +247,6 @@
               ">
     <input type="button" id="but" value="Add Course">
     </div>
-
-<!--
-    <script src="js/courseSelectBar.js"></script>
-    <script src="js/sideBar.js"></script>
--->
 
 <div style="text-align: center; margin: 100;">   
     <input type="submit" name="b1" value="submit">
