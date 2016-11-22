@@ -41,7 +41,7 @@ var auth_status_change_callback = function(response) {
       testAPI();
       /*$.ajax ({
         method: "POST",
-	url: "index.php",
+		url: "index.php",
         data: { facebookid : response.authResponse.userID },
         success: function(){
            console.log("userID sent!");

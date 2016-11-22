@@ -11,7 +11,7 @@
         die("Error: ". $conn->connect_error);
     }
     //Get current session
-   require('session.php');
+    require('session.php');
     $session = Session::getInstance();
     $uid = $session->userID;
 
