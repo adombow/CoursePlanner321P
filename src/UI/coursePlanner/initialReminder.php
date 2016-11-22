@@ -1,6 +1,5 @@
 
 <?php
-    require("session.php");
     $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
     $userName = 'courseplanner';
     $password = 'cpen3210';
