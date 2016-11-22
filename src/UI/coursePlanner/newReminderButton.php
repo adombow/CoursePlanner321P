@@ -135,7 +135,7 @@
       <span class="close">×</span>
       <h2>Here are your tasks</h2>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="text-align:center;margin:100;">
        <?php
      include("initialReminder.php");
      ?>
