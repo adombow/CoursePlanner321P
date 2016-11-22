@@ -1,6 +1,6 @@
 
 <?php
-    //require("session.php");
+    require("session.php");
     $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
     $userName = 'courseplanner';
     $password = 'cpen3210';
@@ -23,16 +23,31 @@ if($result->num_rows>0){
 
    
 
-echo "<table><tr><th>TITLE</th><th>INFO</th><th>LOCATION</th><th>DATE</th><th>START</th><th>END</th></tr>";
+echo "<table>
+      <tr>
+      <th>TITLE</th>
+      <th>INFO</th>
+      <th>LOCATION</th>
+      <th>DATE</th>
+      <th>START</th>
+      <th>END</th>
+      </tr>";
 while($row = $result->fetch_assoc()){
     
-    echo"<tr><td>".$row["Title"]."</td><td>".$row["Info"]."</td><td>".$row["Location"]."</td><td>".$row["Date"]."</td><td>".$row["Start"]."</td><td>".$row["End"]."</td></tr>";
+    echo"<tr>
+         <td>".$row["Title"]."</td>
+         <td>".$row["Info"]."</td>
+         <td>".$row["Location"]."</td>
+         <td>".$row["Date"]."</td>
+         <td>".$row["Start"]."</td>
+         <td>".$row["End"]."</td>
+         </tr>";
 }
 
 echo "</table>";
 }
 else{
-    echo "nothing";
+    echo "YEAH!! No tasks today!!!";
 }
 
 

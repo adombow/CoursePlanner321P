@@ -25,7 +25,7 @@
 </h2>
 
 <?php 
-include("popUpWindow.php");
+include("newReminderButton.php");
 ?>
                 <div class="container">
                         <div class="column column-one column-offset-2">Diya Ren</div>
