@@ -1,4 +1,6 @@
-
+<?php 
+include("popUpWindow.php");
+?>
 
 <!doctype html>
           

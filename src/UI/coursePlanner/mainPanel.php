@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 
 <html>
@@ -6,19 +7,26 @@
 
 	<title>Main Panel</title>
 	<link rel="stylesheet" type="text/css" href="css/sidebar.css">
-	<link rel="stylesheet" type="text/css" href="css/mainPanel.css">	  
+	<link rel="stylesheet" type="text/css" href="css/mainPanel.css">	
 </head>
+
 <body>
 <?php
     include("inc/sidebar.html");
-    include("infoFillIn.php");
+    include("infoFillIn.php");  
 ?>
+
+
 <h1 style="text-align: center;">
         Welcome to Course Planner!
 </h1>
 <h2 style="text-align: center;">
         CPEN311 Team CP
 </h2>
+
+<?php 
+include("popUpWindow.php");
+?>
                 <div class="container">
                         <div class="column column-one column-offset-2">Diya Ren</div>
                         <div class="column column-two column-inset-1">Andrew Dombowsky</div>
@@ -54,44 +62,6 @@
 
 <script src="js/sidebar.js"></script>
 
-<?php
-        require("session.php");
-        //Access the database connection created on login
-        //$conn = $session->db;
-        $serverName = "courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com:3306";
-        $userName = "courseplanner";
-        $password = "cpen3210";
-        $databaseName = "courseplanner";
-        //Create a new database object and connect to it
-        $conn = new mysqli($serverName, $userName, $password, $databaseName);
 
-        if($conn->connect_error){
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        //Create new session
-        $session = Session::getInstance();
-        if( isset($_POST['facebookid']) ){
-            //FB userID from Javascript above (should be unique for every user)
-            $fbID = $_POST['facebookid'];
-            //If user already exists, don't add a new db entry, otherwise create one
-            if( $conn->query("INSERT INTO `User Profile` (`fbID`) VALUES ('$fbID')") === TRUE ){
-                echo "New record created!";
-            } else{
-                echo $conn->error;
-            }
-            //Get the unique row ID for the new user, or retrieve their old one
-            $result = $conn->query("SELECT ID FROM `User Profile` WHERE `fbID`='". $fbID. "'");
-            if( $result->num_rows > 0 ){
-                while($row = $result->fetch_assoc()){
-                    $uid = $row["ID"];
-                }
-            }
-            //Store the user's ID in the session for use later
-            $session->userID = $uid;
-            //$session->db = $conn;
-        }
-        $conn->close();
-?>                      
 </body>
 </html>
