@@ -15,9 +15,10 @@
 <body>
     <?php 
         include("inc/sidebar.html");
+        include("infoFillIn.php");
     ?>
         <h1 style="text-align: center;">
-            Schedule your schedule
+            Plan your schedule
         </h1>
     
         <div>
@@ -33,40 +34,7 @@
         
         <div id="mycal-container"><div class="mycal" style="text-align: center;">Loading ...</div></div>
 
-        
-
     </div>
-
-
-
-    
-
-
-<?php
-        //Access the database connection created on login
-    //$conn = $session->db;
-        $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
-        $userName = 'courseplanner';
-        $password = 'cpen3210';
-    $databaseName = 'courseplanner';
-        //Create a new database object and connect to it
-        //$conn = new mysqli($serverName, $userName, $password, $databaseName);
-    ?>
-
-        <!--DB connection error handling for debugging
-            Should change to something more user friendly for final -->
-        <?php 
-    //if( $conn -> connect_error )
-        //echo $conn->connect_error;
-        ?>
-
-    <?php
-        //Get the current session, if none exists already, make one
-        //$session = Session::getInstance();
-
-        //Do some query to get uid from logintoken
-        //$UID = $session->userID;
-     ?>
 
 </div>
 
@@ -84,8 +52,5 @@
     <script type="text/javascript" src="js/schOnClickDialog.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
 
-    <?php
-    //$conn->close();
-    ?>
 </body>
 </html>
