@@ -27,6 +27,19 @@
             }
         }
     }
+    
+	if( isset($_POST['email']) ){
+        $email = htmlspecialchars($_POST['email']);
+        if($email !== ''){
+            $sql = "UPDATE `User Profile` SET `email` = '$email' WHERE `ID`=$uid";
+            if( $conn->query($sql) === TRUE ){
+                   //echo "Record updated successfully";
+            } else{
+                   echo "Error: ". $conn->error;
+            }
+        }
+    }
+    
     if( isset($_POST['courseName']) ){
 	//for passing course info to database and do the comparsion
 	$nvals = count($_POST['courseName']);

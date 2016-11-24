@@ -74,21 +74,25 @@
     <style>
     body{background-color:Azure}
     </style>
-    <p>1. What's your name    
+    <p>1. What's your name?    
 <!--create a gender chosen button--> 
     <input type="text" name="name"></p>
     <input id="man" type="radio" checked="checked" name="1"/>Male
     <input id="woman" type="radio"  name="1"/>Female 
+    
+    <p>2. What's your e-mail?
+<!--input your e-mail for daily reminders-->
+	<input type="text" name="email"></p>
 
 <!--choose your the year you are in-->
-    <p>2. What year are you in?</p>
+    <p>3. What year are you in?</p>
     <input id="Year1" type="radio" checked="checked" name ="2"/>Year1
     <input id="Year2" type="radio"  name ="2"/>Year2
     <input id="Year3" type="radio"  name ="2"/>Year3
     <input id="Year4" type="radio"  name ="2"/>Year4
     <input id="Year5+" type="radio" name ="2"/>Year5+
 <!--initialize a select bar for falculty-->
-    <p>3. What's your faculty</p>
+    <p>4. What's your faculty</p>
     <select id = "falculty-select">
     <option value ="Applied Science">Applied Science</option>
     <option value ="Architecture and Landscape Architecture, School of">Architecture and Landscape Architecture</option>
@@ -118,7 +122,7 @@
 </select>
 
 <!--creat a table for entering course information-->
-   <p>4. What courses are you taking?</p>
+   <p>5. What courses are you taking?</p>
    <table id="tab" border="1" width="60%" align="center" style="margin-top:20px">
         <tr>
             <td width="20%">Number</td>
