@@ -1,2 +1,2 @@
 MAILTO=addombowsky@shaw.ca
-0 4 * * * /usr/local/bin/php /var/www/html/email.php >/dev/null
+34 23 * * * /usr/bin/php /var/www/html/email.php >/dev/null
