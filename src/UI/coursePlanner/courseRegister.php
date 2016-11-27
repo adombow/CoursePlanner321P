@@ -83,6 +83,10 @@
     <p>2. What's your e-mail?
 <!--input your e-mail for daily reminders-->
 	<input type="text" name="email"></p>
+	<p> Would you like to receive daily reminders about your schedule by e-mail?
+	<input type="radio" name="remind" value="y">Yes
+	<input type="radio" name="remind" value="n">No
+	</p>
 
 <!--choose your the year you are in-->
     <p>3. What year are you in?</p>

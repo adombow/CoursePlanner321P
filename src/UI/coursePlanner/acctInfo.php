@@ -40,6 +40,16 @@
         }
     }
     
+    if( isset($_POST['remind']) ){
+		$remind = $_POST['remind'];
+		$sql = "UPDATE `User Profile` SET `remind` = '$remind' WHERE `ID`=$uid";
+		if( $conn->query($sql) === TRUE ){
+			//echo "Record updated successfully";
+        } else{
+			echo "Error: ". $conn->error;
+        }
+	}
+    
     if( isset($_POST['courseName']) ){
 	//for passing course info to database and do the comparsion
 	$nvals = count($_POST['courseName']);
@@ -48,8 +58,8 @@
 		for( $i = 0; $i < $nvals; $i++ ){
 			$courseName = htmlspecialchars($_POST['courseName'][$i]);
 			$courseNumber = htmlspecialchars($_POST['courseNumber'][$i]);
-            		$courseSection = htmlspecialchars($_POST['courseSection'][$i]);
-            		$sql = "SELECT `ID` FROM `course` WHERE dept='$courseName' AND courseID='$courseNumber' AND sectionID='$courseSection'";
+            $courseSection = htmlspecialchars($_POST['courseSection'][$i]);
+            $sql = "SELECT `ID` FROM `course` WHERE dept='$courseName' AND courseID='$courseNumber' AND sectionID='$courseSection'";
 			$result = $conn->query($sql);
             		while( $row = $result->fetch_assoc() ){
 						$cid = $row['ID'];
