@@ -1,6 +1,7 @@
 // functions of adding a task or class
 
 var invalidTime = function(start_time, end_time){
+    if (start_time === end_time) return true;
     var new_start_time = parseInt(start_time.replace(":",""));
     var new_end_time = parseInt(end_time.replace(":",""));
     if(new_start_time <= new_end_time) return true;
@@ -9,11 +10,11 @@ var invalidTime = function(start_time, end_time){
 
 var addTask = function() {
     //write content
-    $("#new-task").load("inc/schUpdateCalendar.html"); 
+    $("#new-task").show();
     $( "#new-task" ).dialog({
         title: "New Task",
         modal: true,
-        width: 600,
+        width: 400,
         buttons: {
             'Create Task!': function () {
             	var bg = document.getElementById("bg-color-dropdown-menu");
