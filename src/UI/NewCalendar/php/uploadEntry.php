@@ -1,10 +1,11 @@
 <?php
 	// parameters set up
-	$serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com'; //'localhost';//
-	$userName = 'courseplanner'; //'root';//
-	$password = 'cpen3210'; //'';//
+	$serverName = 'localhost';//'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com'; //
+	$userName = 'root';//'courseplanner'; //
+	$password = '';//'cpen3210'; //
 	$databaseName = 'courseplanner';
 	$table = 'Unique Calendar Entry';
+
 
 
 	    $title = $_REQUEST["title"];

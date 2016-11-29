@@ -4,9 +4,11 @@ var showInfoDialog = function(id) {
 	// find the entry with the id 
 	// and set variable
 	var dialog_index = -1;
+	var target;
 	for (var i=0; i<dbEntries.length; i++) {
 		if (dbEntries[i][db_key_id] == id) {
-			dialog_index = i;
+			var dialog_index = i;
+			target = dbEntries[i];
 			break;
 		}
 	}
@@ -18,9 +20,12 @@ var showInfoDialog = function(id) {
 
 	// display all info on a new dialog
 	$( "#onclick-dialog" ).dialog({
-        title: dbEntries[dialog_index][db_key_title],
+        title: target[db_key_title],
         modal: true,
         buttons: {
+        	'Edit' : function () {
+        		editTask(target);
+        	},
             'Delte' : function () {
             	confirm_delete(id);
             },
