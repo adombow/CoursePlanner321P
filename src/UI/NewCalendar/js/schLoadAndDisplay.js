@@ -45,14 +45,24 @@ var mapToDisplay = function() {
         //console.log(display_time[0] + "   " + display_time[1]);
         var display_id = dbEntries[i][db_key_id];
         var display_title = dbEntries[i][db_key_title];
-
+		//add two date
+		var start_date = dbEntries[i][db_key_start_date];
+		var end_date = dbEntries[i][db_key_end_date];
         var temp = {
             id : display_id,
             title: display_title,
             start: display_time[0],
             end : display_time[1],
             backgroundColor: display_color[0],
-            textColor : display_color[1]
+            textColor : display_color[1],
+			ranges: [{ //repeating events are only displayed if they are within at least one of the following ranges.
+				start: moment().startOf('week'), //next two weeks
+				end: moment().endOf('week').add(7,'d'),
+			},
+			{
+				start: moment(start_date,'YYYY-MM-DD'), //all of february
+				end: moment(end_date,'YYYY-MM-DD'),
+			}]
         };
 
         display_events.push(temp);
