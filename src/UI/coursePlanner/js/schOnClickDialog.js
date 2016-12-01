@@ -1,4 +1,3 @@
-
 // display the db entry info when click on corresponding tile
 var showInfoDialog = function(id) {
 	// find the entry with the id 
@@ -22,6 +21,9 @@ var showInfoDialog = function(id) {
         modal: true,
         width: 600,
         buttons: {
+        	'Edit' : function () {
+        		editTask(target);
+        	},
             'Delete' : function () {
             	confirm_delete(id);
             },
@@ -33,7 +35,7 @@ var showInfoDialog = function(id) {
         
     });
 	// write in the info
-    document.getElementById("onclick-dialog").innerHTML = 'Time: ' + dbEntries[i][db_key_start] + '-' + dbEntries[i][db_key_end] + '<br>Location: ' + dbEntries[i][db_key_location] + '<br><br>' + dbEntries[i][db_key_info];
+    document.getElementById("onclick-dialog").innerHTML = 'Time: ' + dbEntries[i][db_key_start_time] + '-' + dbEntries[i][db_key_end_time] + '<br>Location: ' + dbEntries[i][db_key_location] + '<br><br>' + dbEntries[i][db_key_info];
 
 }
 
