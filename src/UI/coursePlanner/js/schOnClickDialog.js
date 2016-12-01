@@ -21,16 +21,14 @@ var showInfoDialog = function(id) {
         modal: true,
         width: 600,
         buttons: {
-        	'Edit' : function () {
-        		editTask(target);
-        	},
-            'Delete' : function () {
-            	confirm_delete(id);
-            },
-            'OK': function () {
+        	'OK': function () {
            		$(this).dialog('close');
            
+            },
+            'Delete' : function () {
+            	confirm_delete(id);
             }
+            
         }
         
     });
