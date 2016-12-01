@@ -88,6 +88,6 @@
       });
     </script>
     <script type="text/javascript" src="js/sidebar.js"></script>
-    <script src='js/b.js'></script>
+   
   </body>
 </html>
