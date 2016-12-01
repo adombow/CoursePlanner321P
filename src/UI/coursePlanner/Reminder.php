@@ -12,7 +12,7 @@
     //Get current session
    // require('session.php');
    // $session = Session::getInstance();
-    $uid = 81;
+    $uid = ;
 
 $sql = "SELECT `reminder`,`Start_Date`,`End_Date`,`Title`,`Info`,`Location`,`Date`, `Start`,`End` FROM `Unique Calendar Entry` WHERE `userID`= $uid AND `courseID` IS NULL";
 $result = $conn->query($sql);
