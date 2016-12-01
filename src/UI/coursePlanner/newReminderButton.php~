@@ -137,7 +137,7 @@
     </div>
     <div class="modal-body" style="text-align:center;margin:100;">
        <?php
-     include("reminder.php");
+     include("initialReminder.php");
      ?>
     </div>
     <div class="modal-footer">
