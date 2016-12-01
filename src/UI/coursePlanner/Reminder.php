@@ -10,9 +10,9 @@
         die("Error: ". $conn->connect_error);
     }
     //Get current session
-   // require('session.php');
-   // $session = Session::getInstance();
-    $uid = ;
+   require('session.php');
+   $session = Session::getInstance();
+    $uid = $session->userID;
 
 $sql = "SELECT `reminder`,`Start_Date`,`End_Date`,`Title`,`Info`,`Location`,`Date`, `Start`,`End` FROM `Unique Calendar Entry` WHERE `userID`= $uid AND `courseID` IS NULL";
 $result = $conn->query($sql);
