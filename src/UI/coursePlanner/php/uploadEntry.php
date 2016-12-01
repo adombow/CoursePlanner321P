@@ -9,8 +9,10 @@
 
 	    $title = $_REQUEST["title"];
 	    $date = $_REQUEST["date"];
-	    $start = $_REQUEST["start"];
-	    $end = $_REQUEST["end"];
+	    $startT = $_REQUEST["startT"];
+	    $endT = $_REQUEST["endT"];
+	    $startD = $_REQUEST["startD"];
+	    $endD = $_REQUEST["endD"];
 	    $location = $_REQUEST["location"];
 	    $info = $_REQUEST["info"];
 	    $bg_color = $_REQUEST["bg_color"];
@@ -60,9 +62,7 @@
 	//
 	// **************************************************
 	// check
-	$exist = 0;
-	
-	$sql = "SELECT * FROM `{$table}` WHERE `userID`={$uid} AND `Date`='{$date}' AND `Start`='{$start}' ";
+	$sql = "SELECT * FROM `{$table}` WHERE `userID`={$uid} AND `Date`='{$date}' AND AND `Start`='{$startT}' AND `End`='{$endT}' AND `Start_Date`='{$startD}' AND `End_Date`='{$endD}' ";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -90,7 +90,7 @@
 
 	
 	if ($exist == 1) {
-		$sql = "UPDATE `{$table}` SET `Title`='{$title}', `Location`='{$location}', `Info`='{$info}', `BColour`='{$bg_color}', `TColour`='{$text_color}' WHERE `Date`='{$date}' AND `Start`='{$start}' AND `End`='{$end}' AND `userID`={$uid} ";
+		$sql = "UPDATE `{$table}` SET `Title`='{$title}', `Location`='{$location}', `Info`='{$info}', `BColour`='{$bg_color}', `TColour`='{$text_color}' WHERE `Date`='{$date}' AND `StartT`='{$startT}' AND `EndT`='{$endT}' AND `StartD`='{$startD}' AND `EndD`='{$endD}' AND `userID`={$uid} ";
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record updated successfully \n";
 		} else {
@@ -99,7 +99,7 @@
 	}
 	else {
 		
-		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Location`, `Info`, `BColour`, `TColour`) VALUES ('{$uid}', '{$title}', '{$date}', '{$start}', '{$end}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}')";
+		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Start_Date`, `End_Date`, `Location`, `Info`, `BColour`, `TColour`) VALUES ('{$uid}', '{$title}', '{$date}', '{$startT}', '{$endT}', '{$startD}', '{$endD}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}')";
 		if ($conn->query($sql) === TRUE) {
 		    echo "New record created successfully \n";
 		} else {
