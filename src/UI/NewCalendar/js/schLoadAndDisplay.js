@@ -61,7 +61,20 @@ var mapToDisplay = function() {
 		var display_day = db2cal_time(dbEntries[i][db_key_date]);
 		var start_date = dbEntries[i][db_key_start_date];
 		var end_date = dbEntries[i][db_key_end_date];
-        var temp = {
+        /*example
+		id:1,
+		start:"10:00",
+		end:"12:00",
+		dow:[1,4],
+		backgroundColor: '#12CA6B',
+		textColor : '#FFF',
+		ranges:[
+			{
+				start:"2015/03/01",
+				end:"2015/04/01"
+			}
+		];*/
+		var temp = {
             id : display_id,
             title: display_title,
             start: dbEntries[i][db_key_start],
@@ -69,18 +82,14 @@ var mapToDisplay = function() {
 			dow: [display_day],
             backgroundColor: display_color[0],
             textColor : display_color[1],
-			ranges: [{ //repeating events are only displayed if they are within at least one of the following ranges.
-				start: moment().startOf('week'), //next two weeks
-				end: moment().endOf('week').add(7,'d'),
-			},
+			ranges: [
 			{
-				start: moment(start_date,'YYYY-MM-DD'), //all of february
-				end: moment(end_date,'YYYY-MM-DD'),
-			}]
+				start: moment(start_date,'YYYY-MM-DD'),
+				end: moment(end_date,'YYYY-MM-DD')
+			}
+			]
         };
-
         display_events.push(temp);
-
     }
 
 
