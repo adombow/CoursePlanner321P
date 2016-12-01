@@ -62,32 +62,36 @@ var mapToDisplay = function() {
 		var start_date = dbEntries[i][db_key_start_date];
 		var end_date = dbEntries[i][db_key_end_date];
         /*example
-		id:1,
-		start:"10:00",
-		end:"12:00",
-		dow:[1,4],
-		backgroundColor: '#12CA6B',
-		textColor : '#FFF',
-		ranges:[
-			{
-				start:"2015/03/01",
-				end:"2015/04/01"
-			}
+		events: [
+              {
+                id     : '2',
+                title  : 'Dentist',
+                start: "10:00",
+				end: "12:00",
+                backgroundColor: 'green',
+                textColor: 'black',
+				dow: [1,4],
+				ranges: [
+				{	start: moment('2016/11/02','YYYY/MM/DD'),
+					end: moment('2016/12/02','YYYY/MM/DD'),}
+				],
+              }
+            ],
 		];*/
 		var temp = {
             id : display_id,
             title: display_title,
             start: dbEntries[i][db_key_start],
             end : dbEntries[i][db_key_end],
-			dow: [display_day],
             backgroundColor: display_color[0],
             textColor : display_color[1],
+			dow: [display_day],
 			ranges: [
 			{
-				start: moment(start_date,'YYYY-MM-DD'),
-				end: moment(end_date,'YYYY-MM-DD')
+				start: moment(start_date,'YYYY/MM/DD'),
+				end: moment(end_date,'YYYY/MM/DD')
 			}
-			]
+			],
         };
         display_events.push(temp);
     }

@@ -53,30 +53,39 @@
               center: 'title',
               right: 'month,agendaWeek,agendaDay'
             },
+			
+			
+			//edit here
+			
+			eventRender: function(event, element, view){
+				console.log(event.start.format());
+				return (event.ranges.filter(function(range){
+					return (event.start.isBefore(range.end) &&
+						event.end.isAfter(range.start));
+				}).length)>0;
+			},
             events: [
-              // all day event
-              {
-                id     : '1',
-                title  : 'Conference',
-                start  : '2016-11-30',
-                end    : '2016-12-02',
-                allDay : true
-              },
-              // short term event 
               {
                 id     : '2',
                 title  : 'Dentist',
-                start  : '2016-11-30T11:30:00',
-                end  : '2016-11-30T012:30:00',
-                allDay : false,
+                start: "10:00",
+				end: "12:00",
                 backgroundColor: 'green',
-                textColor: 'black'
+                textColor: 'black',
+				dow: [1,4],
+				ranges: [
+				{	start: moment('2016/11/02','YYYY/MM/DD'),
+					end: moment('2016/12/02','YYYY/MM/DD'),}
+				],
               }
             ],
+			
+			//error here
             eventClick: function(event) {
               alert(event.id);
             }
-        });
+		
+		});
 
         // create footer
         var footer = document.createElement("div"); 
