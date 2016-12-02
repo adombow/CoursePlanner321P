@@ -10,9 +10,10 @@
         die("Error: ". $conn->connect_error);
     }
     //Get current session
-   require('session.php');
+  require('session.php');
    $session = Session::getInstance();
     $uid = $session->userID;
+
 
 $sql = "SELECT `reminder`,`Start_Date`,`End_Date`,`Title`,`Info`,`Location`,`Date`, `Start`,`End` FROM `Unique Calendar Entry` WHERE `userID`= $uid AND `courseID` IS NULL";
 $result = $conn->query($sql);
@@ -42,31 +43,31 @@ $date_array = getdate();
 //for set up abbreviation weekday
 switch ($date_array['weekday']){
 case "Monday":
-      $abbrDate = 'Mon';
+      $abbrDate = 'mon';
       $abbrNum  = 1;
       break;
 case "Tuesday":
-      $abbrDate = 'Tue';
+      $abbrDate = 'tue';
       $abbrNum  = 2;
       break;
 case "Wednesday":
-      $abbrDate = 'Wed';
+      $abbrDate = 'wed';
       $abbrNum  = 3;
       break;      
 case "Thursday":
-      $abbrDate = 'Thu';
+      $abbrDate = 'thu';
       $abbrNum  = 4;
       break;
 case "Friday":
-      $abbrDate = 'Fri';
+      $abbrDate = 'fri';
       $abbrNum  = 5;
       break;
 case "Saturday":
-      $abbrDate = 'Sat';
+      $abbrDate = 'sat';
       $abbrNum  = 6;
       break;
 case "Sunday":
-      $abbrDate = 'Sun';
+      $abbrDate = 'sun';
       $abbrNum  = 7;
       break;
     
@@ -133,101 +134,101 @@ if($row["End_Date"]==NULL){
   if(($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"])){
 
     switch ($row["Date"]){
-      case "Mon":
+      case "mon":
       if($row["reminder"]==1){
-         $remindemME = "Sun";
+         $remindemME = "sun";
       }else if($row["reminder"]==2){
-         $remindemME = "Sat";
+         $remindemME = "sat";
       }else if($row["reminder"]==3){
-         $remindemME = "Fri";
+         $remindemME = "fri";
       }else if($row["reminder"]==4){
-         $remindemME = "Thu";
+         $remindemME = "thu";
       }else if($row["reminder"]==5){
-         $remindemME = "Wed";
+         $remindemME = "wed";
       }
 
       break; 
       
-      case "Tue":
+      case "tue":
        if($row["reminder"]==1){
-         $remindemME = "Mon";
+         $remindemME = "mon";
       }else if($row["reminder"]==2){
-         $remindemME = "Sun";
+         $remindemME = "sun";
       }else if($row["reminder"]==3){
-         $remindemME = "Sat";
+         $remindemME = "sat";
       }else if($row["reminder"]==4){
-         $remindemME = "Fri";
+         $remindemME = "fri";
       }else if($row["reminder"]==5){
-         $remindemME = "Thu";
+         $remindemME = "thu";
       }
       break;
       
-      case "Wed":
+      case "wed":
       if($row["reminder"]==1){
-         $remindemME = "Tue";
+         $remindemME = "tue";
       }else if($row["reminder"]==2){
-         $remindemME = "Mon";
+         $remindemME = "mon";
       }else if($row["reminder"]==3){
-         $remindemME = "Sun";
+         $remindemME = "sun";
       }else if($row["reminder"]==4){
-         $remindemME = "Sat";
+         $remindemME = "sat";
       }else if($row["reminder"]==5){
-         $remindemME = "Fri";
+         $remindemME = "fri";
       }
       break; 
       
-      case "Thu":
+      case "thu":
       if($row["reminder"]==1){
-         $remindemME = "Wed";
+         $remindemME = "wed";
       }else if($row["reminder"]==2){
-         $remindemME = "Tue";
+         $remindemME = "tue";
       }else if($row["reminder"]==3){
-         $remindemME = "Mon";
+         $remindemME = "mon";
       }else if($row["reminder"]==4){
-         $remindemME = "Sun";
+         $remindemME = "sun";
       }else if($row["reminder"]==5){
-         $remindemME = "Sat";
+         $remindemME = "sat";
       }
       break;
-      case "Fri":
+      case "fri":
       if($row["reminder"]==1){
-         $remindemME = "Thu";
+         $remindemME = "thu";
       }else if($row["reminder"]==2){
-         $remindemME = "Wed";
+         $remindemME = "wed";
       }else if($row["reminder"]==3){
-         $remindemME = "Tue";
+         $remindemME = "tue";
       }else if($row["reminder"]==4){
-         $remindemME = "Mon";
+         $remindemME = "mon";
       }else if($row["reminder"]==5){
-         $remindemME = "Sun";
+         $remindemME = "sun";
       }
       break; 
      
-      case "Sat":
+      case "sat":
       if($row["reminder"]==1){
-         $remindemME = "Fri";
+         $remindemME = "fri";
       }else if($row["reminder"]==2){
-         $remindemME = "Thu";
+         $remindemME = "thu";
       }else if($row["reminder"]==3){
-         $remindemME = "Wed";
+         $remindemME = "wed";
       }else if($row["reminder"]==4){
-         $remindemME = "Tue";
+         $remindemME = "tue";
       }else if($row["reminder"]==5){
-         $remindemME = "Mon";
+         $remindemME = "mon";
       }
       break;
       
-      case "Sun":
+      case "sun":
       if($row["reminder"]==1){
-         $remindemME = "Sat";
+         $remindemME = "sat";
       }else if($row["reminder"]==2){
-         $remindemME = "Fri";
+         $remindemME = "fri";
       }else if($row["reminder"]==3){
-         $remindemME = "Thu";
+         $remindemME = "thu";
       }else if($row["reminder"]==4){
-         $remindemME = "Wed";
+         $remindemME = "wed";
       }else if($row["reminder"]==5){
-         $remindemME = "Tue";
+         $remindemME = "tue";
       }
       break; 
       
