@@ -10,13 +10,35 @@ if($conn->connect_error){
 	die("Error: ". $conn->connect_error);
 }
 
+//Get the current date (db uses 1 for sunday 7 for saturday)
+$date_array = getdate();
+$year = $date_array['year'];
+$month = $date_array['mon'];
+$dayOfMonth = $date_array['mday'];
+$dayOfWeek = $date_array['wday'];
+if($dayOfWeek == 0)
+	$dayOfWeekStr = 'sun';
+if($dayOfWeek == 1)
+	$dayOfWeekStr = 'mon';
+if($dayOfWeek == 2)
+	$dayOfWeekStr = 'tue';
+if($dayOfWeek == 3)
+	$dayOfWeekStr = 'wed';
+if($dayOfWeek == 4)
+	$dayOfWeekStr = 'thu';
+if($dayOfWeek == 5)
+	$dayOfWeekStr = 'fri';
+if($dayOfWeek == 6)
+	$dayOfWeekStr = 'sat';
+
 //E-mail parameters
 $subject = "Here's your CoursePlanner schedule for today!";
-$header = 'From: <no-reply@courseplanner.de>' . 
+$header = 'From: CoursePlanner<no-reply@courseplanner.de>' . 
 			"\r\n". 'X-Mailer: PHP/'. phpversion().
 			"MIME-Version: 1.0\r\n".
 			"Content-type: text/html;charset=UTF-8\r\n";
 
+//Get user information
 $sql = "SELECT `email`, `ID`, `Name` FROM `User Profile` WHERE `remind`='y'";
 $result = $conn->query($sql);
 while( $row = $result->fetch_assoc() ){
@@ -24,50 +46,58 @@ while( $row = $result->fetch_assoc() ){
 	if($email != NULL){
 		$to = $email;
 		$uid = $row['ID'];
-		list($first, $last) = explode( " ", $row['Name'] );
+		$name = explode( " ", $row['Name'] );
+		if(count($name) != 0)
+			$first = $name[0];
+		else
+			$first = "";
 		//grab schedule info ordered by their time, ascending by default
 		//i.e. earliest to latest
-		$sql = "SELECT `title` `info` etc. FROM `Unique Calendar Entry` 
-				WHERE `userID`=$uid AND `date`=$date ORDER BY `time`";
+		$sql = "SELECT * FROM `Unique Calendar Entry` WHERE `userID`=$uid 
+				AND `Date`='$dayOfWeekStr' AND `courseID` IS NULL ORDER BY `Start`";
 		$tasks = $conn->query($sql);
+		echo $conn->error;
 		if( $tasks->num_rows > 0 ){
 			$title = array();
-			$info = array();
-			etc.
+			$location = array();
+			$time = array();
 			while( $tasksRow = $tasks->fetch_assoc() ){
-				$title[] = $tasksRow['title'];
-				$info[] = $tasksRow['info'];
-				etc.
+				$rowStart = explode( "/", $tasksRow['Start_Date'] );
+				$rowEnd = explode( "/", $tasksRow['End_Date'] );
+				//if the task period has started and has not expired yet
+				if( ($year >= $rowStart[0] && ($month > $rowStart[1] || ($month == $rowStart[1] && $dayOfMonth >= $rowStart[2]))) &&
+					($year <= $rowEnd[0] && ($month < $rowEnd[1] || ($month == $rowEnd[1] && $dayOfMonth <= $rowEnd[2]))) ){
+
+					$title[] = $tasksRow['Title'];
+					$location[] = $tasksRow['Location'];
+					$time[] = $tasksRow['Start'];
+				}	
 			}
-			$message = "
-				<html>
-				<head>
-					<title>HTML E-mail</title>
-				</head>
-				<body>
-					<p>Hey $first, here's your schedule for the day!</p>
-					<table width=\"600\" style=\"border:1px solid #333\">
-					<tr>
-						<td align=\"center\">head</td>
-					</tr>
-					<Tr>
-					<td align=\"center\">body 
-					<table align=\"center\" width=\"300\" border=\"0\" 
-								 cellspacing=\"0\" cellpadding=\"0\" 
-								 style=\"border:1px solid #ccc;\">
-					<tr>";
+			$message = <<<EMAIL
+			<html>
+			<body>
+				<p>Hey $first, here's your schedule for the day!</p>
+				<table rules="all" style="border-color: #666;" cellpadding="10">
+				<tr style='background: #eee'>
+					<th><strong>Task</strong></th>
+					<th><strong>Time</strong></th>
+					<th><strong>Location</strong></th>
+				</tr>
+EMAIL;
 			for( $i = 0, $size = count($title); $i < $size; $i++ ){
+				$message .= "<tr>";
 				$message .= "<td> $title[$i] </td>";
-				$message .= "<td> $info[$i] </td>";
-				etc.
+				$message .= "<td> $time[$i] </td>";
+				$message .= "<td> $location[$i] </td>";
+				$message .= "</tr>";
 			}
-			$message .= "
-					</tr>
-					</table></td>
-					</tr>
-					</table>
-				</body>
-				</html>";
+			//add <img src="http://courseplanner.de/img/cp-logo-text.png" alt="CP-Logo" height="84" width="275">
+			$message .= <<<EMAIL
+				</table>
+				<p>From your friends at CoursePlanner, have a great day!</p>
+			</body>
+			</html>
+EMAIL;
 			$retval = mail($to,$subject,$message,$header);
 			if( $retval == true )
 				echo "Message sent\n";

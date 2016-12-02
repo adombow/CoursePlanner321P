@@ -104,25 +104,25 @@
 				foreach($date1 as $item){ 							//ampersand?? &$item?
 					//check exist
 					$check = $conn->query("SELECT `ID` FROM `Unique Calendar Entry`
-					 WHERE `userID`=$userID and `Title`='$title' and `date`='$item'
+					 WHERE `userID`=$uid and `Title`='$title' and `date`='$item'
 					 and `Location`='$location1' and `Start_Date`='$start_date' and
 					 `End_Date`='$end_date'");
 					if($check->num_rows == 0){//no exist
 						$sql = "INSERT INTO `Unique Calendar Entry`(`Title`,
 								`Location`, `Info`, `date`, `start`, `end`,
-								`userID`,`Start_Date`, `End_Date`) VALUES 
+								`userID`,`Start_Date`, `End_Date`, `courseID`) VALUES 
 								('$title','$location1','$info','$item',
 								'$course_schedule_day_start_row1',
-								'$course_schedule_day_end_row1',$userID,
-								'$start_date','$end_date')";
+								'$course_schedule_day_end_row1',$uid,
+								'$start_date','$end_date',$cid)";
 					}
 					else{//exist
 						$sql="UPDATE `Unique Calendar Entry` SET `Title`='$title',
 						`Location`='$location1',`Info`='$info',`date`='$item',
 						`start`='$course_schedule_day_start_row1',
-						`end`='$course_schedule_day_end_row1' WHERE `userID`=$userID
+						`end`='$course_schedule_day_end_row1' WHERE `userID`=$uid
 						 and `Title`='$title' and `date`='$item' and `Location`='$location1'
-						 and `Start_Date`='$start_date' and `End_Date`='$end_date'";
+						 and `Start_Date`='$start_date' and `End_Date`='$end_date' and `courseID`=$cid";
 					}
 					if ($conn->query($sql) != TRUE) {
 						echo "Error: " . $sql . "<br>" . $conn->error;
@@ -136,23 +136,23 @@
 				foreach($date2 as $item){
 					//check exist
 					$check = $conn->query("SELECT `ID` FROM `Unique Calendar Entry`
-					 WHERE `userID`=$userID and `Title`='$title' and `date`='$item'
+					 WHERE `userID`=$uid and `Title`='$title' and `date`='$item'
 					 and `Location`='$location2' and `Start_Date`='$start_date' and
 					 `End_Date`='$end_date'");
 					if($check->num_rows == 0){//no exist
 						$sql = "INSERT INTO `Unique Calendar Entry`(`Title`, `Location`,
-						 `Info`, `date`, `start`, `end`,`userID`,`Start_Date`, `End_Date`)
+						 `Info`, `date`, `start`, `end`,`userID`,`Start_Date`, `End_Date`, `courseID`)
 						 VALUES ('$title','$location2','$info','$item',
 						 '$course_schedule_day_start_row2','$course_schedule_day_end_row2',
-						 $userID,'$start_date','$end_date')";
+						 $uid,'$start_date','$end_date',$cid)";
 					}
 					else{//exist
 						$sql="UPDATE `Unique Calendar Entry` SET `Title`='$title',
 						`Location`='$location2',`Info`='$info',`date`='$item',
 						`start`='$course_schedule_day_start_row2',
-						`end`='$course_schedule_day_end_row2' WHERE `userID`=$userID
+						`end`='$course_schedule_day_end_row2' WHERE `userID`=$uid
 						and `Title`='$title' and `date`='$item' and `Location`='$location2'
-						and `Start_Date`='$start_date' and `End_Date`='$end_date'";
+						and `Start_Date`='$start_date' and `End_Date`='$end_date' and `courseID`=$cid";
 					}
 					if ($conn->query($sql) != TRUE) {
 						echo "Error: " . $sql . "<br>" . $conn->error;
