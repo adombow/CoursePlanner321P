@@ -131,7 +131,7 @@ f)Sidebar Select View:
 <br>
 
 
-e)Course Information Edit Page View:
+g)Course Information Edit Page View:
 
 <br>
 <img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-03%20at%2012.06.51%20AM.png/>
