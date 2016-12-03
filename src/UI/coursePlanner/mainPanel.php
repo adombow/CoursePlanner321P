@@ -6,6 +6,8 @@
 <meta charset="utf-8">
 
 	<title>Main Panel</title>
+    <!-- Bootstrap for page header-->
+    <link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/sidebar.css">
 	<link rel="stylesheet" type="text/css" href="css/mainPanel.css">	
 </head>

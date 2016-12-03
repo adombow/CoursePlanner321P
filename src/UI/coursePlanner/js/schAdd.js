@@ -40,7 +40,7 @@ var addTask = function(date) {
                 	endT: e.options[e.selectedIndex].value,
                     startD: sd.value,
                     endD: ed.value,
-                	location: $('input[name="title"]').val(),
+                	location: $('input[name="location"]').val(),
                 	info: $('input[name="info"]').val(),
                 	bgC: bg.options[bg.selectedIndex].value,
                 	textC: t.options[t.selectedIndex].value
