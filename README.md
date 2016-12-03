@@ -124,7 +124,7 @@ e)Tasks Display View
 <img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-02%20at%2011.57.26%20PM.png/>
 <br>
 
-d)Sidebar Select View:
+f)Sidebar Select View:
 
 <br>
 <img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-02%20at%2011.58.23%20PM.png/>
