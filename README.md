@@ -99,15 +99,11 @@ a)Dashboard View:
 <br>
 
 
-
 b)Facebook Login View:
-
 
 <br>
 <img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.50.42%20AM.png/>
 <br>
-
-
 
 
 c)First login Info Enter Page View:
@@ -117,26 +113,38 @@ c)First login Info Enter Page View:
 <img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.51.04%20AM.png/>
 <br>
 
+d)Check Your Task Button View 
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-02%20at%2011.57.13%20PM.png/>
+<br>
 
+e)Tasks Display View
 
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-02%20at%2011.57.26%20PM.png/>
+<br>
 
 d)Sidebar Select View:
 
-
 <br>
-<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.54.38%20AM.png/>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-02%20at%2011.58.23%20PM.png/>
 <br>
-
 
 
 e)Course Information Edit Page View:
 
 <br>
-<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-11-10%20at%209.51.29%20AM.png/>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-03%20at%2012.06.51%20AM.png/>
 <br>
 
 
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-03%20at%2012.06.57%20AM.png/>
+<br>
 
+<br>
+<img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-03%20at%2012.07.04%20AM.png/>
+<br>
 
 ###5.Restrictions, limitations, and constraints <br />
 The most important constraint will be the scope of this project. The scale of the client right now is limited to the student who are attend in same classes. In the future, we may want our project will be able to use widely in different faculties or even a whole university. As the number of clients and the scope of project increase, it is likely require more time to maintain the website and more money support on this project in order to keep it running functionality.
