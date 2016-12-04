@@ -21,13 +21,13 @@ var dbEntries = Array();
 
 function db2cal_time(db_date){
 	var date_time;
-	if(db_date == "mon") date_time = "1";
-    else if(db_date == "tue") date_time = "2";
-    else if(db_date == "wed") date_time = "3";
-    else if(db_date == "thu") date_time = "4";
-    else if(db_date == "fri") date_time = "5";
-    else if(db_date == "sat") date_time = "6";
-    else if(db_date == "sun") date_time = "7";
+	if(db_date.toLowerCase() == "mon" or db_date.toLowerCase() == "monday") date_time = "1";
+    else if(db_date.toLowerCase() == "tue" or db_date.toLowerCase() == "tuesday") date_time = "2";
+    else if(db_date.toLowerCase() == "wed" or db_date.toLowerCase() == "wednesday") date_time = "3";
+    else if(db_date.toLowerCase() == "thu" or db_date.toLowerCase() == "thursday") date_time = "4";
+    else if(db_date.toLowerCase() == "fri" or db_date.toLowerCase() == "friday") date_time = "5";
+    else if(db_date.toLowerCase() == "sat" or db_date.toLowerCase() == "saturday") date_time = "6";
+    else if(db_date.toLowerCase() == "sun" or db_date.toLowerCase() == "sunday") date_time = "0";
 	return date_time;
 }
 
