@@ -80,6 +80,20 @@ var addTask = function(date) {
 
 }
 
+//function to add increase a day
+function dateAddDays( /*yyyy/mm/dd*/ date_in){
+  var nwdate =  new Date(date_in);
+  nwdate.setDate(nwdate.getDate() + 1);
+  return [  nwdate.getFullYear(),
+            zeroPad(nwdate.getMonth()+1, 10),
+            zeroPad(nwdate.getDate(), 10)
+         ].join('/');
+}
+//function to add zero to date/month < 10
+function zeroPad(nr, base){
+  var len = (String(base).length - String(nr).length) + 1;
+  return len > 0? new Array(len).join('0') + nr : nr;
+}
 
 
 /*
