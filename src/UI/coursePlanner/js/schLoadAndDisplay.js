@@ -21,13 +21,13 @@ var dbEntries = Array();
 
 function db2cal_time(db_date){
 	var date_time;
-	if(db_date.toLowerCase() == "mon" or db_date.toLowerCase() == "monday") date_time = "1";
-    else if(db_date.toLowerCase() == "tue" or db_date.toLowerCase() == "tuesday") date_time = "2";
-    else if(db_date.toLowerCase() == "wed" or db_date.toLowerCase() == "wednesday") date_time = "3";
-    else if(db_date.toLowerCase() == "thu" or db_date.toLowerCase() == "thursday") date_time = "4";
-    else if(db_date.toLowerCase() == "fri" or db_date.toLowerCase() == "friday") date_time = "5";
-    else if(db_date.toLowerCase() == "sat" or db_date.toLowerCase() == "saturday") date_time = "6";
-    else if(db_date.toLowerCase() == "sun" or db_date.toLowerCase() == "sunday") date_time = "0";
+	if(db_date.toLowerCase() == "mon" || db_date.toLowerCase() == "monday") date_time = "1";
+    else if(db_date.toLowerCase() == "tue" || db_date.toLowerCase() == "tuesday") date_time = "2";
+    else if(db_date.toLowerCase() == "wed" || db_date.toLowerCase() == "wednesday") date_time = "3";
+    else if(db_date.toLowerCase() == "thu" || db_date.toLowerCase() == "thursday") date_time = "4";
+    else if(db_date.toLowerCase() == "fri" || db_date.toLowerCase() == "friday") date_time = "5";
+    else if(db_date.toLowerCase() == "sat" || db_date.toLowerCase() == "saturday") date_time = "6";
+    else if(db_date.toLowerCase() == "sun" || db_date.toLowerCase() == "sunday") date_time = "0";
 	return date_time;
 }
 
