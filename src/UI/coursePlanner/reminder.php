@@ -1,3 +1,23 @@
+<html>
+<head>
+<title>...</title>
+<style>
+.reminderTable th{
+margin: auto;
+text-align:center;
+
+color:#2CB5D7 ;
+}
+
+.reminderTable td{
+text-align:center;
+
+color: #2CB5D7;
+}
+</style>
+</head>
+<body>
+
 
 <?php
     $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
@@ -13,14 +33,14 @@
   require('session.php');
    $session = Session::getInstance();
     $uid = $session->userID;
-
+//$uid = 1100;
 
 $sql = "SELECT `reminder`,`Start_Date`,`End_Date`,`Title`,`Info`,`Location`,`Date`, `Start`,`End` FROM `Unique Calendar Entry` WHERE `userID`= $uid AND `courseID` IS NULL";
 $result = $conn->query($sql);
 date_default_timezone_set('America/Vancouver');
 $date_array = getdate();
 
-// foreach ( $date_array as $key => $val ){
+//foreach ( $date_array as $key => $val ){
   //   print "$key = $val<br />";
    //}
     $formated_date = '';
@@ -75,14 +95,19 @@ case "Sunday":
 
 //creat an array
 if($result->num_rows>0){
-echo "<table>
+echo "<table class=\"reminderTable\" border=\"3\" valign=\"center\" bordercolor=\"2CB5D7\" WIDTH=\"515px\">
       <tr>
-      <th>TITLE</th>
-      <th>INFO</th>
-      <th>LOCATION</th>
-      <th>DATE</th>
-      <th>START</th>
-      <th>END</th>
+      <th align=\"center\">TITLE</th>
+     
+      <th align=\"center\">INFO</th>
+      
+      <th align=\"center\">LOCATION</th>
+     
+      <th align=\"center\">DATE</th>
+      
+      <th align=\"center\"> START</th>
+      
+      <th align=\"center\">END</th>
       </tr>";
 while($row = $result->fetch_assoc()){
 
@@ -91,23 +116,35 @@ if($row["End_Date"]==NULL){
   if($row["Start_Date"]==$formated_date){
 
     echo"<tr>
-         <td>".$row["Title"]."</td>
+         <td >".$row["Title"]."</td>
+        
          <td>".$row["Info"]."</td>
+        
          <td>".$row["Location"]."</td>
-         <td>".$row["Date"]."</td>
+
+         <td>".$date_array["weekday"]."</td>
+
          <td>".$row["Start"]."</td>
+
          <td>".$row["End"]."</td>
+       
+      
          </tr>";
   }
 } else if($row["End_Date"]!=NULL){
   if(($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"])){
     if($row["Date"]==$abbrDate){
     echo"<tr>
-         <td>".$row["Title"]."</td>
+         <td valign=\"center\">".$row["Title"]."</td>
+ 
          <td>".$row["Info"]."</td>
+
          <td>".$row["Location"]."</td>
-         <td>".$row["Date"]."</td>
+ 
+         <td>".ucfirst($row["Date"])."</td>
+
          <td>".$row["Start"]."</td>
+  
          <td>".$row["End"]."</td>
          </tr>";
     }
@@ -123,10 +160,15 @@ if($row["End_Date"]==NULL){
   if(date("Y/m/d",time(time($row["Start_Date"])-$row['reminder']*86400))==$formated_date){
     echo"<tr>
          <td>".$row["Title"]."</td>
+
          <td>".$row["Info"]."</td>
+
          <td>".$row["Location"]."</td>
-         <td>".$row["Date"]."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
          <td>".$row["Start"]."</td>
+
          <td>".$row["End"]."</td>
          </tr>";
   }
@@ -236,9 +278,11 @@ if($row["End_Date"]==NULL){
     if($remindemME==$abbrDate){
        echo"<tr>
          <td>".$row["Title"]."</td>
+
          <td>".$row["Info"]."</td>
          <td>".$row["Location"]."</td>
-         <td>".$row["Date"]."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
          <td>".$row["Start"]."</td>
          <td>".$row["End"]."</td>
          </tr>";
