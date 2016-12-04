@@ -1,5 +1,8 @@
+
+<!DOCTYPE HTML>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"> 
 <title>...</title>
 <style>
 .reminderTable th{
@@ -17,7 +20,7 @@ color: #2CB5D7;
 </style>
 </head>
 <body>
-
+</html>
 
 <?php
     $serverName = 'courseplanner.cs9msqhnvnqr.us-west-2.rds.amazonaws.com';
@@ -114,15 +117,15 @@ while($row = $result->fetch_assoc()){
 if($row["reminder"]==0){
 if($row["End_Date"]==NULL){
   if($row["Start_Date"]==$formated_date){
-
+    if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
     echo"<tr>
          <td >".$row["Title"]."</td>
         
-         <td>".$row["Info"]."</td>
+         <td>"."None"."</td>
         
          <td>".$row["Location"]."</td>
 
-         <td>".$date_array["weekday"]."</td>
+         <td>".ucfirst($row["Date"])."</td>
 
          <td>".$row["Start"]."</td>
 
@@ -130,35 +133,40 @@ if($row["End_Date"]==NULL){
        
       
          </tr>";
-  }
-} else if($row["End_Date"]!=NULL){
-  if(($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"])){
-    if($row["Date"]==$abbrDate){
+       } else if(($row["Info"]!=NULL)&&($row["Location"]==NULL)){
     echo"<tr>
-         <td valign=\"center\">".$row["Title"]."</td>
- 
+         <td >".$row["Title"]."</td>
+        
          <td>".$row["Info"]."</td>
+        
+         <td>"."None"."</td>
 
-         <td>".$row["Location"]."</td>
- 
          <td>".ucfirst($row["Date"])."</td>
 
          <td>".$row["Start"]."</td>
-  
+
          <td>".$row["End"]."</td>
-         </tr>";
-    }
+       
       
- 
+         </tr>";
+       }else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
+     echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>"."None"."</td>
+        
+         <td>"."None"."</td>
 
-     }
-   }
-  
+         <td>".ucfirst($row["Date"])."</td>
 
-} else if($row["reminder"]!=0){
-if($row["End_Date"]==NULL){
-  if(date("Y/m/d",time(time($row["Start_Date"])-$row['reminder']*86400))==$formated_date){
-    echo"<tr>
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       }  else {  
+        echo"<tr>
          <td>".$row["Title"]."</td>
 
          <td>".$row["Info"]."</td>
@@ -171,6 +179,153 @@ if($row["End_Date"]==NULL){
 
          <td>".$row["End"]."</td>
          </tr>";
+
+       }
+  }
+} else if($row["End_Date"]!=NULL){
+  if(($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"])){
+    if($row["Date"]==$abbrDate){
+   if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>"."None"."</td>
+        
+         <td>".$row["Location"]."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } else if(($row["Info"]!=NULL)&&($row["Location"]==NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>".$row["Info"]."</td>
+        
+         <td>"."None"."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>"."None"."</td>
+        
+         <td>"."None"."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } 
+       else {  
+        echo"<tr>
+         <td>".$row["Title"]."</td>
+
+         <td>".$row["Info"]."</td>
+
+         <td>".$row["Location"]."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+         </tr>";
+
+       }
+    }
+      
+ 
+
+     }
+   }
+  
+
+} else if($row["reminder"]!=0){
+if($row["End_Date"]==NULL){
+  if(date("Y/m/d",time(time($row["Start_Date"])-$row['reminder']*86400))==$formated_date){
+     if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>"."None"."</td>
+        
+         <td>".$row["Location"]."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } else if(($row["Info"]!=NULL)&&($row["Location"]==NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>".$row["Info"]."</td>
+        
+         <td>"."None"."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>"."None"."</td>
+        
+         <td>"."None"."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } 
+       else {  
+        echo"<tr>
+         <td>".$row["Title"]."</td>
+
+         <td>".$row["Info"]."</td>
+
+         <td>".$row["Location"]."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+         </tr>";
+
+       }
   }
 } else if($row["End_Date"]!=NULL){
   if(($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"])){
@@ -276,16 +431,71 @@ if($row["End_Date"]==NULL){
       
     }
     if($remindemME==$abbrDate){
-       echo"<tr>
-         <td>".$row["Title"]."</td>
-
-         <td>".$row["Info"]."</td>
+       if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>"."None"."</td>
+        
          <td>".$row["Location"]."</td>
 
          <td>".ucfirst($row["Date"])."</td>
+
          <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } else if(($row["Info"]!=NULL)&&($row["Location"]==NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>".$row["Info"]."</td>
+        
+         <td>"."None"."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
+    echo"<tr>
+         <td >".$row["Title"]."</td>
+        
+         <td>"."None"."</td>
+        
+         <td>"."None"."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
+         <td>".$row["End"]."</td>
+       
+      
+         </tr>";
+       } 
+       else {  
+        echo"<tr>
+         <td>".$row["Title"]."</td>
+
+         <td>".$row["Info"]."</td>
+
+         <td>".$row["Location"]."</td>
+
+         <td>".ucfirst($row["Date"])."</td>
+
+         <td>".$row["Start"]."</td>
+
          <td>".$row["End"]."</td>
          </tr>";
+
+       }
     }
 
       
