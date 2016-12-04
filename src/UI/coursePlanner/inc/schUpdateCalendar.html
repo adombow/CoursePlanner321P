@@ -1,26 +1,58 @@
-<div style="display: inline-block; text-align: center;">
-	Start Date<input type="text"  value="yyyy/mm/dd" id="start-date-user-input">
+<!-- 	
+	This file is the content of addTask dialog 
+-->
 
-    <script type="text/javascript">$('#start-date-user-input').fdatepicker({
-      format: 'yyyy/mm/dd', 
-    });
-	</script>
+
+<!-- To manipulate global var sch_weekly_task -->
+<script type="text/javascript" src="js/schDBParameters.js"></script>
+
+<div style="margin: 5px;">Weekly Repeated Task: <input type="checkbox" id="weekly-task"></div>
+<script>
+
+	$("#weekly-task").change(function() {
+	    if(this.checked) {
+	        $(".date-range").show();
+	        sch_weekly_task = true;
+	    } else {
+	    	$(".date-range").hide();
+	    	sch_weekly_task = false;
+	    }
+	    //console.log(sch_weekly_task);
+	});	
+</script>
+
+
+
+
+<div class="date-range">
+	<div type="display: inline;">
+		<div style="float: left;"><p>Start Date</p></div>
+		<div style="float: right; "><input type="text"  value="yyyy/mm/dd" id="start-date-user-input" ></div>
+
+	    <script type="text/javascript">$('#start-date-user-input').fdatepicker({
+	      format: 'yyyy/mm/dd', 
+	    });
+		</script>
+	</div>
+	<br>
+	<br>
+	<div type="display: inline;">
+		<div style="float: left;"><p>End Date</p></div>
+		<div style="float: right; "><input type="text"  value="yyyy/mm/dd" id="end-date-user-input" ></div>
+
+	    <script type="text/javascript">$('#end-date-user-input').fdatepicker({
+	      format: 'yyyy/mm/dd', 
+	    });
+
+
+		</script>
+	</div>
+	<br>
 </div>
-
-<div style="display: inline-block; text-align: center;">
-	End Date<input type="text"  value="yyyy/mm/dd" id="end-date-user-input">
-
-    <script type="text/javascript">$('#end-date-user-input').fdatepicker({
-      format: 'yyyy/mm/dd', 
-    });
-	</script>
-</div>
-
 
 
 <div style="text-align: center; text-align-last: center; margin:10px;">
-	
-	<div style="float: left; display: inline-block;">
+	<div class="date-range" class="add-entry" style="float: left; display: inline-block;">
 		<div>Date:</div>
 		<br>
 		<select id="date-dropdown-menu">
@@ -33,7 +65,7 @@
 			<option value="sun">Sunday</option>
 		</select>
 	</div>
-	<div style="float: center; display: inline-block;">
+	<div class="add-entry" style="float: center; display: inline-block;">
 		<div>Start Time:</div>
 		<br>
 		<select id="start-time-dropdown-menu">
@@ -75,7 +107,7 @@
 			<option value=23:30>23:30</option>
 		</select>
 	</div>
-	<div style="float: right; display: inline-block;">
+	<div class="add-entry" style="float: right; display: inline-block;">
 		<div>End Time:</div>
 		<br>
 		<select id="end-time-dropdown-menu">
@@ -120,7 +152,7 @@
 </div>
 
 
-<p style="text-align: center;"">----</p>
+<p class="add-entry" style="text-align: center;"">------------------------------------------</p>
 
 
 <div style="text-align: center; margin:10px;">
@@ -139,9 +171,21 @@
 	</div>
 </div>
 
-<p style="text-align: center;"">----</p>
+<p style="text-align: center;"">------------------------------------------</p>
 
-<div style="text-align: center; text-align-last: center; margin:10px;">
+<div style="margin: 5px;">Choose Color: <input type="checkbox" id="set-color"></div>
+<script>
+	$("#set-color").change(function() {
+	    if(this.checked) {
+	        $(".customize-color").show();
+	    } else {
+	    	$(".customize-color").hide();
+	    }
+	    
+	});	
+</script>
+
+<div class="customize-color" style="text-align: center; text-align-last: center; margin:10px;">
 	<p>background color:</p>
 	<select id="bg-color-dropdown-menu">
 		<option value=""></option>
@@ -162,7 +206,7 @@
 </div>
 
 
-<div style="text-align: center; text-align-last: center; margin:10px;">
+<div class="customize-color" style="text-align: center; text-align-last: center; margin:10px;">
 	<p>text color:</p>
 	<select id="text-color-dropdown-menu">
 		<option value=""></option>
@@ -182,8 +226,42 @@
 	</select>
 </div>
 
+<p style="text-align: center;"">------------------------------------------</p>
+
+<div style="margin: 5px;">Choose Reminding Date: <input type="checkbox" id="set-reminder"></div>
+<div class="customize-reminder"  style="text-align: center; text-align-last: center; margin:10px;">
+	Before 
+	<select id="reminder-dropdown-menu">
+		<option value=0>0</option>
+		<option value=1>1</option>
+		<option value=2>2</option>
+		<option value=3>3</option>
+		<option value=4>4</option>
+		<option value=5>5</option>
+	</select>
+	 days to remind me !
+</div>
+<script>
+	$("#set-reminder").change(function() {
+	    if(this.checked) {
+	        $(".customize-reminder").show();
+	    } else {
+	    	$(".customize-reminder").hide();
+	    }
+	    
+	});	
+</script>
 
 
+
+
+
+<!-- Initialize the state of some content of this html -->
+<script type="text/javascript">
+	$(".date-range").hide();
+	$(".customize-color").hide();
+	$(".customize-reminder").hide();
+</script>
 
 
    

@@ -61,6 +61,14 @@ include("newReminderButton.php");
                         </div>
                 </div>
 	</div>
+    <script type="text/javascript">
+      // create footer
+      var footer = document.createElement("div"); 
+      var footer_text = document.createTextNode("CPEN321 Team Course Planner");
+      footer.appendChild(footer_text);
+      footer.id = "footer";
+      document.body.appendChild(footer);
+    </script>
 
 <script src="js/sidebar.js"></script>
 

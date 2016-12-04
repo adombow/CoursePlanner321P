@@ -1,34 +1,29 @@
 // array thats going to be displayed on calendar
 var display_events  = [
-	/*{
-		
-	    id     : '2',
-	    title  : 'Dentist',
-	    start: "10:00",
-	    end: "23:00",
-	    backgroundColor: 'green',
-	    textColor: 'black',
-	    dow: [1,4],
-	    ranges: [
-	    { start: moment('2016/11/07','YYYY/MM/DD'), // include start
-	      end: moment('2016/11/12','YYYY/MM/DD') }  // exclude end
-	    ]
-	    
-	}
-	*/
+  /*{
+    
+      id     : '2',
+      title  : 'Dentist',
+      start: "10:00",
+      end: "23:00",
+      backgroundColor: 'green',
+      textColor: 'black',
+      dow: [1,4],
+      ranges: [
+      { start: moment('2016/11/07','YYYY/MM/DD'), // include start
+        end: moment('2016/11/12','YYYY/MM/DD') }  // exclude end
+      ]
+      
+  }
+  */
 ];
 
 // interface function to pass the array enevts
 function getEvents(){
     console.log("----->> get Events: ");
-	console.log(display_events);
-	return display_events;
+  console.log(display_events);
+  return display_events;
 }
-
-
-
-
-
 
 
 
@@ -36,12 +31,14 @@ function getEvents(){
 var rerender = function() {
     $(document).ready(function() {
 
-    	$('#calendar').remove();
+      $('#calendar').remove();
     
-    	$( '#cal-container' ).append( '<div id="calendar"></div>');
+      $( '#cal-container' ).append( '<div id="calendar"></div>');
         // page is ready
         $('#calendar').fullCalendar({
             // calendar properties
+            minTime: "04:00:00",
+            maxTime: "24:00:00",
             // enable theme
             theme: true,
             // emphasizes business hours
@@ -67,10 +64,10 @@ var rerender = function() {
             },
             dayClick: function(date, jsEvent, view) {
               addTask(date);
+
               //alert('Clicked on: ' + date.format());
 
             }
         });
     });
 }
-

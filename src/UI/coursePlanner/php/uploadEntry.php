@@ -17,6 +17,7 @@
 	    $info = $_REQUEST["info"];
 	    $bg_color = $_REQUEST["bg_color"];
 	    $text_color = $_REQUEST["text_color"];
+	    $reminder = $_REQUEST["reminder"];
 	// get user ID
 	require('/var/www/html/session.php');
 	$session = Session::getInstance();
@@ -90,7 +91,7 @@
 
 	
 	if ($exist == 1) {
-		$sql = "UPDATE `{$table}` SET `Title`='{$title}', `Location`='{$location}', `Info`='{$info}', `BColour`='{$bg_color}', `TColour`='{$text_color}' WHERE `Date`='{$date}' AND `StartT`='{$startT}' AND `EndT`='{$endT}' AND `StartD`='{$startD}' AND `EndD`='{$endD}' AND `userID`={$uid} ";
+		$sql = "UPDATE `{$table}` SET `Title`='{$title}', `Location`='{$location}', `Info`='{$info}', `BColour`='{$bg_color}', `TColour`='{$text_color}', `Reminder`={$reminder} WHERE `Date`='{$date}' AND `StartT`='{$startT}' AND `EndT`='{$endT}' AND `StartD`='{$startD}' AND `EndD`='{$endD}' AND `userID`={$uid} ";
 		if ($conn->query($sql) === TRUE) {
 		    echo "Record updated successfully \n";
 		} else {
@@ -99,7 +100,7 @@
 	}
 	else {
 		
-		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Start_Date`, `End_Date`, `Location`, `Info`, `BColour`, `TColour`) VALUES ('{$uid}', '{$title}', '{$date}', '{$startT}', '{$endT}', '{$startD}', '{$endD}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}')";
+		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Start_Date`, `End_Date`, `Location`, `Info`, `BColour`, `TColour`, `Reminder`) VALUES ('{$uid}', '{$title}', '{$date}', '{$startT}', '{$endT}', '{$startD}', '{$endD}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}', {$reminder})";
 		if ($conn->query($sql) === TRUE) {
 		    echo "New record created successfully \n";
 		} else {

@@ -11,3 +11,6 @@ var db_key_title = "Title";
 var db_key_info = "Info";
 var db_key_color_bg = "BColour";
 var db_key_color_text = "TColour";
+
+
+var sch_weekly_task = false;
