@@ -40,6 +40,7 @@
       <?php 
         include("inc/sidebar.html");
       ?>
+    
           <div>
             <div id="onclick-dialog"></div>
             <div id="confirm-delete"></div>

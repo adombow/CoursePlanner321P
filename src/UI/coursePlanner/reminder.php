@@ -100,23 +100,23 @@ case "Sunday":
 if($result->num_rows>0){
 echo "<table class=\"reminderTable\" border=\"3\" valign=\"center\" bordercolor=\"2CB5D7\" WIDTH=\"515px\">
       <tr>
-      <th align=\"center\">TITLE</th>
+      <th >TITLE</th>
      
-      <th align=\"center\">INFO</th>
+      <th >INFO</th>
       
-      <th align=\"center\">LOCATION</th>
+      <th >LOCATION</th>
      
-      <th align=\"center\">DATE</th>
+      <th >DATE</th>
       
-      <th align=\"center\"> START</th>
+      <th >START</th>
       
-      <th align=\"center\">END</th>
+      <th >END</th>
       </tr>";
 while($row = $result->fetch_assoc()){
 
 if($row["reminder"]==0){
 if($row["End_Date"]==NULL){
-  if($row["Start_Date"]==$formated_date){
+  if($row["Start_Date"]==$formated_date||$row["Start_Date"]==date("Y-m-d")){
     if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
     echo"<tr>
          <td >".$row["Title"]."</td>
@@ -124,11 +124,8 @@ if($row["End_Date"]==NULL){
          <td>"."None"."</td>
         
          <td>".$row["Location"]."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
@@ -140,11 +137,8 @@ if($row["End_Date"]==NULL){
          <td>".$row["Info"]."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
@@ -156,11 +150,8 @@ if($row["End_Date"]==NULL){
          <td>"."None"."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
@@ -183,20 +174,17 @@ if($row["End_Date"]==NULL){
        }
   }
 } else if($row["End_Date"]!=NULL){
-  if(($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"])){
+  if((($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"]))||(($row["Start_Date"]<=date("Y-m-d"))&&(date("Y-m-d")<=$row["End_Date"]))){
     if($row["Date"]==$abbrDate){
-   if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
+ if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
     echo"<tr>
          <td >".$row["Title"]."</td>
         
          <td>"."None"."</td>
         
          <td>".$row["Location"]."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
@@ -208,33 +196,26 @@ if($row["End_Date"]==NULL){
          <td>".$row["Info"]."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
          </tr>";
-       } else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
-    echo"<tr>
+       }else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
+     echo"<tr>
          <td >".$row["Title"]."</td>
         
          <td>"."None"."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
          </tr>";
-       } 
-       else {  
+       }  else {  
         echo"<tr>
          <td>".$row["Title"]."</td>
 
@@ -249,30 +230,29 @@ if($row["End_Date"]==NULL){
          <td>".$row["End"]."</td>
          </tr>";
 
-       }
+       
     }
       
- 
+ }
 
      }
    }
   
 
 } else if($row["reminder"]!=0){
+   
 if($row["End_Date"]==NULL){
-  if(date("Y/m/d",time(time($row["Start_Date"])-$row['reminder']*86400))==$formated_date){
-     if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
+
+  if((date("Y/m/d",time(time($row["Start_Date"])-$row['reminder']*86400))==$formated_date)||(date("Y-m-d",time(time($row["Start_Date"])-$row['reminder']*86400))==date("Y-m-d"))){
+    if(($row["Info"]==NULL)&&($row["Location"]!=NULL)){
     echo"<tr>
          <td >".$row["Title"]."</td>
         
          <td>"."None"."</td>
         
          <td>".$row["Location"]."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
@@ -284,33 +264,26 @@ if($row["End_Date"]==NULL){
          <td>".$row["Info"]."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
          </tr>";
-       } else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
-    echo"<tr>
+       }else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
+     echo"<tr>
          <td >".$row["Title"]."</td>
         
          <td>"."None"."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
          </tr>";
-       } 
-       else {  
+       }  else {  
         echo"<tr>
          <td>".$row["Title"]."</td>
 
@@ -327,9 +300,11 @@ if($row["End_Date"]==NULL){
 
        }
   }
-} else if($row["End_Date"]!=NULL){
-  if(($row["Start_Date"]<=$formated_date)&&($formated_date<=$row["End_Date"])){
 
+} else if($row["End_Date"]!=NULL){
+
+  if((($row["Start_Date"]-$row["reminder"]<=$formated_date)&&($formated_date<=$row["End_Date"]))||(($row["Start_Date"]-$row["reminder"]<=date("Y-m-d"))&&(date("Y-m-d")<=$row["End_Date"]))){
+ 
     switch ($row["Date"]){
       case "mon":
       if($row["reminder"]==1){
@@ -438,11 +413,8 @@ if($row["End_Date"]==NULL){
          <td>"."None"."</td>
         
          <td>".$row["Location"]."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
@@ -454,33 +426,26 @@ if($row["End_Date"]==NULL){
          <td>".$row["Info"]."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
          </tr>";
-       } else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
-    echo"<tr>
+       }else if(($row["Info"]==NULL)&&($row["Location"]==NULL)){
+     echo"<tr>
          <td >".$row["Title"]."</td>
         
          <td>"."None"."</td>
         
          <td>"."None"."</td>
-
          <td>".ucfirst($row["Date"])."</td>
-
          <td>".$row["Start"]."</td>
-
          <td>".$row["End"]."</td>
        
       
          </tr>";
-       } 
-       else {  
+       }  else {  
         echo"<tr>
          <td>".$row["Title"]."</td>
 
@@ -495,11 +460,11 @@ if($row["End_Date"]==NULL){
          <td>".$row["End"]."</td>
          </tr>";
 
-       }
+       
     }
 
       
- 
+ }
 
      }
   }
