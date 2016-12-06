@@ -5,36 +5,35 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <title>Change Account Info</title>
    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   <script type="text/javascript" src="jquery-1.3.1.js"></script>
-   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
+	
      var _len = 0;
      $(document).ready(function(){
         //<tr/>middle
         $("#tab tr").attr("align","center");
-        
+		
         //increase<tr/>
-        $("#but").click(function(){
-            //var _len = $("#tab tr").length;        
+        $("#but").click(function(){        
 	    $("#tab").append("<tr id="+_len+" align='center'>"
                                 +"<td>"+_len+"</td>"
                                 +"<td>Course"+_len+"</td>"
-                                +"<td><input type='text' name='courseName["+_len+"]' id='courseName"+_len+"' /></td>"
- +"<td><input type='text' name='courseNumber["+_len+"]' id='courseNumber"+_len+"' /></td>" 
-+"<td><input type='text' name='courseSection["+_len+"]' id='courseSection"+_len+"' /></td>" 
+                                +"<td><input type='text' name='courseName["+_len+"]' id='courseName"+_len+"' required /></td>"
+ +"<td><input type='text' name='courseNumber["+_len+"]' id='courseNumber"+_len+"' required /></td>" 
++"<td><input type='text' name='courseSection["+_len+"]' id='courseSection"+_len+"' required /></td>" 
                                +"<td><a href=\'#\' onclick=\'deltr("+_len+")\'>DELETE</a></td>"
                             +"</tr>");            
-            _len++;
-	    console.log(_len);
-	})    
-    })
+        _len++;
+		console.log(_len);
+		});    
+    });
     
     //delete<tr/>
     var deltr =function(index)
@@ -55,7 +54,6 @@
         _len--;
 	console.log(_len);
     }
-
 </script>
 
 </head>
@@ -65,7 +63,7 @@
 	include("inc/sidebar.html");
 ?>
 <script src="js/sidebar.js"></script>
-    <form id="form1" method="post">
+    <form name="form1" id="form1" method="post">
     
     <input type="hidden" name="refresh" value="mainPanel.php">
     <div style="text-align: center; margin: 100;">
@@ -76,16 +74,16 @@
     </style>
     <p>1. What's your name?    
 <!--create a gender chosen button--> 
-    <input type="text" name="name"></p>
+    <input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>" ></p>
     <input id="man" type="radio" checked="checked" name="1"/>Male
     <input id="woman" type="radio"  name="1"/>Female 
     
     <p>2. What's your e-mail?
 <!--input your e-mail for daily reminders-->
-	<input type="text" name="email"></p>
+	<input type="email" name="email" id="email" value="<?php echo htmlspecialchars($email); ?>"></p>
 	<p> Would you like to receive daily reminders about your schedule by e-mail?
-	<input type="radio" name="remind" value="y">Yes
-	<input type="radio" name="remind" value="n">No
+	<input type="radio" name="remind" id="remindy" value="y" onclick="$('#email').attr('required', true);" <?php if($remind == 'y') echo 'checked="checked"'; ?> >Yes
+	<input type="radio" name="remind" id="remindn" value="n" onclick="$('#email').removeAttr('required');" <?php if($remind == 'n') echo 'checked="checked"'; ?> >No
 	</p>
 
 <!--choose your the year you are in-->

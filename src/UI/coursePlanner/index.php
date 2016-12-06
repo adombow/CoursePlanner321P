@@ -2,7 +2,7 @@
           
 <html>
 <head>
-
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
 <meta charset="UTF-8">
 
 <title>Please Log In</title>

@@ -3,6 +3,7 @@
 
 <html>
 <head>
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
 <meta charset="utf-8">
 
 	<title>Main Panel</title>

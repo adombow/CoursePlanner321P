@@ -15,10 +15,36 @@
     //Get current session
     $session = Session::getInstance();
     $uid = $session->userID;
+	
+	//Grab user info for pre-populating HTML inputs
+	$sql = "SELECT `Name`,`email`,`remind` FROM `User Profile` WHERE `ID`=$uid";
+	$result = $conn->query($sql);
+	echo $conn->error;
+	if( $result->num_rows > 0 ){
+		while ( $row = $result->fetch_assoc() ) {
+			$name = $row['Name'];
+			$email = $row['email'];
+			$remind = $row['remind'];
+		}
+	} else{
+		$name = '';
+		$email = '';
+		$remind = 'n';
+	}
+	//Grab course info for pre-populating HTML inputs
+	$sql = "SELECT `Title` FROM `Unique Calendar Entry` WHERE `ID`=$uid AND `courseID` IS NOT NULL";
+	$result = $conn->query($sql);
+	echo $conn->error;
+	if( $result->num_rows > 0 ){
+		$course = array();
+		while ( $row = $result->fetch_assoc() ) {
+			$course[] = $row['Title'];
+		}
+	}
 
     if( isset($_POST['name']) ){
         $name = htmlspecialchars($_POST['name']);
-        if($name !== ''){
+        if($name !== '' && $name !== ' '){
             $sql = "UPDATE `User Profile` SET `Name` = '$name' WHERE `ID`=$uid";
             if( $conn->query($sql) === TRUE ){
                    //echo "Record updated successfully";
@@ -30,7 +56,7 @@
     
 	if( isset($_POST['email']) ){
         $email = htmlspecialchars($_POST['email']);
-        if($email !== ''){
+        if($email !== '' && $email !== ' '){
             $sql = "UPDATE `User Profile` SET `email` = '$email' WHERE `ID`=$uid";
             if( $conn->query($sql) === TRUE ){
                    //echo "Record updated successfully";
@@ -50,17 +76,18 @@
         }
 	}
     
-    if( isset($_POST['courseName']) ){
+if( isset($_POST['courseName']) ){
+	//Array to hold errors from user inputs
+	$courseErrArr = array();
 	//for passing course info to database and do the comparsion
 	$nvals = count($_POST['courseName']);
-	if( $nvals == count($_POST['courseNumber']) && $nvals == count($_POST['courseSection']) ){
-		//for each course entered by the user
-		for( $i = 0; $i < $nvals; $i++ ){
-			$courseName = htmlspecialchars($_POST['courseName'][$i]);
-			$courseNumber = htmlspecialchars($_POST['courseNumber'][$i]);
-            $courseSection = htmlspecialchars($_POST['courseSection'][$i]);
+	//for each course entered by the user
+	for( $i = 0; $i < $nvals; $i++ ){
+		$courseName = htmlspecialchars($_POST['courseName'][$i]);
+		$courseNumber = htmlspecialchars($_POST['courseNumber'][$i]);
+        $courseSection = htmlspecialchars($_POST['courseSection'][$i]);
     
-            $sql = "SELECT `ID`, `dept`, `courseID`, `sectionID`, `course_type`,
+        $sql = "SELECT `ID`, `dept`, `courseID`, `sectionID`, `course_type`,
 					`course_title`, `course_info`, `course_credit`, `course_location`,
 					`course_term`, `course_schedule_term_row1`, `course_schedule_day_row1`,
 					`course_schedule_day_start_row1`, `course_schedule_day_end_row1`, 
@@ -71,7 +98,8 @@
 					`course_instructors`, `course_book1`, `course_book2`, `course_book3` 
 					FROM `course` WHERE dept='$courseName' AND courseID='$courseNumber' 
 					AND sectionID='$courseSection'";
-			$result = $conn->query($sql);
+		$result = $conn->query($sql);
+		if( $result->num_rows > 0 ){
 			while ( $row = $result->fetch_assoc() ) {
 				$cid = $row['ID'];
 				$title = $row["dept"]." ".$row["courseID"]." ".$row["sectionID"];
@@ -159,12 +187,21 @@
 					}
 				}
 			}
-        }
+		} else{
+			//store course info to display error.
+			$courseErrArr[] = array( name => $courseName,
+									 number => $courseNumber,
+									 section => $courseSection );
+		}
 	}
-    }
+}
     //closing connection
     $conn->close();
     if( isset($_POST['refresh']) ){
+		if( count($errorArr) > 0 ){
+		//print out messages to user & refresh page? or redirect? or neither?
+		//header("Location: courseRegister.php");
+		}	
 			header('Location: '.$_SERVER['REQUEST_URI']); 
             //header('Location: '.$_SERVER['PHP_SELF']);
     } else if( isset($_POST['redirect']) ){

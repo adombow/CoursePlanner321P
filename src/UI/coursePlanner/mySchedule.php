@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
         <title>My Schedule</title>
         <meta charset='utf-8' />
         <!-- jquery for dialog-->
