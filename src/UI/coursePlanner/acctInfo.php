@@ -76,9 +76,10 @@
         }
 	}
     
-if( isset($_POST['courseName']) ){
-	//Array to hold errors from user inputs
+    //Array to hold errors from user inputs
 	$courseErrArr = array();
+    
+if( isset($_POST['courseName']) ){
 	//for passing course info to database and do the comparsion
 	$nvals = count($_POST['courseName']);
 	//for each course entered by the user
@@ -189,22 +190,34 @@ if( isset($_POST['courseName']) ){
 			}
 		} else{
 			//store course info to display error.
-			$courseErrArr[] = array( name => $courseName,
-									 number => $courseNumber,
-									 section => $courseSection );
+			$courseErrArr[] = array( "name" => $courseName,
+									 "number" => $courseNumber,
+									 "section" => $courseSection );
 		}
 	}
 }
     //closing connection
     $conn->close();
-    if( isset($_POST['refresh']) ){
-		if( count($errorArr) > 0 ){
-		//print out messages to user & refresh page? or redirect? or neither?
-		//header("Location: courseRegister.php");
+    if( isset($_POST['submitted']) ){
+		$errMessage = '<script>';
+		$numErr = count($courseErrArr);
+		if( $numErr > 0 ){
+			//print out messages to user
+			$errMessage .= 'alert("Some of the courses you have entered were not found in our database. Please check that the information you entered was for an existing UBC course and try again:\n\n';
+			for( $i = 0; $i < $numErr; $i++){
+				$errMessage .= $courseErrArr[$i]['name']." ".$courseErrArr[$i]['number']." ".$courseErrArr[$i]['section']."\\n";
+			}
+			$errMessage .= '"); ';
 		}	
-			header('Location: '.$_SERVER['REQUEST_URI']); 
-            //header('Location: '.$_SERVER['PHP_SELF']);
-    } else if( isset($_POST['redirect']) ){
-			header("Location: mainPanel.php");
+		if( $_POST['submitted'] == 'refresh' ){
+			$errMessage .= "window.location.href='".$_SERVER['REQUEST_URI']."'; </script>";
+		} else if( $_POST['submitted'] == 'redirect' ){
+			if( $numErr > 0 ){
+				$errMessage .= "window.location.href='courseRegister.php'; </script>";
+			} else{
+				$errMessage .= "window.location.href='mainPanel.php'; </script>";
+			}
+		}
+		echo $errMessage;
 	}
 ?>

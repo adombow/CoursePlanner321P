@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 
 <html>
@@ -18,7 +17,6 @@
     include("inc/sidebar.html");
     include("infoFillIn.php");  
 ?>
-
 
 <h1 style="text-align: center;">
         Welcome to Course Planner!

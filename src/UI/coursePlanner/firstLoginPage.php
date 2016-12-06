@@ -65,7 +65,7 @@
 ?>
     <form id="form1" method="post">
     
-    <input type="hidden" name="redirect" value="mainPanel.php">
+    <input type="hidden" name="submitted" value="<?php echo 'redirect'; ?>">
     <div style="text-align: center; margin: 100;">
     <h1 style="text-align:center;">WE WOULD LIKE TO KNOW MORE ABOUT YOU</h1>
    

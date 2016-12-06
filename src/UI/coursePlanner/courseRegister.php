@@ -9,12 +9,13 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <title>Change Account Info</title>
+   <!-- Bootstrap for page header-->
+   <link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
-	
      var _len = 0;
      $(document).ready(function(){
         //<tr/>middle
@@ -59,13 +60,13 @@
 </head>
 <body>
 <?php
-	include("infoFillIn.php");
 	include("inc/sidebar.html");
+	include("infoFillIn.php");
 ?>
 <script src="js/sidebar.js"></script>
     <form name="form1" id="form1" method="post">
     
-    <input type="hidden" name="refresh" value="mainPanel.php">
+    <input type="hidden" name="submitted" value="<?php echo 'refresh'; ?>">
     <div style="text-align: center; margin: 100;">
     <h1 style="text-align:center;">MODIFY YOUR ACCOUNT AND COURSE INFORMATION</h1>
    
