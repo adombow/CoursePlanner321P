@@ -10,7 +10,7 @@ if($conn->connect_error){
 	die("Error: ". $conn->connect_error);
 }
 
-//Get the current date (db uses 1 for sunday 7 for saturday)
+//Get the current date
 $date_array = getdate();
 $year = $date_array['year'];
 $month = $date_array['mon'];
