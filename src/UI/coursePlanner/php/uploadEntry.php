@@ -100,7 +100,9 @@
 	}
 	else {
 		
-		$sql = "INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Start_Date`, `End_Date`, `Location`, `Info`, `BColour`, `TColour`, `Reminder`) VALUES ('{$uid}', '{$title}', '{$date}', '{$startT}', '{$endT}', '{$startD}', '{$endD}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}', {$reminder})";
+		$sql = <<<TILE
+		INSERT INTO `{$table}` (`userID`, `Title`, `Date`, `Start`, `End`, `Start_Date`, `End_Date`, `Location`, `Info`, `BColour`, `TColour`, `Reminder`) VALUES ('{$uid}', '{$title}', '{$date}', '{$startT}', '{$endT}', '{$startD}', '{$endD}', '{$location}', '{$info}', '{$bg_color}', '{$text_color}', {$reminder})
+TILE;
 		if ($conn->query($sql) === TRUE) {
 		    echo "New record created successfully \n";
 		} else {
