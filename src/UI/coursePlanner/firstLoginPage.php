@@ -17,6 +17,7 @@
 <script>
 	
      var _len = 0;
+     var _col = _len + 1;
      $(document).ready(function(){
         //<tr/>middle
         $("#tab tr").attr("align","center");
@@ -24,14 +25,15 @@
         //increase<tr/>
         $("#but").click(function(){        
 	    $("#tab").append("<tr id="+_len+" align='center'>"
-                                +"<td>"+_len+"</td>"
-                                +"<td>Course"+_len+"</td>"
+                                +"<td>"+_col+"</td>"
+                                +"<td>Course"+_col+"</td>"
                                 +"<td><input type='text' name='courseName["+_len+"]' id='courseName"+_len+"' required /></td>"
  +"<td><input type='text' name='courseNumber["+_len+"]' id='courseNumber"+_len+"' required /></td>" 
 +"<td><input type='text' name='courseSection["+_len+"]' id='courseSection"+_len+"' required /></td>" 
                                +"<td><a href=\'#\' onclick=\'deltr("+_len+")\'>DELETE</a></td>"
                             +"</tr>");            
         _len++;
+        _col++;
 		console.log(_len);
 		});    
     });
@@ -46,13 +48,14 @@
             var nextTxtVal = $("#desc"+i).val();
             $("tr[id=\'"+i+"\']")
                 .replaceWith("<tr id="+(i-1)+" align='center'>"
-                                +"<td>"+(i-1)+"</td>"
-                                +"<td>Course "+(i-1)+"</td>"
+                                +"<td>"+(i)+"</td>"
+                                +"<td>Course "+(i)+"</td>"
                                 +"<td><input type='text' name='desc"+(i-1)+"' value='"+nextTxtVal+"' id='desc"+(i-1)+"'/></td>"
                                 +"<td><a href=\'#\' onclick=\'deltr("+(i-1)+")\'>DELETE</a></td>"
                             +"</tr>");
         }    
         _len--;
+        _col--;
 	console.log(_len);
     }
 
