@@ -208,6 +208,8 @@ if( isset($_POST['courseName']) ){
 				$errMessage .= $courseErrArr[$i]['name']." ".$courseErrArr[$i]['number']." ".$courseErrArr[$i]['section']."\\n";
 			}
 			$errMessage .= '"); ';
+		} else if( $numErr == 0 ){
+			$errMessage .= 'alert("Your profile and course information has been succesfully updated!"); ';
 		}	
 		if( $_POST['submitted'] == 'refresh' ){
 			$errMessage .= "window.location.href='".$_SERVER['REQUEST_URI']."'; </script>";
