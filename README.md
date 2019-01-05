@@ -1,6 +1,6 @@
 
 
-#COURSE PLANNER
+# COURSE PLANNER
 
 ## WHAT IS THIS PROJECT?
 Course Planner is to be a website that will enable students to efficiently and easily schedule reminders for all of their coursework. Using information collected from your peers, through a comprehensive course element rating system, as well as custom settings collected from the user, a scheduling system will generate helpful reminders directing you when to begin studying or working on certain assignments. Course Planner is unique to other existing scheduling applications in that it automatically creates and schedules reminders using both user’s preferences and information sourced from other students to allow easier study scheduling.
@@ -22,8 +22,8 @@ UI<br />
 2.Mengxi Zhang<br />
 
 
-##Know More About Our Design 
-###1.Core features: <br />
+## Know More About Our Design 
+### 1.Core features: <br />
 a)Edit Courses Schedule:<br />
             1)Add course 
             2)Delete course 
@@ -41,13 +41,13 @@ c)Ranking and Modifying Course Features<br />
          3) Add information to existing feature
 
 
-###Additional features:<br />
+### Additional features:<br />
 a)Create or login to user profile <br /> 
          1) Use facebook to login to Course Planner profile
       	 2) Create a new course planner profile after first login in with Facebook
 
 
-###2.Architectural & Component-Level Design
+### 2.Architectural & Component-Level Design
 
 
 LAMP<br />
@@ -89,7 +89,7 @@ PHP programing language <br />
 	Students and Professors/TAs need to register a Web Server account to access the course schedule system, reminder system and ranking and modified course system. The course schedule system will display the related course id, schedule, outline and professors/TAs contact information. The reminder system will be used to remind the assignments and exams. Students can set the remind system to re-remind or do not remind. Professors/TAs can edit the remind system to post the assignments and exams. The ranking system is used to ranked the related assignments and exams difficulty.
 
 
-###4.User Interface Design <br />
+### 4.User Interface Design <br />
 	The user interface mainly includes login view, schedule panel, reminder panel, workload ranking panel, and contact and help panel. The login view is used to allow users to login with their facebook account, which requires a facebook login module to support the function. After the user logs into their account, they will be able to navigate through all the following four panels on a sidebar. Users could open or hide the sidebar by clicking opening button or close button. The panels will display user’s private information related to their account, and users could modify their schedule, set reminder requirements, rank workload of certain class work and get contact and help from our design team on corresponding panels. All the panels are able to access certain parts of our server end database to retrieve or update information. Also, there should be a reminder module to support its functionality.
 
 a)Dashboard View:
@@ -146,23 +146,23 @@ g)Course Information Edit Page View:
 <img heigh="700" src=https://github.com/lukeZhangMengxi/CoursePlanner321P/blob/master/readmeIMG/Screen%20Shot%202016-12-03%20at%2012.07.04%20AM.png/>
 <br>
 
-###5.Restrictions, limitations, and constraints <br />
+### 5.Restrictions, limitations, and constraints <br />
 The most important constraint will be the scope of this project. The scale of the client right now is limited to the student who are attend in same classes. In the future, we may want our project will be able to use widely in different faculties or even a whole university. As the number of clients and the scope of project increase, it is likely require more time to maintain the website and more money support on this project in order to keep it running functionality.
 
 
-###6.GUI<br />
+### 6.GUI<br />
 The user interface is built using HTML, CSS, PHP and Javascript libraries.
 
 
 
 
-###7.Validation<br />
+### 7.Validation<br />
 The UI validation will be a preceding process with the involvement of the clients. The design progress is based on a weekly basis and client feedback taken into account to design the user interface as user friendly as possible in order to ensures that the product actually meets the user's needs, and that the specifications were correct in the first place. 
 
 
 
 
-###8.Changes and Rationale<br />
+### 8.Changes and Rationale<br />
 
 The most significant changes made to the design is due to relaxing our requirement to distinguish between students and TAs/professors. This exclusion only affects our database. Our database is now simpler than it was before and excludes some functions from needing to be implemented on the server. All assignments and exams will now be added and ranked by students, as this now our only type of user. We will no longer be showing any user profile information that is not directly pertinent to said user; only their name, contact information etc. 
 
